@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class ExampleSubsystem extends SubsystemBase {
+public class drivetrain extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+  public drivetrain() {}
 
   /**
    * Example command factory method.
@@ -19,6 +22,15 @@ public class ExampleSubsystem extends SubsystemBase {
   public CommandBase exampleMethodCommand() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
+
+    PWMSparkMax frontLeftMotor = new PWMSparkMax(Constants.Drivetrain.frontLeftMotor);
+    PWMSparkMax frontRightMotor = new PWMSparkMax(Constants.Drivetrain.frontRightMotor);
+    PWMSparkMax backLeftMotor = new  PWMSparkMax(Constants.Drivetrain.backLeftMotor);
+    PWMSparkMax backRightMotor = new PWMSparkMax(Constants.Drivetrain.backRightMotor);
+
+  
+
+
     return runOnce(
         () -> {
           /* one-time action goes here */
@@ -43,5 +55,10 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public setMotorSpeed(){
+
+    Robot.m_drivetrain.
   }
 }
