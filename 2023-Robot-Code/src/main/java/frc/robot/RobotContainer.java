@@ -5,15 +5,14 @@
 package frc.robot;
 
 import frc.robot.Constants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.XboxController;
 
-/**
+/**S
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
@@ -21,21 +20,29 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final drivetrain m_exampleSubsystem = new drivetrain();
 
-  XboxController controller = new XboxController(Constants.m_controller);
+  XboxController controller = new XboxController(Constants.Controller.m_controller);
+
+  public Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
+  public Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
+  public Trigger bButton = new JoystickButton(controller, Constants.Controller.Buttons.m_bButton);
+  public Trigger aButton = new JoystickButton(controller, Constants.Controller.Buttons.m_aButton);
+
+  public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
+  public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
+  int dPadValue = controller.getPOV();
+
+
 
   public double GetDriverRawAxis(int axis){
     return controller.getRawAxis(axis);
   }
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(Constants.kDriverControllerPort);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+     if(dPadValue == 0) {
+      System.out.println("Hello you're pressing the UP dpad button!!!r pressing the UP dpad button");;
+     }
     configureBindings();
   }
 
@@ -50,12 +57,10 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**
@@ -63,8 +68,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /**public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
+    /**return Autos.exampleAuto(m_exampleSubsystem);*/
+  //}
 }
