@@ -5,12 +5,11 @@
 package frc.robot;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.drivetrain;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**S
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,6 +21,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   XboxController controller = new XboxController(Constants.Controller.m_controller);
+  Joystick controller_J = new Joystick(Constants.Controller.m_controller);
 
   public Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
   public Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
@@ -30,7 +30,7 @@ public class RobotContainer {
 
   public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
   public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
-  int dPadValue = controller.getPOV();
+  int dPadDirection = controller_J.getPOV(0);
 
 
 
@@ -40,7 +40,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-     if(dPadValue == 0) {
+     if(dPadDirection == 0) {
       System.out.println("Hello you're pressing the UP dpad button!!!r pressing the UP dpad button");;
      }
     configureBindings();
