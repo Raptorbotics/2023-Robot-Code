@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.drivetrain;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.Constants.Motors.shoulder;
 import frc.robot.subsystems.arm;
 
 /**
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer = new RobotContainer();
   public static MecanumDrive drive;
   public static arm m_arm = new arm();
+  public static shoulder m_shoulder = new shoulder();
 
   
 
