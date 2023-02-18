@@ -5,6 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class ShoulderTeleop extends CommandBase {
   /** Creates a new ShoulderTeleop. */
@@ -19,7 +21,9 @@ public class ShoulderTeleop extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

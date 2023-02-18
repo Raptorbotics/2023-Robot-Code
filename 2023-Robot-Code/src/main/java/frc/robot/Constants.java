@@ -69,6 +69,7 @@ public final class Constants {
   }
 
   public final class motorSpeeds {
-    public static final double armMotor = 0.5;
+    public static final double setArmMotorSpeed = 0.5;
+    public static final double shoulderMotorSpeed = .5;
   }
 }
