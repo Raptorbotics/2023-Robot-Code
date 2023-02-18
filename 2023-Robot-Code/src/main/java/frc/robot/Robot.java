@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.drivetrain;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.cameraserver.CameraServer;
-import frc.robot.Constants.Motors.shoulder;
+import frc.robot.subsystems.shoulder;
 import frc.robot.subsystems.arm;
 
 /**

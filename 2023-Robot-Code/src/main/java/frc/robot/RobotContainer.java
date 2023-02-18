@@ -4,12 +4,11 @@
 
 package frc.robot;
 
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.controls.DPadButton;
+import frc.controls.DPadButton.DPadDirection;
 
 import frc.robot.commands.test;
 
@@ -31,10 +30,8 @@ public class RobotContainer {
 
   public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
   public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
-  public POVButton UP = new POVButton(controller, 0);
-  public POVButton DOWN = new POVButton(controller, 180);
-  public POVButton LEFT = new POVButton(controller, 270);
-  public POVButton RIGHT = new POVButton(controller, 90);
+
+  public DPadButton UP = new DPadButton(controller, DPadDirection.UP);
 
 
 
@@ -45,20 +42,20 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 
-    UP.onTrue(new test());
+    //UP.onTrue(new test());
+    if(controller.isConnected()) {
+      System.out.println("Controller is connected");
+      System.out.println("Controller name is: " + controller.getName());
+      System.out.println("Controller type is: " + controller.getType());
+      System.out.println("Controller port is: " + controller.getPort());
+      System.out.println("Controller POV's #: " + controller.getPOVCount());
+    }
      
+    UP.onTrue(new test());
     configureBindings();
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
+
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
