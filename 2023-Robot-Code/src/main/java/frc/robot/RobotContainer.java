@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.controls.DPadButton;
+import frc.controls.DPadButton.DPadDirection;
 
 import frc.robot.commands.test;
 
@@ -30,6 +32,8 @@ public class RobotContainer {
 
   public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
   public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
+
+  public DPadButton UP = new DPadButton(controller, DPadDirection.UP);
   //public POVButton UP = new POVButton(controller, 0);
   //public POVButton DOWN = new POVButton(controller, 180);
   //public POVButton LEFT = new POVButton(controller, 270);
@@ -53,6 +57,7 @@ public class RobotContainer {
       System.out.println("Controller POV's #: " + controller.getPOVCount());
     }
      
+    UP.onTrue(new test());
     configureBindings();
   }
 
