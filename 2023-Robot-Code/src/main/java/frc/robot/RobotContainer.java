@@ -31,10 +31,10 @@ public class RobotContainer {
 
   public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
   public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
-  public POVButton UP = new POVButton(controller, 0);
-  public POVButton DOWN = new POVButton(controller, 180);
-  public POVButton LEFT = new POVButton(controller, 270);
-  public POVButton RIGHT = new POVButton(controller, 90);
+  //public POVButton UP = new POVButton(controller, 0);
+  //public POVButton DOWN = new POVButton(controller, 180);
+  //public POVButton LEFT = new POVButton(controller, 270);
+  //public POVButton RIGHT = new POVButton(controller, 90);
 
 
 
@@ -45,7 +45,14 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 
-    UP.onTrue(new test());
+    //UP.onTrue(new test());
+    if(controller.isConnected()) {
+      System.out.println("Controller is connected");
+      System.out.println("Controller name is: " + controller.getName());
+      System.out.println("Controller type is: " + controller.getType());
+      System.out.println("Controller port is: " + controller.getPort());
+      System.out.println("Controller POV's #: " + controller.getPOVCount());
+    }
      
     configureBindings();
   }
