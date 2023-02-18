@@ -21,15 +21,21 @@ import frc.robot.subsystems.arm;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
-  public static RobotContainer m_robotContainer = new RobotContainer();
+  public static drivetrain m_Drivetrain = new drivetrain();
+  
   public static MecanumDrive drive;
   public static arm m_arm = new arm();
   public static shoulder m_shoulder = new shoulder();
 
+
+
+
+
+//MUST BE LAST THING INSTANTIATED
+  public static RobotContainer m_robotContainer = new RobotContainer();
   
 
-  public static drivetrain m_Drivetrain = new drivetrain();
+
 
   /**
    * This function is run when the robot is first started up and should be used for any

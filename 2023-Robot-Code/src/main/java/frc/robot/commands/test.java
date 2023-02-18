@@ -10,16 +10,20 @@ public class test extends CommandBase {
   /** Creates a new test. */
   public test() {
     // Use addRequirements() here to declare subsystem dependencies.
-    System.out.println("Hello! You pressed UP!");
+   // System.out.println("Hello! You pressed UP!");
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //System.out.println("Hello! You pressed UP!");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    System.out.println("Hello! You pressed UP!");
+  }
 
   // Called once the command ends or is interrupted.
   @Override

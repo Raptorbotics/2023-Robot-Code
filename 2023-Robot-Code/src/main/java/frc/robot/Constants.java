@@ -25,10 +25,10 @@ public final class Constants {
       public static final int frontRightMotorTwo = 3;
 
       public static final int backLeftMotorOne = 4;
-      public static final int backLeftMotorTwo = 4;
+      public static final int backLeftMotorTwo = 7;
 
-      public static final int backRightMotorOne = 3;
-      public static final int backRightMotorTwo = 3;
+      public static final int backRightMotorOne = 8;
+      public static final int backRightMotorTwo = 9;
   }
 
   public final class arm {

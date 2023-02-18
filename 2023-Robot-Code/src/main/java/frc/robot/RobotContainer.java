@@ -4,13 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.controls.DPadButton;
-import frc.controls.DPadButton.DPadDirection;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Robot;
 
-import frc.robot.commands.test;
+import edu.wpi.first.wpilibj.XboxController;
+
+import frc.robot.commands.Drive;
+import frc.robot.commands.ShoulderTeleop;
 
 /**S
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,38 +34,37 @@ public class RobotContainer {
   public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
   public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
 
-  public DPadButton UP = new DPadButton(controller, DPadDirection.UP);
-
-
+  public POVButton UP = new POVButton(controller, 0);
+  public POVButton DOWN = new POVButton(controller, 180);
+  public POVButton LEFT = new POVButton(controller, 270);
+  public POVButton RIGHT = new POVButton(controller, 90);
 
   public double GetDriverRawAxis(int axis){
     return controller.getRawAxis(axis);
   }
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the trigger bindings
-
-    //UP.onTrue(new test());
-    if(controller.isConnected()) {
-      System.out.println("Controller is connected");
-      System.out.println("Controller name is: " + controller.getName());
-      System.out.println("Controller type is: " + controller.getType());
-      System.out.println("Controller port is: " + controller.getPort());
-      System.out.println("Controller POV's #: " + controller.getPOVCount());
-    }
-     
-    UP.onTrue(new test());
-    configureBindings();
-  }
-
 
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
+    Robot.m_Drivetrain.setDefaultCommand(new Drive());
+    //Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }
+
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public RobotContainer() {
+    // Configure the trigger bindings
+     
+    DOWN.whileTrue(new ShoulderTeleop("ManualDown"));
+    rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
+    UP.whileTrue(new ShoulderTeleop("ManualUp"));
+    configureBindings();
+  }
+
+
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
