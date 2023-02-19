@@ -12,11 +12,11 @@
 //import org.opencv.core.Mat;
 
 //public class camera extends SubsystemBase {
-  /** Creates a new camera. */
+/** Creates a new camera. */
 //  public camera() {}
 
 //  @Override
 //  public void periodic() {
-    // This method will be called once per scheduler run
+// This method will be called once per scheduler run
 //  }
 //}

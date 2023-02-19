@@ -4,14 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Robot;
-
-import edu.wpi.first.wpilibj.XboxController;
-
 import frc.robot.commands.Drive;
 import frc.robot.commands.ShoulderTeleop;
 
@@ -22,60 +20,56 @@ import frc.robot.commands.ShoulderTeleop;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
 
-  XboxController controller = new XboxController(Constants.Controller.m_controller);
+	// The robot's subsystems and commands are defined here...
 
-  public Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
-  public Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
-  public Trigger bButton = new JoystickButton(controller, Constants.Controller.Buttons.m_bButton);
-  public Trigger aButton = new JoystickButton(controller, Constants.Controller.Buttons.m_aButton);
+	XboxController controller = new XboxController(Constants.Controller.m_controller);
 
-  public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
-  public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
+	public Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
+	public Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
+	public Trigger bButton = new JoystickButton(controller, Constants.Controller.Buttons.m_bButton);
+	public Trigger aButton = new JoystickButton(controller, Constants.Controller.Buttons.m_aButton);
 
-  public POVButton UP = new POVButton(controller, 0);
-  public POVButton DOWN = new POVButton(controller, 180);
-  public POVButton LEFT = new POVButton(controller, 270);
-  public POVButton RIGHT = new POVButton(controller, 90);
+	public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
+	public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
 
-  public double GetDriverRawAxis(int axis){
-    return controller.getRawAxis(axis);
-  }
+	public POVButton UP = new POVButton(controller, 0);
+	public POVButton DOWN = new POVButton(controller, 180);
+	public POVButton LEFT = new POVButton(controller, 270);
+	public POVButton RIGHT = new POVButton(controller, 90);
 
-  private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    Robot.m_Drivetrain.setDefaultCommand(new Drive());
-    //Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
+	public double GetDriverRawAxis(int axis) {
+		return controller.getRawAxis(axis);
+	}
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-  }
+	private void configureBindings() {
+		// Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+		Robot.m_Drivetrain.setDefaultCommand(new Drive());
+		//Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the trigger bindings
-     
-    //ShoulderTeleop Keybinds
-    DOWN.whileTrue(new ShoulderTeleop("Manual Down")); 
-    rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
-    rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
-    rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
-    UP.whileTrue(new ShoulderTeleop("Manual Up"));
-    configureBindings();
-  }
+		// Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+		// cancelling on release.
+	}
 
+	/** The container for the robot. Contains subsystems, OI devices, and commands. */
+	public RobotContainer() {
+		// Configure the trigger bindings
 
-
-
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  /**public Command getAutonomousCommand() {
+		//ShoulderTeleop Keybinds
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down"));
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
+		UP.whileTrue(new ShoulderTeleop("Manual Up"));
+		configureBindings();
+	}
+	/**
+	 * Use this to pass the autonomous command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in autonomous
+	 */
+	/**public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     /**return Autos.exampleAuto(m_exampleSubsystem);*/
-  //}
+	//}
 }

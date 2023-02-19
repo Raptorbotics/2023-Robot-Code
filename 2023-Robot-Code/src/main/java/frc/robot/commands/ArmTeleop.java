@@ -11,62 +11,47 @@ import frc.robot.Robot;
 
 public class ArmTeleop extends CommandBase {
 
-  Timer m_timer = new Timer();
-  double m_time; 
-  boolean  buttonPressedFinal;
+	Timer m_timer = new Timer();
+	double m_time;
+	boolean buttonPressedFinal;
 
-  /** Creates a new ArmTeleop. */
-  public ArmTeleop(double time, Boolean buttonPressedOne) {
-      buttonPressedFinal = buttonPressedOne;
+	/** Creates a new ArmTeleop. */
+	public ArmTeleop(double time, Boolean buttonPressedOne) {
+		buttonPressedFinal = buttonPressedOne;
 
-    m_time = time;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_arm);
-  }
+		m_time = time;
+		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(Robot.m_arm);
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  
-        m_timer.start();
-   
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		m_timer.start();
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
- 
-       Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.setArmMotorSpeed);
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.setArmMotorSpeed);
+	}
 
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		Robot.m_arm.setArmMotorSpeed(0);
+		m_timer.reset();
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-
-    Robot.m_arm.setArmMotorSpeed(0);
-    m_timer.reset();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-
-    if (buttonPressedFinal = true ) {
-     
-      return m_timer.get() > m_time;}
-
-      else if(buttonPressedFinal = false){
-
-     return false;
-    }
-
-    else{
-
-      return true;
-    }
-  }
-  
-    
-  }
-
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		if (buttonPressedFinal = true) {
+			return m_timer.get() > m_time;
+		} else if (buttonPressedFinal = false) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}

@@ -10,21 +10,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class shoulder extends SubsystemBase {
-  /** Creates a new shoulder. */
-  public shoulder() {}
-  PWMVictorSPX shoulderMotor = new PWMVictorSPX(Constants.Motors.shoulder.shoulderMotor);
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 
+	/** Creates a new shoulder. */
+	public shoulder() {}
 
-public void setShoulderMotorSpeed(double axis){
-  shoulderMotor.set(axis);
+	PWMVictorSPX shoulderMotor = new PWMVictorSPX(Constants.Motors.shoulder.shoulderMotor);
+
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void setShoulderMotorSpeed(double axis) {
+		shoulderMotor.set(axis);
+	}
 }
-
-
-
-
-}
-
