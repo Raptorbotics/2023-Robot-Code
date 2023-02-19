@@ -20,7 +20,7 @@ public class arm extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void setArmMotorSpeed(double axis) {
+	public void setMotorSpeed(double axis) {
 		armMotor.set(axis);
 	}
 }
