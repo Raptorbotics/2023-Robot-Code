@@ -12,6 +12,7 @@ public class ShoulderTeleop extends CommandBase {
 
 	double shoulderHeightSpeed = Constants.Predetermined.shoulder.m_shoulderHeightSpeed;
 	String option;
+
 	public double getShoulderAngle() {
 		return Robot.m_shoulder.getShoulderAngle();
 	}
@@ -28,7 +29,7 @@ public class ShoulderTeleop extends CommandBase {
 	public ShoulderTeleop(String Option) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_shoulder);
-option = Option;
+		option = Option;
 	}
 
 	// Called when the command is initially scheduled.

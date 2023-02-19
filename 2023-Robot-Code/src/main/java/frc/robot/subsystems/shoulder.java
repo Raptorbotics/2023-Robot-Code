@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 public class shoulder extends SubsystemBase {
 
-  private double shoulderAngle;
+	private double shoulderAngle;
 
 	public void setShoulderAngle(double value) {
 		shoulderAngle = value;
@@ -20,29 +20,25 @@ public class shoulder extends SubsystemBase {
 		return shoulderAngle;
 	}
 
-  public void reduceShoulderAngle(double amount) {
-    shoulderAngle = shoulderAngle - amount;
-  }
+	public void reduceShoulderAngle(double amount) {
+		shoulderAngle = shoulderAngle - amount;
+	}
 
-  public void increaseShoulderAngle(double amount) {
-    shoulderAngle = shoulderAngle + amount;
-  }
+	public void increaseShoulderAngle(double amount) {
+		shoulderAngle = shoulderAngle + amount;
+	}
 
-  /** Creates a new shoulder. */
-  public shoulder() {}
-  PWMVictorSPX shoulderMotor = new PWMVictorSPX(Constants.Motors.shoulder.shoulderMotor);
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	/** Creates a new shoulder. */
+	public shoulder() {}
 
+	PWMVictorSPX shoulderMotor = new PWMVictorSPX(Constants.Motors.shoulder.shoulderMotor);
 
-public void setShoulderMotorSpeed(double axis){
-  shoulderMotor.set(axis);
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void setShoulderMotorSpeed(double axis) {
+		shoulderMotor.set(axis);
+	}
 }
-
-
-
-
-}
-

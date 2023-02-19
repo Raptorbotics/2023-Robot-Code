@@ -56,8 +56,8 @@ public class RobotContainer {
 		//ShoulderTeleop Keybinds
 		DOWN.whileTrue(new ShoulderTeleop("Manual Down")); //Manual Down
 		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low")); //Predetermined Low
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));//Predetermined Medium
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));//Predetermined High
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium")); //Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High")); //Predetermined High
 		UP.whileTrue(new ShoulderTeleop("Manual Up")); //Manual Up
 		configureBindings();
 	}
