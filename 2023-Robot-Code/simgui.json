@@ -13,5 +13,23 @@
       "/LiveWindow/Ungrouped/PWMVictorSPX[5]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[6]": "Motor Controller"
     }
+  },
+  "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "Subscribers": {
+        "open": true
+      },
+      "open": true
+    },
+    "visible": true
   }
 }
