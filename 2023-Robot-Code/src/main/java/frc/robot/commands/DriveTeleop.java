@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class Drive extends CommandBase {
+public class DriveTeleop extends CommandBase {
 
 	/** Creates a new Drive. */
-	public Drive() {
+	public DriveTeleop() {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_Drivetrain);
 	}
