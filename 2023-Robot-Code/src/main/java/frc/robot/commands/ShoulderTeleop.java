@@ -10,7 +10,8 @@ import frc.robot.Robot;
 
 public class ShoulderTeleop extends CommandBase {
   public String option;
-  public static double armHeight = 0;
+  public static double shoulderHeight = 0;
+  double shoulderHeightSpeed = Constants.m_shoulderHeightSpeed;
   /** Creates a new ShoulderTeleop. */
   public ShoulderTeleop(String Option) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,28 +29,28 @@ public class ShoulderTeleop extends CommandBase {
   
     switch (option) {
       case "Manual Down":
-        if(armHeight <= 0) {
+        if(shoulderHeight <= 0) {
          System.out.println("Arm height is at its minimum");
           return;
       }
-        armHeight = armHeight - 1;
+      shoulderHeight = shoulderHeight - shoulderHeightSpeed;
         Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
       break;
       case "Manual Up":
-        if(armHeight >= 270) {
+        if(shoulderHeight >= 270) {
           System.out.println("Arm height is at its maximum");
           return;
       }
-        armHeight = armHeight + 1;
+      shoulderHeight = shoulderHeight + shoulderHeightSpeed;
         Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
       break;
       case "Low":
-        if(armHeight < 90){
+        if(shoulderHeight < 90){
           Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight + 1;
-      } else if(armHeight > 90) {
+          shoulderHeight = shoulderHeight + shoulderHeightSpeed;
+      } else if(shoulderHeight > 90) {
           Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight - 1;
+          shoulderHeight = shoulderHeight - shoulderHeightSpeed;
         }
         else{
           Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -57,12 +58,12 @@ public class ShoulderTeleop extends CommandBase {
         }
       break;
       case "Medium":
-        if(armHeight < 120){
+        if(shoulderHeight < 120){
           Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight + 1;
-      } else if(armHeight > 120) {
+          shoulderHeight = shoulderHeight + shoulderHeightSpeed;
+      } else if(shoulderHeight > 120) {
           Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight - 1;
+          shoulderHeight = shoulderHeight - shoulderHeightSpeed;
         }
         else{
           Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -70,12 +71,12 @@ public class ShoulderTeleop extends CommandBase {
         }
       break;
       case "High":
-        if(armHeight < 250){
+        if(shoulderHeight < 250){
           Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight + 1;
-      } else if(armHeight > 250) {
+          shoulderHeight = shoulderHeight + shoulderHeightSpeed;
+      } else if(shoulderHeight > 250) {
           Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
-          armHeight = armHeight - 1;
+          shoulderHeight = shoulderHeight - shoulderHeightSpeed;
         }
         else{
           Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -89,7 +90,7 @@ public class ShoulderTeleop extends CommandBase {
      
     }
 
-    System.out.println(armHeight);
+    System.out.println(shoulderHeight);
   }
 
 
@@ -102,7 +103,7 @@ public class ShoulderTeleop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if((option == "Low" && armHeight == 90) || (option == "Medium" && armHeight == 120) ||(option == "High" && armHeight == 250) ) {
+    if((option == "Low" && shoulderHeight == 90) || (option == "Medium" && shoulderHeight == 120) ||(option == "High" && shoulderHeight == 250) ) {
       return true;
     }
     return false;
