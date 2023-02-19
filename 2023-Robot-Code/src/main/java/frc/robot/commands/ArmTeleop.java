@@ -33,6 +33,8 @@ public class ArmTeleop extends CommandBase {
 			case "Manual Retract":
 				if (armExtension <= 0) {
 					System.out.println("Arm Extension: MINIMUM");
+
+					Robot.m_arm.setMotorSpeed(0);
 					return;
 				}
 				armExtension = armExtension - armExtensionSpeed;
@@ -41,6 +43,7 @@ public class ArmTeleop extends CommandBase {
 			case "Manual Extend":
 				if (armExtension >= 270) {
 					System.out.println("Arm Extension: MAXIMUM");
+					Robot.m_arm.setMotorSpeed(0);
 					return;
 				}
 				armExtension = armExtension + armExtensionSpeed;
