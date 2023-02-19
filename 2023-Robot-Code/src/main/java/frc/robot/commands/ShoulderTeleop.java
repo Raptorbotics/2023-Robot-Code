@@ -25,7 +25,7 @@ public class ShoulderTeleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (option == "ManualDown" ){
+    if (option == "Manual Down" ){
       if(armHeight <= 0) {
         System.out.println("Arm height is at its minimum");
         return;
@@ -33,7 +33,7 @@ public class ShoulderTeleop extends CommandBase {
       armHeight = armHeight - 1;
     Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
     }
-    else if (option == "ManualUp"){
+    else if (option == "Manual Up"){
       if(armHeight >= 270) {
         System.out.println("Arm height is at its maximum");
         return;
@@ -53,11 +53,40 @@ public class ShoulderTeleop extends CommandBase {
         System.out.println("Arm height is already at low preset");
       }
     }
+
+    else if (option == "Medium") {
+      if(armHeight < 120){
+      Robot.m_shoulder.setShoulderMotorSpeed(0.25);
+      armHeight = armHeight + .5;
+      } else if(armHeight > 120) {
+        Robot.m_shoulder.setShoulderMotorSpeed(-0.25);
+        armHeight = armHeight - .5;
+      }
+      else{
+        Robot.m_shoulder.setShoulderMotorSpeed(0);
+        System.out.println("Arm height is already at low preset");
+      }
+    }
+      else if (option == "High") {
+        if(armHeight < 250){
+        Robot.m_shoulder.setShoulderMotorSpeed(0.25);
+        armHeight = armHeight + .5;
+        } else if(armHeight > 250) {
+          Robot.m_shoulder.setShoulderMotorSpeed(-0.25);
+          armHeight = armHeight - .5;
+        }
+        else{
+          Robot.m_shoulder.setShoulderMotorSpeed(0);
+          System.out.println("Arm height is already at low preset");
+        }
+
+      }
     else{
       Robot.m_shoulder.setShoulderMotorSpeed(0);
     }
     System.out.println(armHeight);
   }
+
 
   // Called once the command ends or is interrupted.
   @Override
@@ -68,7 +97,7 @@ public class ShoulderTeleop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(option == "Low" && armHeight == 90) {
+    if((option == "Low" && armHeight == 90) || (option == "Medium" && armHeight == 120) ||(option == "High" && armHeight == 250) ) {
       return true;
     }
     return false;

@@ -56,9 +56,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
      
-    DOWN.whileTrue(new ShoulderTeleop("ManualDown"));
+    DOWN.whileTrue(new ShoulderTeleop("Manual Down"));
     rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
-    UP.whileTrue(new ShoulderTeleop("ManualUp"));
+    rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
+    rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
+
+    UP.whileTrue(new ShoulderTeleop("Manual Up"));
     configureBindings();
   }
 
