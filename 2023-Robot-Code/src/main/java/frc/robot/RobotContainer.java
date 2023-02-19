@@ -54,7 +54,7 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		//ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down")); //Manual Down
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down")); //Manual Down1
 		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low")); //Predetermined Low
 		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium")); //Predetermined Medium
 		rBumper.and(yButton).onTrue(new ShoulderTeleop("High")); //Predetermined High

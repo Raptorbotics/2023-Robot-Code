@@ -10,7 +10,7 @@ import frc.robot.Robot;
 
 public class ShoulderTeleop extends CommandBase {
 
-	double shoulderHeightSpeed = Constants.Predetermined.shoulder.m_shoulderHeightSpeed;
+	static double  shoulderHeightSpeed = Constants.Predetermined.shoulder.m_shoulderHeightSpeed;
 	String option;
 
 	public double getShoulderAngle() {
@@ -32,9 +32,10 @@ public class ShoulderTeleop extends CommandBase {
 		option = Option;
 	}
 
-	// Called when the command is initially scheduled.
+	// Called when the command is initially scheduled.1
 	@Override
 	public void initialize() {
+		Robot.m_shoulder.setShoulderAngle(Constants.Predetermined.shoulder.initialShoulderAngle);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
