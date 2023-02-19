@@ -12,7 +12,7 @@ public class ShoulderTeleop extends CommandBase {
 
 	public String option;
 	public static double shoulderHeight = 0;
-	double shoulderHeightSpeed = Constants.Predetermined.shoulder.shoulderHeightSpeed;
+	double shoulderHeightSpeed = Constants.Predetermined.Shoulder.shoulderHeightSpeed;
 
 	/** Creates a new ShoulderTeleop. */
 	public ShoulderTeleop(String Option) {
@@ -34,7 +34,7 @@ public class ShoulderTeleop extends CommandBase {
 					return;
 				}
 				shoulderHeight = shoulderHeight - shoulderHeightSpeed;
-				Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+				Robot.m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
 				break;
 			case "Manual Up":
 				if (shoulderHeight >= 270) {
@@ -42,14 +42,14 @@ public class ShoulderTeleop extends CommandBase {
 					return;
 				}
 				shoulderHeight = shoulderHeight + shoulderHeightSpeed;
-				Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+				Robot.m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
 				break;
 			case "Low":
-				if (shoulderHeight < 90) {
-					Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+				if (shoulderHeight < Constants.Predetermined.Shoulder.Height.low) {
+					Robot.m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight + shoulderHeightSpeed;
-				} else if (shoulderHeight > 90) {
-					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+				} else if (shoulderHeight > Constants.Predetermined.Shoulder.Height.low) {
+					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight - shoulderHeightSpeed;
 				} else {
 					Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -57,11 +57,11 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 			case "Medium":
-				if (shoulderHeight < 120) {
-					Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+				if (shoulderHeight < Constants.Predetermined.Shoulder.Height.medium) {
+					Robot.m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight + shoulderHeightSpeed;
-				} else if (shoulderHeight > 120) {
-					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+				} else if (shoulderHeight > Constants.Predetermined.Shoulder.Height.medium) {
+					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight - shoulderHeightSpeed;
 				} else {
 					Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -69,11 +69,11 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 			case "High":
-				if (shoulderHeight < 250) {
-					Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+				if (shoulderHeight < Constants.Predetermined.Shoulder.Height.high) {
+					Robot.m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight + shoulderHeightSpeed;
-				} else if (shoulderHeight > 250) {
-					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+				} else if (shoulderHeight > Constants.Predetermined.Shoulder.Height.high) {
+					Robot.m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					shoulderHeight = shoulderHeight - shoulderHeightSpeed;
 				} else {
 					Robot.m_shoulder.setShoulderMotorSpeed(0);
@@ -98,9 +98,9 @@ public class ShoulderTeleop extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		if (
-			(option == "Low" && shoulderHeight == 90) ||
-			(option == "Medium" && shoulderHeight == 120) ||
-			(option == "High" && shoulderHeight == 250)
+			(option == "Low" && shoulderHeight == Constants.Predetermined.Shoulder.Height.low) ||
+			(option == "Medium" && shoulderHeight == Constants.Predetermined.Shoulder.Height.medium) ||
+			(option == "High" && shoulderHeight == Constants.Predetermined.Shoulder.Height.high)
 		) {
 			return true;
 		}

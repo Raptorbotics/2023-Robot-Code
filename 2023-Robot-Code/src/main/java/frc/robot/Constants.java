@@ -17,30 +17,29 @@ public final class Constants {
 	public static final int m_limiter = 1;
 
 	public final class Predetermined {
-		public final class arm{
+		public final class Arm{
 			public static final double armExtensionSpeed = 1;
 
-			public final class extension{
-				public static final double lowExtension = 90;
-				public static final double mediumExtension = 120;
-				public static final double highExtension = 250;
+			public final class Extension{
+				public static final double low = 90;
+				public static final double medium = 120;
+				public static final double high = 250;
 
 			}
 		}
-		public final class shoulder {
+		public final class Shoulder {
 
 			public static final double shoulderHeightSpeed = 1;
 
-			public final class height {
+			public final class Height {
 
-				public static final double lowHeight = 90;
-				public static final double mediumHeight = 120;
-				public static final double highHeight = 250;
+				public static final double low = 90;
+				public static final double medium = 120;
+				public static final double high = 250;
 			}
 		}
 	}
 
-	//public static final String Motors = null;
 
 	public final class Motors {
 
@@ -68,7 +67,13 @@ public final class Constants {
 
 			public static final int shoulderMotor = 6;
 		}
+		public final class Speeds {
+
+			public static final double arm = 0.5;
+			public static final double shoulder = .5;
+		}
 	}
+	
 
 	public final class Controller {
 
@@ -99,9 +104,5 @@ public final class Constants {
 		}
 	}
 
-	public final class motorSpeeds {
-
-		public static final double armMotorSpeed = 0.5;
-		public static final double shoulderMotorSpeed = .5;
-	}
+	
 }
