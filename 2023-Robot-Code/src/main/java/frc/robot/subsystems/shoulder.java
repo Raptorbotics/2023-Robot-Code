@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 public class shoulder extends SubsystemBase {
 
-	private double shoulderAngle;
+	private double shoulderAngle = 0;
 
 	public void setShoulderAngle(double value) {
 		shoulderAngle = value;
