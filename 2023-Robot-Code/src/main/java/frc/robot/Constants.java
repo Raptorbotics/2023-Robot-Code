@@ -14,6 +14,20 @@ package frc.robot;
  */
 public final class Constants {
   public static final int m_limiter = 1;
+
+  public final class Predetermined{
+    public final class shoulder{
+      public static final double m_shoulderHeightSpeed = 1;
+        public final class height{
+          public static final double lowHeight = 90;
+          public static final double mediumHeight =120;
+          public static final double highHeight = 250;
+
+      }
+
+    }
+  }
+  
   //public static final String Motors = null;
 
   public final class Motors {
