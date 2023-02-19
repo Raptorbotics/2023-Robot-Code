@@ -1,0 +1,7 @@
+To use Prettier, download prettier extension and also open console and copy & paste below:
+
+npm install -g prettier prettier-plugin-java
+
+Then type this in console:
+
+prettier --write "**/*.java"

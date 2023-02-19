@@ -4,21 +4,23 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class arm extends SubsystemBase {
-  PWMVictorSPX armMotor = new PWMVictorSPX(Constants.Motors.arm.armMotor);
-  /** Creates a new arm. */
-  public arm() {}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	PWMVictorSPX armMotor = new PWMVictorSPX(Constants.Motors.arm.armMotor);
 
-  public void setArmMotorSpeed(double axis){
-    armMotor.set(axis);
-  }
+	/** Creates a new arm. */
+	public arm() {}
+
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void setArmMotorSpeed(double axis) {
+		armMotor.set(axis);
+	}
 }
