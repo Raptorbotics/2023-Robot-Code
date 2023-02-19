@@ -31,7 +31,7 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public void execute() {
 		switch (option) {
-			case "Manual Down":
+			case "Manual Retract":
 				if (armExtension <= 0) {
 					System.out.println("Arm height is at its minimum");
 					return;
@@ -39,7 +39,7 @@ public class ArmTeleop extends CommandBase {
 				armExtension = armExtension - armExtensionSpeed;
 				Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
 				break;
-			case "Manual Up":
+			case "Manual Extend":
 				if (armExtension >= 270) {
 					System.out.println("Arm height is at its maximum");
 					return;
@@ -102,6 +102,13 @@ public class ArmTeleop extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		if (
+			(option == "Low" && armExtension == 90) ||
+			(option == "Medium" && armExtension == 120) ||
+			(option == "High" && armExtension == 250)
+		) {
+			return true;
+		}
 	return false;
 }}
 

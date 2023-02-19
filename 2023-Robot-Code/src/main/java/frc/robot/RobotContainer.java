@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Robot;
+import frc.robot.commands.ArmTeleop;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ShoulderTeleop;
 
@@ -57,10 +58,18 @@ public class RobotContainer {
 
 		//ShoulderTeleop Keybinds
 		DOWN.whileTrue(new ShoulderTeleop("Manual Down"));
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
+		lBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
+		lBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
+		lBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
 		UP.whileTrue(new ShoulderTeleop("Manual Up"));
+
+		//ArmTelop Keybinds
+
+		LEFT.whileTrue(new ArmTeleop("Manual Extend"));
+		rBumper.and(aButton).onTrue(new ArmTeleop("Low"));
+		rBumper.and(bButton).onTrue(new ArmTeleop("Medium"));
+		rBumper.and(yButton).onTrue(new ArmTeleop("High"));
+		RIGHT.whileTrue(new ArmTeleop("Manual Retract"));
 		configureBindings();
 	}
 	/**
