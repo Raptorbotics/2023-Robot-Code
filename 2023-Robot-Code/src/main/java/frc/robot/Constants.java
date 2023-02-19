@@ -21,6 +21,7 @@ public final class Constants {
 		public final class shoulder {
 
 			public static final double m_shoulderHeightSpeed = 1;
+			public static final double initialShoulderAngle = 0;
 
 			public final class height {
 

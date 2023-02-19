@@ -5,11 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Robot;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ShoulderTeleop;
 
@@ -56,11 +54,11 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		//ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down"));
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
-		UP.whileTrue(new ShoulderTeleop("Manual Up"));
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down")); //Manual Down
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low")); //Predetermined Low
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));//Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High"));//Predetermined High
+		UP.whileTrue(new ShoulderTeleop("Manual Up")); //Manual Up
 		configureBindings();
 	}
 	/**
