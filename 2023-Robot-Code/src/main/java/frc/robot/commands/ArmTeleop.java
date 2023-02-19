@@ -33,13 +33,13 @@ public class ArmTeleop extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.setArmMotorSpeed);
+		Robot.m_arm.setMotorSpeed(Constants.motorSpeeds.setArmMotorSpeed);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		Robot.m_arm.setArmMotorSpeed(0);
+		Robot.m_arm.setMotorSpeed(0);
 		m_timer.reset();
 	}
 
