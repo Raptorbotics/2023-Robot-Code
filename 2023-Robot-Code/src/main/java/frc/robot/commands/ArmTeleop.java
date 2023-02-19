@@ -11,47 +11,97 @@ import frc.robot.Robot;
 
 public class ArmTeleop extends CommandBase {
 
-	Timer m_timer = new Timer();
-	double m_time;
-	boolean buttonPressedFinal;
+	public String option;
+	public static double armExtension  = 0;
+	double armExtensionSpeed = Constants.Predetermined.arm.armExtensionSpeed;
 
 	/** Creates a new ArmTeleop. */
-	public ArmTeleop(double time, Boolean buttonPressedOne) {
-		buttonPressedFinal = buttonPressedOne;
-
-		m_time = time;
-		// Use addRequirements() here to declare subsystem dependencies.
+	public ArmTeleop(String Option) {
 		addRequirements(Robot.m_arm);
+		option = Option;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		m_timer.start();
+		
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.setArmMotorSpeed);
+		switch (option) {
+			case "Manual Down":
+				if (armExtension <= 0) {
+					System.out.println("Arm height is at its minimum");
+					return;
+				}
+				armExtension = armExtension - armExtensionSpeed;
+				Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+				break;
+			case "Manual Up":
+				if (armExtension >= 270) {
+					System.out.println("Arm height is at its maximum");
+					return;
+				}
+				armExtension = armExtension + armExtensionSpeed;
+				Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+				break;
+			case "Low":
+				if (armExtension < 90) {
+					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension + armExtensionSpeed;
+				} else if (armExtension > 90) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension - armExtensionSpeed;
+				} else {
+					Robot.m_arm.setArmMotorSpeed(0);
+					System.out.println("Arm height is already at low preset");
+				}
+				break;
+			case "Medium":
+				if (armExtension < 120) {
+					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension + armExtensionSpeed;
+				} else if (armExtension > 120) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension - armExtensionSpeed;
+				} else {
+					Robot.m_arm.setArmMotorSpeed(0);
+					System.out.println("Arm height is already at low preset");
+				}
+				break;
+			case "High":
+				if (armExtension < 250) {
+					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension + armExtensionSpeed;
+				} else if (armExtension > 250) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+					armExtension = armExtension - armExtensionSpeed;
+				} else {
+					Robot.m_arm.setArmMotorSpeed(0);
+					System.out.println("Arm height is already at low preset");
+				}
+				break;
+			default:
+			Robot.m_arm.setArmMotorSpeed(0);
+				break;
+		}
+
+		System.out.println(armExtension);
+	}
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
 		Robot.m_arm.setArmMotorSpeed(0);
-		m_timer.reset();
+	
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		if (buttonPressedFinal = true) {
-			return m_timer.get() > m_time;
-		} else if (buttonPressedFinal = false) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+	return false;
+}
 }
