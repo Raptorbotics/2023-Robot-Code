@@ -12,11 +12,10 @@ public class ShoulderTeleop extends CommandBase {
 
 	public String option;
 	public static double shoulderHeight = 0;
-	double shoulderHeightSpeed = Constants.Predetermined.shoulder.m_shoulderHeightSpeed;
+	double shoulderHeightSpeed = Constants.Predetermined.shoulder.shoulderHeightSpeed;
 
 	/** Creates a new ShoulderTeleop. */
 	public ShoulderTeleop(String Option) {
-		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_shoulder);
 		option = Option;
 	}

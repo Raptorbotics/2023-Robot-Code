@@ -17,10 +17,19 @@ public final class Constants {
 	public static final int m_limiter = 1;
 
 	public final class Predetermined {
+		public final class arm{
+			public static final double armExtensionSpeed = 1;
 
+			public final class extension{
+				public static final double lowExtension = 90;
+				public static final double mediumExtension = 120;
+				public static final double highExtension = 250;
+
+			}
+		}
 		public final class shoulder {
 
-			public static final double m_shoulderHeightSpeed = 1;
+			public static final double shoulderHeightSpeed = 1;
 
 			public final class height {
 
@@ -92,7 +101,7 @@ public final class Constants {
 
 	public final class motorSpeeds {
 
-		public static final double setArmMotorSpeed = 0.5;
+		public static final double armMotorSpeed = 0.5;
 		public static final double shoulderMotorSpeed = .5;
 	}
 }
