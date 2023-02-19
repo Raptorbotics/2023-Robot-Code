@@ -90,7 +90,7 @@ public class ArmTeleop extends CommandBase {
 
 		System.out.println(armExtension);
 	}
-	}
+	
 
 	// Called once the command ends or is interrupted.
 	@Override
@@ -103,5 +103,5 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public boolean isFinished() {
 	return false;
-}
-}
+}}
+
