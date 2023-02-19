@@ -25,65 +25,70 @@ public class ShoulderTeleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (option == "Manual Down" ){
-      if(armHeight <= 0) {
-        System.out.println("Arm height is at its minimum");
-        return;
+  
+    switch (option) {
+      case "Manual Down":
+        if(armHeight <= 0) {
+         System.out.println("Arm height is at its minimum");
+          return;
       }
-      armHeight = armHeight - 1;
-    Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
-    }
-    else if (option == "Manual Up"){
-      if(armHeight >= 270) {
-        System.out.println("Arm height is at its maximum");
-        return;
+        armHeight = armHeight - 1;
+        Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+      break;
+      case "Manual Up":
+        if(armHeight >= 270) {
+          System.out.println("Arm height is at its maximum");
+          return;
       }
-      armHeight = armHeight + 1;
-      Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
-    } else if (option == "Low") {
-      if(armHeight < 90){
-      Robot.m_shoulder.setShoulderMotorSpeed(0.25);
-      armHeight = armHeight + .5;
+        armHeight = armHeight + 1;
+        Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+      break;
+      case "Low":
+        if(armHeight < 90){
+          Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight + 1;
       } else if(armHeight > 90) {
-        Robot.m_shoulder.setShoulderMotorSpeed(-0.25);
-        armHeight = armHeight - .5;
-      }
-      else{
-        Robot.m_shoulder.setShoulderMotorSpeed(0);
-        System.out.println("Arm height is already at low preset");
-      }
-    }
-
-    else if (option == "Medium") {
-      if(armHeight < 120){
-      Robot.m_shoulder.setShoulderMotorSpeed(0.25);
-      armHeight = armHeight + .5;
-      } else if(armHeight > 120) {
-        Robot.m_shoulder.setShoulderMotorSpeed(-0.25);
-        armHeight = armHeight - .5;
-      }
-      else{
-        Robot.m_shoulder.setShoulderMotorSpeed(0);
-        System.out.println("Arm height is already at low preset");
-      }
-    }
-      else if (option == "High") {
-        if(armHeight < 250){
-        Robot.m_shoulder.setShoulderMotorSpeed(0.25);
-        armHeight = armHeight + .5;
-        } else if(armHeight > 250) {
-          Robot.m_shoulder.setShoulderMotorSpeed(-0.25);
-          armHeight = armHeight - .5;
+          Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight - 1;
         }
         else{
           Robot.m_shoulder.setShoulderMotorSpeed(0);
           System.out.println("Arm height is already at low preset");
         }
+      break;
+      case "Medium":
+        if(armHeight < 120){
+          Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight + 1;
+      } else if(armHeight > 120) {
+          Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight - 1;
+        }
+        else{
+          Robot.m_shoulder.setShoulderMotorSpeed(0);
+          System.out.println("Arm height is already at low preset");
+        }
+      break;
+      case "High":
+        if(armHeight < 250){
+          Robot.m_shoulder.setShoulderMotorSpeed(Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight + 1;
+      } else if(armHeight > 250) {
+          Robot.m_shoulder.setShoulderMotorSpeed(-Constants.motorSpeeds.shoulderMotorSpeed);
+          armHeight = armHeight - 1;
+        }
+        else{
+          Robot.m_shoulder.setShoulderMotorSpeed(0);
+          System.out.println("Arm height is already at low preset");
+        }
+      break;
 
-      }
-    else{
-      Robot.m_shoulder.setShoulderMotorSpeed(0);
+      default:
+        Robot.m_shoulder.setShoulderMotorSpeed(0);
+      break;
+     
     }
+
     System.out.println(armHeight);
   }
 
