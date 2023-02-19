@@ -5,14 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Robot;
-import frc.robot.commands.ArmTeleop;
-import frc.robot.commands.Drive;
+import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
+import frc.robot.commands.ArmTeleop;
 
 /**S
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,7 +43,7 @@ public class RobotContainer {
 
 	private void configureBindings() {
 		// Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-		Robot.m_Drivetrain.setDefaultCommand(new Drive());
+		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop());
 		//Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
 
 		// Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
@@ -57,12 +55,12 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		//ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down"));
-		lBumper.and(aButton).onTrue(new ShoulderTeleop("Low"));
-		lBumper.and(bButton).onTrue(new ShoulderTeleop("Medium"));
-		lBumper.and(yButton).onTrue(new ShoulderTeleop("High"));
-		UP.whileTrue(new ShoulderTeleop("Manual Up"));
-
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder)); //Manual Down1
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder)); //Predetermined Low
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder)); //Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder)); //Predetermined High
+		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder)); //Manual Up
+		
 		//ArmTelop Keybinds
 
 		LEFT.whileTrue(new ArmTeleop("Manual Extend"));

@@ -5,11 +5,28 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class shoulder extends SubsystemBase {
+
+	private double shoulderAngle = 0;
+
+	public void setShoulderAngle(double value) {
+		shoulderAngle = value;
+	}
+
+	public double getShoulderAngle() {
+		return shoulderAngle;
+	}
+
+	public void reduceShoulderAngle(double amount) {
+		shoulderAngle = shoulderAngle - amount;
+	}
+
+	public void increaseShoulderAngle(double amount) {
+		shoulderAngle = shoulderAngle + amount;
+	}
 
 	/** Creates a new shoulder. */
 	public shoulder() {}
