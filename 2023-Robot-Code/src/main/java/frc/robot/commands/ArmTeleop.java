@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.lang.constant.Constable;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -13,7 +15,7 @@ public class ArmTeleop extends CommandBase {
 
 	public String option;
 	public static double armExtension  = 0;
-	double armExtensionSpeed = Constants.Predetermined.arm.armExtensionSpeed;
+	double armExtensionSpeed = Constants.Predetermined.Arm.armExtensionSpeed;
 
 	/** Creates a new ArmTeleop. */
 	public ArmTeleop(String Option) {
@@ -37,7 +39,7 @@ public class ArmTeleop extends CommandBase {
 					return;
 				}
 				armExtension = armExtension - armExtensionSpeed;
-				Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+				Robot.m_arm.setArmMotorSpeed(-Constants.Motors.Speeds.arm);
 				break;
 			case "Manual Extend":
 				if (armExtension >= 270) {
@@ -45,14 +47,14 @@ public class ArmTeleop extends CommandBase {
 					return;
 				}
 				armExtension = armExtension + armExtensionSpeed;
-				Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+				Robot.m_arm.setArmMotorSpeed(Constants.Motors.Speeds.arm);
 				break;
 			case "Low":
-				if (armExtension < 90) {
-					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+				if (armExtension < Constants.Predetermined.Arm.Extension.low) {
+					Robot.m_arm.setArmMotorSpeed(Constants.Motors.Speeds.arm);
 					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > 90) {
-					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+				} else if (armExtension > Constants.Predetermined.Arm.Extension.low) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.Motors.Speeds.arm);
 					armExtension = armExtension - armExtensionSpeed;
 				} else {
 					Robot.m_arm.setArmMotorSpeed(0);
@@ -60,11 +62,11 @@ public class ArmTeleop extends CommandBase {
 				}
 				break;
 			case "Medium":
-				if (armExtension < 120) {
-					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+				if (armExtension < Constants.Predetermined.Arm.Extension.medium) {
+					Robot.m_arm.setArmMotorSpeed(Constants.Motors.Speeds.arm);
 					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > 120) {
-					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+				} else if (armExtension > Constants.Predetermined.Arm.Extension.medium) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.Motors.Speeds.arm);
 					armExtension = armExtension - armExtensionSpeed;
 				} else {
 					Robot.m_arm.setArmMotorSpeed(0);
@@ -72,11 +74,11 @@ public class ArmTeleop extends CommandBase {
 				}
 				break;
 			case "High":
-				if (armExtension < 250) {
-					Robot.m_arm.setArmMotorSpeed(Constants.motorSpeeds.armMotorSpeed);
+				if (armExtension < Constants.Predetermined.Arm.Extension.high) {
+					Robot.m_arm.setArmMotorSpeed(Constants.Motors.Speeds.arm);
 					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > 250) {
-					Robot.m_arm.setArmMotorSpeed(-Constants.motorSpeeds.armMotorSpeed);
+				} else if (armExtension > Constants.Predetermined.Arm.Extension.high) {
+					Robot.m_arm.setArmMotorSpeed(-Constants.Motors.Speeds.arm);
 					armExtension = armExtension - armExtensionSpeed;
 				} else {
 					Robot.m_arm.setArmMotorSpeed(0);
@@ -103,9 +105,9 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		if (
-			(option == "Low" && armExtension == 90) ||
-			(option == "Medium" && armExtension == 120) ||
-			(option == "High" && armExtension == 250)
+			(option == "Low" && armExtension == Constants.Predetermined.Arm.Extension.low) ||
+			(option == "Medium" && armExtension == Constants.Predetermined.Arm.Extension.medium) ||
+			(option == "High" && armExtension == Constants.Predetermined.Arm.Extension.high)
 		) {
 			return true;
 		}
