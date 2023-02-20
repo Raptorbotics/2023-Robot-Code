@@ -7,17 +7,31 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.subsystems.arm;
 
 public class ArmTeleop extends CommandBase {
+	
+static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
+	String option;
+	private arm m_arm;
 
-	public String option;
-	public static double armExtension  = 0;
-	double armExtensionSpeed = Constants.Predetermined.Arm.armExtensionSpeed;
+	public double getArmAngle() {
+		return m_arm.getArmAngle();
+	}
 
-	/** Creates a new ArmTeleop. */
-	public ArmTeleop(String Option) {
+	public void reduceArmAngle(double amount) {
+		m_arm.reduceArmAngle(amount);
+	}
+
+	public void increaseArmAngle(double amount) {
+		m_arm.increaseArmAngle(amount);
+	}
+
+
+	public ArmTeleop(String Option, arm subsystem) {
 		addRequirements(Robot.m_arm);
 		option = Option;
+		m_arm = subsystem;
 	}
 
 	// Called when the command is initially scheduled.
@@ -31,33 +45,33 @@ public class ArmTeleop extends CommandBase {
 	public void execute() {
 		switch (option) {
 			case "Manual Retract":
-				if (armExtension <= 0) {
+				if (getArmAngle() <= 0) {
 					System.out.println("Arm Extension: MINIMUM");
 
 					Robot.m_arm.setMotorSpeed(0);
 					return;
 				}
-				armExtension = armExtension - armExtensionSpeed;
+				reduceArmAngle(armHeightSpeed);
 				Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 				break;
 			case "Manual Extend":
-				if (armExtension >= 270) {
+				if (getArmAngle() >= 270) {
 					System.out.println("Arm Extension: MAXIMUM");
 					Robot.m_arm.setMotorSpeed(0);
 					return;
 				}
-				armExtension = armExtension + armExtensionSpeed;
+				increaseArmAngle(armHeightSpeed);
 				Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 				break;
 
 				//Low Preset
 			case "Low":
-				if (armExtension < Constants.Predetermined.Arm.Extension.low) {
+				if (getArmAngle() < Constants.Predetermined.Arm.Extension.low) {
 					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > Constants.Predetermined.Arm.Extension.low) {
+					increaseArmAngle(armHeightSpeed);
+				} else if (getArmAngle()  > Constants.Predetermined.Arm.Extension.low) {
 					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					armExtension = armExtension - armExtensionSpeed;
+					reduceArmAngle(armHeightSpeed);
 				} else {
 					Robot.m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: LOW PRESET");
@@ -66,12 +80,12 @@ public class ArmTeleop extends CommandBase {
 
 				//Medium Preset
 			case "Medium":
-				if (armExtension < Constants.Predetermined.Arm.Extension.medium) {
+				if (getArmAngle() < Constants.Predetermined.Arm.Extension.medium) {
 					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > Constants.Predetermined.Arm.Extension.medium) {
+					increaseArmAngle(armHeightSpeed);
+				} else if (getArmAngle()  > Constants.Predetermined.Arm.Extension.medium) {
 					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					armExtension = armExtension - armExtensionSpeed;
+					reduceArmAngle(armHeightSpeed);
 				} else {
 					Robot.m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: MEDIUM PRESET");
@@ -80,12 +94,12 @@ public class ArmTeleop extends CommandBase {
 
 				//High Preset
 			case "High":
-				if (armExtension < Constants.Predetermined.Arm.Extension.high) {
+				if (getArmAngle() < Constants.Predetermined.Arm.Extension.high) {
 					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					armExtension = armExtension + armExtensionSpeed;
-				} else if (armExtension > Constants.Predetermined.Arm.Extension.high) {
+					increaseArmAngle(armHeightSpeed);
+				} else if (getArmAngle() > Constants.Predetermined.Arm.Extension.high) {
 					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					armExtension = armExtension - armExtensionSpeed;
+					reduceArmAngle(armHeightSpeed);
 				} else {
 					Robot.m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: HIGH PRESET");
@@ -96,7 +110,7 @@ public class ArmTeleop extends CommandBase {
 				break;
 		}
 
-		System.out.println(armExtension);
+		System.out.println("Arm Extension: " + getArmAngle());
 	}
 	
 
@@ -111,9 +125,9 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public boolean isFinished() {
 		if (
-			(option == "Low" && armExtension == Constants.Predetermined.Arm.Extension.low) ||
-			(option == "Medium" && armExtension == Constants.Predetermined.Arm.Extension.medium) ||
-			(option == "High" && armExtension == Constants.Predetermined.Arm.Extension.high)
+			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
+			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
+			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)
 		) {
 			return true;
 		}

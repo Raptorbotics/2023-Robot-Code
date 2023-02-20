@@ -38,28 +38,10 @@ public class drivetrain extends SubsystemBase {
 		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
 	}
 
-	/**
-	 * Example command factory method.
-	 *
-	 * @return a command
-	 */
-	/**public CommandBase exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-  
-
-
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-	//});
-	//}
-
-	/**
-	 * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-	 *
-	 * @return value of some boolean subsystem state, such as a digital sensor.
-	 */
+	public void setMotorSpeed(double xAxis, double yAxis, double zAxis, double d) {
+		Robot.drive.driveCartesian(xAxis, yAxis, zAxis);
+	}
+	
 	public boolean exampleCondition() {
 		// Query some boolean state, such as a digital sensor.
 		return false;
@@ -75,7 +57,5 @@ public class drivetrain extends SubsystemBase {
 		// This method will be called once per scheduler run during simulation
 	}
 
-	public void setMotorSpeed(double xAxis, double yAxis, double zAxis, double d) {
-		Robot.drive.driveCartesian(xAxis, yAxis, zAxis);
-	}
+
 }

@@ -63,11 +63,11 @@ public class RobotContainer {
 		
 		//ArmTelop Keybinds
 
-		LEFT.whileTrue(new ArmTeleop("Manual Extend"));
-		rBumper.and(aButton).onTrue(new ArmTeleop("Low"));
-		rBumper.and(bButton).onTrue(new ArmTeleop("Medium"));
-		rBumper.and(yButton).onTrue(new ArmTeleop("High"));
-		RIGHT.whileTrue(new ArmTeleop("Manual Retract"));
+		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm));
+		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm));
+		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm));
+		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm));
+		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm));
 		configureBindings();
 	}
 	/**
