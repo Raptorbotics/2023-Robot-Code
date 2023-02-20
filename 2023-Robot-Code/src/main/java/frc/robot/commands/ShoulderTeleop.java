@@ -44,7 +44,7 @@ public class ShoulderTeleop extends CommandBase {
 		switch (option) {
 			case "Manual Down":
 				if (getShoulderAngle() <= 0) {
-					System.out.println("Arm height is at its minimum");
+					System.out.println("Arm angle is at its minimum");
 					m_shoulder.setShoulderMotorSpeed(0);
 					return;
 				}
@@ -53,7 +53,7 @@ public class ShoulderTeleop extends CommandBase {
 				break;
 			case "Manual Up":
 				if (getShoulderAngle() >= 270) {
-					System.out.println("Arm height is at its maximum");
+					System.out.println("Arm angle is at its maximum");
 					m_shoulder.setShoulderMotorSpeed(0);
 					return;
 				}
@@ -81,7 +81,7 @@ public class ShoulderTeleop extends CommandBase {
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
 					m_shoulder.setShoulderMotorSpeed(0);
-					System.out.println("Arm height is already at low preset");
+					System.out.println("Arm height is already at medium preset");
 				}
 				break;
 			case "High":
@@ -93,7 +93,7 @@ public class ShoulderTeleop extends CommandBase {
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
 					m_shoulder.setShoulderMotorSpeed(0);
-					System.out.println("Arm height is already at low preset");
+					System.out.println("Arm height is already at high preset");
 				}
 				break;
 			default:
