@@ -15,6 +15,8 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private arm m_arm;
 
+	double autonomousExtension;
+
 	public double getArmAngle() {
 		return m_arm.getArmAngle();
 	}
@@ -28,9 +30,10 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	}
 
 
-	public ArmTeleop(String Option, arm subsystem) {
+	public ArmTeleop(String Option, arm subsystem ,double autonomousArmExtension) {
 		addRequirements(Robot.m_arm);
 		option = Option;
+		autonomousExtension = autonomousArmExtension;
 		m_arm = subsystem;
 	}
 
@@ -105,6 +108,28 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 					System.out.println("Arm Extension: HIGH PRESET");
 				}
 				break;
+
+
+			case "Autonomous":
+
+			if(getArmAngle() < autonomousExtension){
+			Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
+			increaseArmAngle(armHeightSpeed);
+			}
+			else if(getArmAngle() > autonomousExtension){
+				Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+				reduceArmAngle(armHeightSpeed);
+				}
+				else {
+					Robot.m_arm.setMotorSpeed(0);
+					System.out.println("Arm Extension: Autonomous");
+				}
+
+
+
+			break;
+
+
 			default:
 			Robot.m_arm.setMotorSpeed(0);
 				break;

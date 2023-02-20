@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -14,16 +15,19 @@ String option;
 double xInput; 
 double yInput;
 double zInput;
+double time;
+
+
 	/** Creates a new Drive. */
-	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput) {
+	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) {
 		// Use addRequirements() here to declare subsystem dependencies.
 
 		option = Option;
-
-		xInput = m_xInput;
+		
 		yInput = m_yInput;
 		zInput = m_zInput;
-
+		
+		time = m_time;
 
 		addRequirements(Robot.m_Drivetrain);
 	}
@@ -49,7 +53,17 @@ double zInput;
 		break;
 
 		case "Autonomous":
-		Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
+		Timer  m_timer = new Timer();
+	
+		m_timer.start();
+
+
+		if (m_timer.get() < time){
+			Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
+		}else{
+		Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
+		}
+		
 		break;
 		default:
 		Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
