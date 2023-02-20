@@ -18,7 +18,7 @@ public final class Constants {
 
 	public final class Predetermined {
 		public final class Arm{
-			public static final double armExtensionSpeed = 1;
+			public static final double Speed = 1;
 
 			public final class Extension{
 				public static final double low = 90;
@@ -29,7 +29,7 @@ public final class Constants {
 		}
 		public final class Shoulder {
 
-			public static final double shoulderHeightSpeed = 1;
+			public static final double Speed = 1;
 
 			public final class Height {
 
@@ -52,24 +52,24 @@ public final class Constants {
 			public static final int frontRightMotorTwo = 3;
 
 			public static final int backLeftMotorOne = 4;
-			public static final int backLeftMotorTwo = 7;
+			public static final int backLeftMotorTwo = 5;
 
-			public static final int backRightMotorOne = 8;
-			public static final int backRightMotorTwo = 9;
+			public static final int backRightMotorOne = 6;
+			public static final int backRightMotorTwo = 7;
 		}
 
 		public final class arm {
 
-			public static final int armMotor = 5;
+			public static final int armMotor = 8;
 		}
 
 		public final class shoulder {
 
-			public static final int shoulderMotor = 6;
+			public static final int shoulderMotor = 9;
 		}
 		public final class Speeds {
 
-			public static final double arm = 0.5;
+			public static final double arm = .5;
 			public static final double shoulder = .5;
 		}
 	}

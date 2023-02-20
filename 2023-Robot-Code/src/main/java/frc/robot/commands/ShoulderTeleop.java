@@ -10,7 +10,7 @@ import frc.robot.subsystems.shoulder;
 
 public class ShoulderTeleop extends CommandBase {
 
-	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.shoulderHeightSpeed;
+	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.Speed;
 	String option;
 	private shoulder m_shoulder;
 
@@ -42,81 +42,97 @@ public class ShoulderTeleop extends CommandBase {
 	@Override
 	public void execute() {
 		switch (option) {
+
+			//MANUAL DOWN
 			case "Manual Down":
 				if (getShoulderAngle() <= 0) {
-					System.out.println("Arm height is at its minimum");
-					m_shoulder.setShoulderMotorSpeed(0);
+
+					System.out.println("Shoulder Height: MINIMUM");
+					m_shoulder.setMotorSpeed(0);
+
 					return;
 				}
 				reduceShoulderAngle(shoulderHeightSpeed);
-				m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
+				m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 				break;
+
+			//MANUAL UP
 			case "Manual Up":
 				if (getShoulderAngle() >= 270) {
-					System.out.println("Arm height is at its maximum");
-					m_shoulder.setShoulderMotorSpeed(0);
+					System.out.println("Arm angle is at its maximum");
+					m_shoulder.setMotorSpeed(0);
 					return;
 				}
 				increaseShoulderAngle(shoulderHeightSpeed);
-				m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
+				m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 				break;
+
+			//LOW PRESET
 			case "Low":
-				if (getShoulderAngle() < 90) {
-					m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
+				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.low) {
+					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 					increaseShoulderAngle(shoulderHeightSpeed);
-				} else if (getShoulderAngle() > 90) {
-					m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
+				} else if (getShoulderAngle() > Constants.Predetermined.Shoulder.Height.low) {
+					m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
-					m_shoulder.setShoulderMotorSpeed(0);
-					System.out.println("Arm height is already at low preset");
+					m_shoulder.setMotorSpeed(0);
+					System.out.println("Shoulder Height: LOW PRESET");
 				}
 				break;
+
+			//MEDIUM PRESET
 			case "Medium":
-				if (getShoulderAngle() < 120) {
-					m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
+				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.medium) {
+					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 					increaseShoulderAngle(shoulderHeightSpeed);
-				} else if (getShoulderAngle() > 120) {
-					m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
+				} else if (getShoulderAngle() > Constants.Predetermined.Shoulder.Height.medium) {
+					m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
-					m_shoulder.setShoulderMotorSpeed(0);
-					System.out.println("Arm height is already at low preset");
+
+					m_shoulder.setMotorSpeed(0);
+					System.out.println("Shoulder Height: MEDIUM PRESET");
+
 				}
 				break;
+
+			//HIGH PRESET
 			case "High":
-				if (getShoulderAngle() < 250) {
-					m_shoulder.setShoulderMotorSpeed(Constants.Motors.Speeds.shoulder);
+				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.high) {
+					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 					increaseShoulderAngle(shoulderHeightSpeed);
-				} else if (getShoulderAngle() > 250) {
-					m_shoulder.setShoulderMotorSpeed(-Constants.Motors.Speeds.shoulder);
+				} else if (getShoulderAngle() > Constants.Predetermined.Shoulder.Height.high) {
+					m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
-					m_shoulder.setShoulderMotorSpeed(0);
-					System.out.println("Arm height is already at low preset");
+
+					m_shoulder.setMotorSpeed(0);
+					System.out.println("Shoulder Height: HIGH PRESET");
+
 				}
 				break;
 			default:
-				m_shoulder.setShoulderMotorSpeed(0);
+				m_shoulder.setMotorSpeed(0);
 				break;
 		}
 
-		System.out.println(getShoulderAngle());
+		System.out.println("Shoulder Angle: " + getShoulderAngle());
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		m_shoulder.setShoulderMotorSpeed(0);
+		m_shoulder.setMotorSpeed(0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
 		if (
-			(option == "Low" && getShoulderAngle() == 90) ||
-			(option == "Medium" && getShoulderAngle() == 120) ||
-			(option == "High" && getShoulderAngle() == 250)
+			(option == "Low" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.low) ||
+			(option == "Medium" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.medium) ||
+			(option == "High" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.high)
 		) {
 			return true;
 		}

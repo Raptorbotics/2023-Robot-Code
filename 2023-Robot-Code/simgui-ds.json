@@ -11,9 +11,11 @@
           "incKey": 68
         },
         {
+          "decKey": 87,
           "incKey": 83
         },
         {
+          "decKey": 69,
           "decayRate": 0.0,
           "keyRate": 0.009999999776482582
         }
@@ -21,32 +23,22 @@
       "axisCount": 5,
       "buttonCount": 6,
       "buttonKeys": [
-<<<<<<< Updated upstream
         65,
         66,
         88,
         89,
         76,
-=======
-        81,
-        87,
-        69,
-        -1,
-        -1,
->>>>>>> Stashed changes
         82
       ],
       "povConfig": [
         {
-<<<<<<< Updated upstream
           "key0": 265,
+          "key135": 323,
           "key180": 264,
+          "key225": 321,
           "key270": 263,
+          "key315": 327,
           "key90": 262
-=======
-          "key0": 49,
-          "key180": 50
->>>>>>> Stashed changes
         }
       ],
       "povCount": 1
