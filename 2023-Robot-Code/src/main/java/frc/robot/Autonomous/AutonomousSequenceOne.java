@@ -5,6 +5,11 @@
 package frc.robot.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.commands.DriveTeleop;
+import frc.robot.commands.ShoulderTeleop;
+import frc.robot.subsystems.shoulder;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,6 +19,20 @@ public class AutonomousSequenceOne extends SequentialCommandGroup {
   public AutonomousSequenceOne() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+
+
+      new DriveTeleop(Constants.Predetermined.Drive.autonomous,Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
+      Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,Constants.AutonomousSpeeds.Drive.SequenceOne.zInput),
+
+      new ShoulderTeleop("Autonomous", Robot.m_shoulder )
+
+
+
+
+    );
   }
-}
+
+ 
+  }
+

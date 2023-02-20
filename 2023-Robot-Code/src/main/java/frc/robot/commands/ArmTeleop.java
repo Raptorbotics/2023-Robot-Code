@@ -11,7 +11,7 @@ import frc.robot.subsystems.arm;
 
 public class ArmTeleop extends CommandBase {
 	
-static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
+static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private arm m_arm;
 

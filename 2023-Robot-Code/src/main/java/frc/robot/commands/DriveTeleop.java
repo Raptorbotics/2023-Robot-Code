@@ -9,10 +9,22 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class DriveTeleop extends CommandBase {
-
+	
+String option;
+double xInput; 
+double yInput;
+double zInput;
 	/** Creates a new Drive. */
-	public DriveTeleop() {
+	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput) {
 		// Use addRequirements() here to declare subsystem dependencies.
+
+		option = Option;
+
+		xInput = m_xInput;
+		yInput = m_yInput;
+		zInput = m_zInput;
+
+
 		addRequirements(Robot.m_Drivetrain);
 	}
 
@@ -24,10 +36,26 @@ public class DriveTeleop extends CommandBase {
 	@Override
 	public void execute() {
 		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) * (Constants.m_limiter);
-		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
-		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) * (Constants.m_limiter);
+	double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
+	  double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) * (Constants.m_limiter);
+	 
+	
+	  
+	
+		switch(option){
 
+		case "Teleop":
 		Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
+		break;
+
+		case "Autonomous":
+		Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
+		break;
+		default:
+		Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
+
+
+		}
 	}
 
 	// Called once the command ends or is interrupted.

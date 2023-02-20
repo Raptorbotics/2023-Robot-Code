@@ -10,7 +10,7 @@ import frc.robot.subsystems.shoulder;
 
 public class ShoulderTeleop extends CommandBase {
 
-	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.Speed;
+	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.speed;
 	String option;
 	private shoulder m_shoulder;
 
