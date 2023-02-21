@@ -5,6 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -32,6 +35,7 @@ public class RobotContainer {
 	public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
 	public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
 
+	
 	public POVButton UP = new POVButton(controller, 0);
 	public POVButton DOWN = new POVButton(controller, 180);
 	public POVButton LEFT = new POVButton(controller, 270);
@@ -41,42 +45,52 @@ public class RobotContainer {
 		return controller.getRawAxis(axis);
 	}
 
-	private void configureBindings() {
-		// Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop());
-		//Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
+	final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-		// Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-		// cancelling on release.
-	}
+	
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	public RobotContainer() {
 		// Configure the trigger bindings
-
+		
 		//ShoulderTeleop Keybinds
 		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder)); //Manual Down1
 		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder)); //Predetermined Low
 		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder)); //Predetermined Medium
 		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder)); //Predetermined High
+		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder)); //Predetermined High
+		
 		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder)); //Manual Up
 		
 		//ArmTelop Keybinds
 
-		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm));
-		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm));
-		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm));
-		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm));
-		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm));
+		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0));
+		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
+		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0,0));
+		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0,0));
+		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0,0));
+		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0,0));
 		configureBindings();
+	}
+
+	private void configureBindings() {
+		
+		
+		//Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
+
+		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
+		//m_chooser.addOption("Auto Sequence 2", new frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
+		SmartDashboard.putData(m_chooser);
+
 	}
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
 	 *
 	 * @return the command to run in autonomous
 	 */
-	/**public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    /**return Autos.exampleAuto(m_exampleSubsystem);*/
+	public Command getAutonomousCommand() {
+    //An example command will be run in autonomous
+    return  m_chooser.getSelected();
 	//}
+}
 }

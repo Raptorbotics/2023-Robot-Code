@@ -6,11 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.shoulder;
 
 public class ShoulderTeleop extends CommandBase {
 
-	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.Speed;
+	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.speed;
 	String option;
 	private shoulder m_shoulder;
 
@@ -112,6 +113,20 @@ public class ShoulderTeleop extends CommandBase {
 
 				}
 				break;
+
+				case "Default":
+
+				if (getShoulderAngle() > 0) {
+					Robot.m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
+					reduceShoulderAngle(shoulderHeightSpeed);
+				}
+				else {
+					Robot.m_shoulder.setMotorSpeed(0);
+					System.out.println("Shoulder Height: Reset");
+				}
+
+
+
 			default:
 				m_shoulder.setMotorSpeed(0);
 				break;
@@ -132,7 +147,8 @@ public class ShoulderTeleop extends CommandBase {
 		if (
 			(option == "Low" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.low) ||
 			(option == "Medium" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.medium) ||
-			(option == "High" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.high)
+			(option == "High" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.high)||
+			(option == "Default" && getShoulderAngle() == 0)
 		) {
 			return true;
 		}

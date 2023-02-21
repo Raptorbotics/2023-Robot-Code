@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -11,9 +12,14 @@ import frc.robot.subsystems.arm;
 
 public class ArmTeleop extends CommandBase {
 	
-static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
+static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private arm m_arm;
+
+	double time;
+	Timer  m_timer = new Timer();
+
+	double autonomousExtension;
 
 	public double getArmAngle() {
 		return m_arm.getArmAngle();
@@ -28,15 +34,20 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
 	}
 
 
-	public ArmTeleop(String Option, arm subsystem) {
+	public ArmTeleop(String Option, arm subsystem ,double autonomousArmExtension, double m_time) {
 		addRequirements(Robot.m_arm);
+
 		option = Option;
+		autonomousExtension = autonomousArmExtension;
 		m_arm = subsystem;
+
+		time = m_time;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+	 m_timer.start();
 		
 	}
 
@@ -105,6 +116,39 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
 					System.out.println("Arm Extension: HIGH PRESET");
 				}
 				break;
+
+				case "Default":
+
+				if (getArmAngle() > 0) {
+					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+					reduceArmAngle(armHeightSpeed);
+				}
+				else {
+					Robot.m_arm.setMotorSpeed(0);
+					System.out.println("Arm Exension: Reset");
+				}
+
+
+			case "Autonomous":
+
+			if(getArmAngle() < autonomousExtension){
+			Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
+			increaseArmAngle(armHeightSpeed);
+			}
+			else if(getArmAngle() > autonomousExtension){
+				Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+				reduceArmAngle(armHeightSpeed);
+				}
+				else {
+					Robot.m_arm.setMotorSpeed(0);
+					System.out.println("Arm Extension: Autonomous");
+				}
+
+
+
+			break;
+
+
 			default:
 			Robot.m_arm.setMotorSpeed(0);
 				break;
@@ -127,9 +171,25 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.Speed;
 		if (
 			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
 			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
-			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)
+			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)||
+			(option == "Default" && getArmAngle() == 0)
 		) {
 			return true;
 		}
+
+		if(option == "Autonomous") {
+			if (m_timer.hasElapsed(time)){
+				Robot.m_Drivetrain.setMotorSpeed(0 , 0, 0, 0);
+				return true;
+			  }else{
+			  return false;
+
+		}
+
+
+		
+			
+	}
+	
 	return false;
 }}

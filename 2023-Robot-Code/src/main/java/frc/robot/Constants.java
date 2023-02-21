@@ -17,8 +17,12 @@ public final class Constants {
 	public static final int m_limiter = 1;
 
 	public final class Predetermined {
+		public final class Drive{
+			public static final String teleop = "Teleop";	
+			public static final String autonomous = "Autonomous";
+		}
 		public final class Arm{
-			public static final double Speed = 1;
+			public static final double speed = 1;
 
 			public final class Extension{
 				public static final double low = 90;
@@ -29,7 +33,7 @@ public final class Constants {
 		}
 		public final class Shoulder {
 
-			public static final double Speed = 1;
+			public static final double speed = 1;
 
 			public final class Height {
 
@@ -37,6 +41,26 @@ public final class Constants {
 				public static final double medium = 120;
 				public static final double high = 250;
 			}
+		}
+	}
+
+	public final class AutonomousSpeeds{
+		public final class Drive{
+			public final class SequenceOne{
+				public static final double xInput = 0;
+				public static final double yInput = .5;
+				public static final double zInput = 0;
+			
+			}
+			
+		}
+		public final class Arm{
+
+			
+		}
+		public final class Shoulder{
+
+			
 		}
 	}
 

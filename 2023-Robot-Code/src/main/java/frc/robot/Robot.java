@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import java.sql.DriverPropertyInfo;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.DriveTeleop;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.shoulder;
@@ -27,6 +30,10 @@ public class Robot extends TimedRobot {
 	public static MecanumDrive drive;
 	public static arm m_arm = new arm();
 	public static shoulder m_shoulder = new shoulder();
+
+
+
+
 
 	//MUST BE LAST THING INSTANTIATED
 	public static RobotContainer m_robotContainer = new RobotContainer();
@@ -69,7 +76,7 @@ public class Robot extends TimedRobot {
 	/** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
 	@Override
 	public void autonomousInit() {
-		//*m_autonomousCommand = m_robotContainer.getAutonomousCommand();*/
+		m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
@@ -87,6 +94,9 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+	  
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
@@ -94,7 +104,11 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during operator control. */
 	@Override
-	public void teleopPeriodic() {}
+	public void teleopPeriodic() {
+		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop(Constants.Predetermined.Drive.teleop, 0, 0, 0, 0));
+	
+
+	}
 
 	@Override
 	public void testInit() {
