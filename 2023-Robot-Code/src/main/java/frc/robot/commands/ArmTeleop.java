@@ -117,6 +117,17 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 				}
 				break;
 
+				case "Default":
+
+				if (getArmAngle() > 0) {
+					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+					reduceArmAngle(armHeightSpeed);
+				}
+				else {
+					Robot.m_arm.setMotorSpeed(0);
+					System.out.println("Arm Exension: Reset");
+				}
+
 
 			case "Autonomous":
 
@@ -160,7 +171,8 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 		if (
 			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
 			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
-			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)
+			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)||
+			(option == "Default" && getArmAngle() == 0)
 		) {
 			return true;
 		}
