@@ -26,7 +26,7 @@ public class AutonomousSequenceOne extends SequentialCommandGroup {
       new DriveTeleop(Constants.Predetermined.Drive.autonomous,Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
       Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,Constants.AutonomousSpeeds.Drive.SequenceOne.zInput, 5),
 
-      new ArmTeleop("Low", Robot.m_arm, 270,5)
+      new ArmTeleop("Autonomous", Robot.m_arm, 270,6)
 
 
 

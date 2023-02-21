@@ -87,12 +87,7 @@ Timer  m_timer = new Timer();
 				return true;
 			  }else{
 			  return false;
-
 		}
-
-
-		
-			
 	}
 	return false;
 }

@@ -16,6 +16,8 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private arm m_arm;
 
+	boolean end = false;	
+
 	double time;
 	Timer  m_timer = new Timer();
 
@@ -42,6 +44,7 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 		m_arm = subsystem;
 
 		time = m_time;
+		
 	}
 
 	// Called when the command is initially scheduled.
@@ -131,6 +134,7 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 
 			case "Autonomous":
 
+			if (end = false){
 			if(getArmAngle() < autonomousExtension){
 			Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 			increaseArmAngle(armHeightSpeed);
@@ -144,7 +148,7 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 					System.out.println("Arm Extension: Autonomous");
 				}
 
-
+			}
 
 			break;
 
@@ -172,19 +176,28 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
 			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
 			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high)||
-			(option == "Default" && getArmAngle() == 0)
+			(option == "Default" && getArmAngle() == 0)//||
+			//(option == "Autonomous" && getArmAngle() == autonomousExtension)
 		) {
+
 			return true;
 		}
 
-		if(option == "Autonomous") {
+		 if(option == "Autonomous") {
 			if (m_timer.hasElapsed(time)){
+				end = true;
+
+				if(getArmAngle() > 0){
+				
+						Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+						reduceArmAngle(armHeightSpeed);
+						System.out.println("Arm Extension: " + getArmAngle());
+					
+				}else{
 				Robot.m_Drivetrain.setMotorSpeed(0 , 0, 0, 0);
 				return true;
-			  }else{
-			  return false;
-
-		}
+				}
+			  }
 
 
 		
