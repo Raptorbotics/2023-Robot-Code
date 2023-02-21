@@ -17,6 +17,8 @@ double yInput;
 double zInput;
 double time;
 
+Timer  m_timer = new Timer();
+
 
 	/** Creates a new Drive. */
 	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) {
@@ -34,7 +36,9 @@ double time;
 
 	// Called when the command is initially scheduled.
 	@Override
-	public void initialize() {}
+	public void initialize() {
+		m_timer.start();
+	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
@@ -53,15 +57,13 @@ double time;
 		break;
 
 		case "Autonomous":
-		Timer  m_timer = new Timer();
 	
-		m_timer.start();
+	
+	
 
 
 		if (m_timer.get() < time){
 			Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
-		}else{
-		Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
 		}
 		
 		break;
@@ -79,6 +81,20 @@ double time;
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return false;
+		if(option == "Autonomous") {
+			if (m_timer.hasElapsed(time)){
+				Robot.m_Drivetrain.setMotorSpeed(0 , 0, 0, 0);
+				return true;
+			  }else{
+			  return false;
+
+		}
+
+
+		
+			
 	}
+	return false;
 }
+}
+

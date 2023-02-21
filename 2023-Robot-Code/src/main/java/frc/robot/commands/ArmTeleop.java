@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -14,6 +15,9 @@ public class ArmTeleop extends CommandBase {
 static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private arm m_arm;
+
+	double time;
+	Timer  m_timer = new Timer();
 
 	double autonomousExtension;
 
@@ -30,16 +34,20 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 	}
 
 
-	public ArmTeleop(String Option, arm subsystem ,double autonomousArmExtension) {
+	public ArmTeleop(String Option, arm subsystem ,double autonomousArmExtension, double m_time) {
 		addRequirements(Robot.m_arm);
+
 		option = Option;
 		autonomousExtension = autonomousArmExtension;
 		m_arm = subsystem;
+
+		time = m_time;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+	 m_timer.start();
 		
 	}
 
@@ -156,5 +164,20 @@ static double  armHeightSpeed = Constants.Predetermined.Arm.speed;
 		) {
 			return true;
 		}
+
+		if(option == "Autonomous") {
+			if (m_timer.hasElapsed(time)){
+				Robot.m_Drivetrain.setMotorSpeed(0 , 0, 0, 0);
+				return true;
+			  }else{
+			  return false;
+
+		}
+
+
+		
+			
+	}
+	
 	return false;
 }}

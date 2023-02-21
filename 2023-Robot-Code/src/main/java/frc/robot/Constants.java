@@ -47,9 +47,9 @@ public final class Constants {
 	public final class AutonomousSpeeds{
 		public final class Drive{
 			public final class SequenceOne{
-				public static final double xInput = 1;
-				public static final double yInput = 1;
-				public static final double zInput = 1;
+				public static final double xInput = 0;
+				public static final double yInput = .5;
+				public static final double zInput = 0;
 			
 			}
 			
