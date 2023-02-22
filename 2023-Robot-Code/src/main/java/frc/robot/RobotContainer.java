@@ -15,10 +15,14 @@ import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
 import frc.robot.commands.ArmTeleop;
 
-/**S
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+/**
+ * S
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
@@ -35,7 +39,6 @@ public class RobotContainer {
 	public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
 	public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
 
-	
 	public POVButton UP = new POVButton(controller, 0);
 	public POVButton DOWN = new POVButton(controller, 180);
 	public POVButton LEFT = new POVButton(controller, 270);
@@ -47,47 +50,48 @@ public class RobotContainer {
 
 	final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	
-
-	/** The container for the robot. Contains subsystems, OI devices, and commands. */
+	/**
+	 * The container for the robot. Contains subsystems, OI devices, and commands.
+	 */
 	public RobotContainer() {
 		// Configure the trigger bindings
-		
-		//ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder)); //Manual Down1
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder)); //Predetermined Low
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder)); //Predetermined Medium
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder)); //Predetermined High
-		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder)); //Manual Up
-		
-		//ArmTelop Keybinds
 
-		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0,0));
-		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0,0));
-		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0,0));
-		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0,0));
-		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0,0));
+		// ShoulderTeleop Keybinds
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder ,0,0, false)); // Manual Down1
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder,0,0, false)); // Predetermined Low
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder,0,0, false)); // Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder,0,0, false)); // Predetermined High
+		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder,0,0, false)); // Manual Up
+
+		// ArmTelop Keybinds
+
+		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0, false));
+		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0, false));
+		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0, false));
+		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0, false));
+		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0, false));
 		configureBindings();
 	}
 
 	private void configureBindings() {
-		
-		
-		//Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
+
+		// Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
 
 		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
-		//m_chooser.addOption("Auto Sequence 2", new frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
+		// m_chooser.addOption("Auto Sequence 2", new
+		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
 		SmartDashboard.putData(m_chooser);
 
 	}
+
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
 	 *
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
-    //An example command will be run in autonomous
-    return  m_chooser.getSelected();
-	//}
-}
+		// An example command will be run in autonomous
+		return m_chooser.getSelected();
+		// }
+	}
 }

@@ -33,12 +33,12 @@ public class arm extends SubsystemBase {
 		armMotor.set(axis);
 	}
 
-	public arm() {}
+	public arm() {
+	}
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
 	}
 
-	
 }

@@ -5,11 +5,15 @@
 package frc.robot;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
@@ -17,20 +21,22 @@ public final class Constants {
 	public static final int m_limiter = 1;
 
 	public final class Predetermined {
-		public final class Drive{
-			public static final String teleop = "Teleop";	
+		public final class Drive {
+			public static final String teleop = "Teleop";
 			public static final String autonomous = "Autonomous";
 		}
-		public final class Arm{
+
+		public final class Arm {
 			public static final double speed = 1;
 
-			public final class Extension{
+			public final class Extension {
 				public static final double low = 90;
 				public static final double medium = 120;
 				public static final double high = 250;
 
 			}
 		}
+
 		public final class Shoulder {
 
 			public static final double speed = 1;
@@ -44,26 +50,25 @@ public final class Constants {
 		}
 	}
 
-	public final class AutonomousSpeeds{
-		public final class Drive{
-			public final class SequenceOne{
+	public final class AutonomousSpeeds {
+		public final class Drive {
+			public final class SequenceOne {
 				public static final double xInput = 0;
 				public static final double yInput = .5;
 				public static final double zInput = 0;
-			
+
 			}
-			
-		}
-		public final class Arm{
 
-			
 		}
-		public final class Shoulder{
 
-			
+		public final class Arm {
+
+		}
+
+		public final class Shoulder {
+
 		}
 	}
-
 
 	public final class Motors {
 
@@ -91,13 +96,13 @@ public final class Constants {
 
 			public static final int shoulderMotor = 9;
 		}
+
 		public final class Speeds {
 
 			public static final double arm = .5;
 			public static final double shoulder = .5;
 		}
 	}
-	
 
 	public final class Controller {
 
@@ -127,6 +132,5 @@ public final class Constants {
 			public static final int m_rBumper = 6;
 		}
 	}
-
 
 }

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -11,9 +12,16 @@ import frc.robot.subsystems.shoulder;
 
 public class ShoulderTeleop extends CommandBase {
 
-	static double  shoulderHeightSpeed = Constants.Predetermined.Shoulder.speed;
+	static double shoulderHeightSpeed = Constants.Predetermined.Shoulder.speed;
 	String option;
 	private shoulder m_shoulder;
+
+	double time;
+	Timer timer = new Timer();
+
+	boolean reset;
+
+	double autonomousExtension;
 
 	public double getShoulderAngle() {
 		return m_shoulder.getShoulderAngle();
@@ -28,23 +36,31 @@ public class ShoulderTeleop extends CommandBase {
 	}
 
 	/** Creates a new ShoulderTeleop. */
-	public ShoulderTeleop(String Option, shoulder subsystem) {
+	public ShoulderTeleop(String Option, shoulder subsystem, double autonomousShoulderExtension, double m_time,
+			boolean m_reset) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		option = Option;
 		m_shoulder = subsystem;
+		autonomousExtension = autonomousShoulderExtension;
+
+		reset = m_reset;
+
+		time = m_time;
+
 		addRequirements(m_shoulder);
 	}
 
 	// Called when the command is initially scheduled.1
 	@Override
-	public void initialize() {}
+	public void initialize() {
+	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
 		switch (option) {
 
-			//MANUAL DOWN
+			// MANUAL DOWN
 			case "Manual Down":
 				if (getShoulderAngle() <= 0) {
 
@@ -57,7 +73,7 @@ public class ShoulderTeleop extends CommandBase {
 				m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 				break;
 
-			//MANUAL UP
+			// MANUAL UP
 			case "Manual Up":
 				if (getShoulderAngle() >= 270) {
 					System.out.println("Arm angle is at its maximum");
@@ -68,7 +84,7 @@ public class ShoulderTeleop extends CommandBase {
 				m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 				break;
 
-			//LOW PRESET
+			// LOW PRESET
 			case "Low":
 				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.low) {
 					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
@@ -82,7 +98,7 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 
-			//MEDIUM PRESET
+			// MEDIUM PRESET
 			case "Medium":
 				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.medium) {
 					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
@@ -98,7 +114,7 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 
-			//HIGH PRESET
+			// HIGH PRESET
 			case "High":
 				if (getShoulderAngle() < Constants.Predetermined.Shoulder.Height.high) {
 					m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
@@ -114,18 +130,41 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 
-				case "Default":
+			case "Autonomous":
+
+				if (getShoulderAngle() < autonomousExtension) {
+					Robot.m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
+					increaseShoulderAngle(shoulderHeightSpeed);
+				} else if (getShoulderAngle() > autonomousExtension) {
+					Robot.m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
+					reduceShoulderAngle(shoulderHeightSpeed);
+				} else {
+					Robot.m_shoulder.setMotorSpeed(0);
+					System.out.println("Shoulder Height: Autonomous");
+				}
+
+				if (reset && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+
+					Robot.m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
+					reduceShoulderAngle(shoulderHeightSpeed);
+					System.out.println("Shoulder Height: " + getShoulderAngle());
+
+				} else if (getShoulderAngle() == 0 || reset == false && timer.hasElapsed(time)) {
+					Robot.m_shoulder.setMotorSpeed(0);
+
+				}
+
+				break;
+
+			case "Default":
 
 				if (getShoulderAngle() > 0) {
 					Robot.m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
 					reduceShoulderAngle(shoulderHeightSpeed);
-				}
-				else {
+				} else {
 					Robot.m_shoulder.setMotorSpeed(0);
 					System.out.println("Shoulder Height: Reset");
 				}
-
-
 
 			default:
 				m_shoulder.setMotorSpeed(0);
@@ -144,14 +183,24 @@ public class ShoulderTeleop extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		if (
-			(option == "Low" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.low) ||
-			(option == "Medium" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.medium) ||
-			(option == "High" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.high)||
-			(option == "Default" && getShoulderAngle() == 0)
-		) {
+		if ((option == "Low" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.low) ||
+				(option == "Medium" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.medium) ||
+				(option == "High" && getShoulderAngle() == Constants.Predetermined.Shoulder.Height.high) ||
+				(option == "Default" && getShoulderAngle() == 0)) {
 			return true;
 		}
+		if (reset && option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+
+			Robot.m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
+			reduceShoulderAngle(shoulderHeightSpeed);
+			System.out.println("Shoulder Height: " + getShoulderAngle());
+
+		} else if (getShoulderAngle() == 0 || reset == false && timer.hasElapsed(time)) {
+			Robot.m_shoulder.setMotorSpeed(0);
+			return true;
+		}
+
 		return false;
+
 	}
 }
