@@ -34,7 +34,8 @@ public class ArmTeleop extends CommandBase {
 		m_arm.increaseArmAngle(amount);
 	}
 
-	public ArmTeleop(String Option, arm subsystem, double autonomousArmExtension, double m_time, boolean m_reset) {
+	public ArmTeleop(String Option, arm subsystem, double autonomousArmExtension, 
+	double m_time, boolean m_reset) {
 		addRequirements(Robot.m_arm);
 
 		option = Option;
@@ -120,7 +121,7 @@ public class ArmTeleop extends CommandBase {
 				}
 				break;
 
-			case "Default":
+		 	case "Default":
 
 				if (getArmAngle() > 0) {
 					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
@@ -128,9 +129,9 @@ public class ArmTeleop extends CommandBase {
 				} else {
 					Robot.m_arm.setMotorSpeed(0);
 					System.out.println("Arm Exension: Reset");
-				}
+				} 
 
-			case "Autonomous":
+			/* case "Autonomous":
 
 				if (getArmAngle() < autonomousExtension) {
 					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
@@ -154,6 +155,9 @@ public class ArmTeleop extends CommandBase {
 
 				}
 				break;
+ */
+
+				
 
 			default:
 				Robot.m_arm.setMotorSpeed(0);
@@ -182,7 +186,7 @@ public class ArmTeleop extends CommandBase {
 
 			return true;
 		}
-		if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmAngle() > 0) {
+	/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmAngle() > 0) {
 
 			Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 			reduceArmAngle(armExtensionSpeed);
@@ -191,7 +195,7 @@ public class ArmTeleop extends CommandBase {
 		} else if (getArmAngle() == 0 || reset == false && timer.hasElapsed(time)) {
 			Robot.m_arm.setMotorSpeed(0);
 			return true;
-		}
+		} */
 
 		return false;
 	}
