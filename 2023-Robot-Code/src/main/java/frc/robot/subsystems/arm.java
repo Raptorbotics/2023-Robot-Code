@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class arm extends SubsystemBase {
+
 	private double ArmAngle = 0;
 
 	public void setArmAngle(double value) {
@@ -33,12 +34,10 @@ public class arm extends SubsystemBase {
 		armMotor.set(axis);
 	}
 
-	public arm() {
-	}
+	public arm() {}
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
 	}
-
 }

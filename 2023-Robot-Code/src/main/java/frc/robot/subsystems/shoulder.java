@@ -35,13 +35,12 @@ public class shoulder extends SubsystemBase {
 	}
 
 	/** Creates a new shoulder. */
-	public shoulder() {
-	}
+	public shoulder() {}
+
 	// CHANGE TO FALCON SPEED CONTROLLER TYPE (LOOOK AT ARM CODE FOR 2022 ROBOT)
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
 	}
-
 }

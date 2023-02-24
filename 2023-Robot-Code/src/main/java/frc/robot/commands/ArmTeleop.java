@@ -34,8 +34,7 @@ public class ArmTeleop extends CommandBase {
 		m_arm.increaseArmAngle(amount);
 	}
 
-	public ArmTeleop(String Option, arm subsystem, double autonomousArmExtension, 
-	double m_time, boolean m_reset) {
+	public ArmTeleop(String Option, arm subsystem, double autonomousArmExtension, double m_time, boolean m_reset) {
 		addRequirements(Robot.m_arm);
 
 		option = Option;
@@ -45,14 +44,12 @@ public class ArmTeleop extends CommandBase {
 		time = m_time;
 
 		reset = m_reset;
-
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
 		timer.start();
-
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -78,7 +75,6 @@ public class ArmTeleop extends CommandBase {
 				increaseArmAngle(armExtensionSpeed);
 				Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 				break;
-
 			// Low Preset
 			case "Low":
 				if (getArmAngle() < Constants.Predetermined.Arm.Extension.low) {
@@ -92,7 +88,6 @@ public class ArmTeleop extends CommandBase {
 					System.out.println("Arm Extension: LOW PRESET");
 				}
 				break;
-
 			// Medium Preset
 			case "Medium":
 				if (getArmAngle() < Constants.Predetermined.Arm.Extension.medium) {
@@ -106,7 +101,6 @@ public class ArmTeleop extends CommandBase {
 					System.out.println("Arm Extension: MEDIUM PRESET");
 				}
 				break;
-
 			// High Preset
 			case "High":
 				if (getArmAngle() < Constants.Predetermined.Arm.Extension.high) {
@@ -120,17 +114,14 @@ public class ArmTeleop extends CommandBase {
 					System.out.println("Arm Extension: HIGH PRESET");
 				}
 				break;
-
-		 	case "Default":
-
+			case "Default":
 				if (getArmAngle() > 0) {
 					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 					reduceArmAngle(armExtensionSpeed);
 				} else {
 					Robot.m_arm.setMotorSpeed(0);
 					System.out.println("Arm Exension: Reset");
-				} 
-
+				}
 			/* case "Autonomous":
 
 				if (getArmAngle() < autonomousExtension) {
@@ -157,8 +148,6 @@ public class ArmTeleop extends CommandBase {
 				break;
  */
 
-				
-
 			default:
 				Robot.m_arm.setMotorSpeed(0);
 				break;
@@ -171,22 +160,21 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		Robot.m_arm.setMotorSpeed(0);
-
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		if ((option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
-				(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
-				(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high) ||
-				(option == "Default" && getArmAngle() == 0)// ||
-		// (option == "Autonomous" && getArmAngle() == autonomousExtension)
+		if (
+			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
+			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
+			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high) ||
+			(option == "Default" && getArmAngle() == 0) // ||
+			// (option == "Autonomous" && getArmAngle() == autonomousExtension)
 		) {
-
 			return true;
 		}
-	/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmAngle() > 0) {
+		/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmAngle() > 0) {
 
 			Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 			reduceArmAngle(armExtensionSpeed);

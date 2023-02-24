@@ -15,25 +15,28 @@ import frc.robot.commands.ShoulderTeleop;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutonomousSequenceOne extends SequentialCommandGroup {
-  /** Creates a new AutonomousSequenceOne. */
-  public AutonomousSequenceOne() {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
 
-    new DriveTeleop(Constants.Predetermined.Drive.autonomous, Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
-    Constants.AutonomousSpeeds.Drive.SequenceOne.yInput, Constants.AutonomousSpeeds.Drive.SequenceOne.zInput, 1),
-
-        new ArmTeleop("Autonomous", Robot.m_arm, 270, 4, true),
-
-        new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270, 3, false),
-
-        new DriveTeleop(Constants.Predetermined.Drive.autonomous, Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
-        Constants.AutonomousSpeeds.Drive.SequenceOne.yInput, Constants.AutonomousSpeeds.Drive.SequenceOne.zInput, 6)
-
-    
-
-    );
-  }
-
+	/** Creates a new AutonomousSequenceOne. */
+	public AutonomousSequenceOne() {
+		// Add your commands in the addCommands() call, e.g.
+		// addCommands(new FooCommand(), new BarCommand());
+		addCommands(
+			new DriveTeleop(
+				Constants.Predetermined.Drive.autonomous,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
+				1
+			),
+			new ArmTeleop("Autonomous", Robot.m_arm, 270, 4, true),
+			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270, 3, false),
+			new DriveTeleop(
+				Constants.Predetermined.Drive.autonomous,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
+				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
+				6
+			)
+		);
+	}
 }

@@ -42,21 +42,15 @@ public class DriveTeleop extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX))
-				* (Constants.m_limiter);
-		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY))
-				* (Constants.m_limiter);
-		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX))
-				* (Constants.m_limiter);
+		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) * (Constants.m_limiter);
+		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
+		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) * (Constants.m_limiter);
 
 		switch (option) {
-
 			case "Teleop":
 				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
-
 			case "Autonomous":
-
 				if (m_timer.get() < time) {
 					Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
 				}
@@ -64,14 +58,12 @@ public class DriveTeleop extends CommandBase {
 				break;
 			default:
 				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
-
 		}
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {
-	}
+	public void end(boolean interrupted) {}
 
 	// Returns true when the command should end.
 	@Override

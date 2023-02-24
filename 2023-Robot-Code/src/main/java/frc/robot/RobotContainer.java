@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.ArmTeleop;
 import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
-import frc.robot.commands.ArmTeleop;
 
 /**
  * S
@@ -57,12 +57,12 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		// ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder ,0,0, false)); // Manual Down1
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder,0,0, false)); // Predetermined Low
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder,0,0, false)); // Predetermined Medium
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder,0,0, false)); // Predetermined High
-		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder,0,0, false)); // Predetermined High
-		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder,0,0, false)); // Manual Up
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false)); // Manual Down1
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false)); // Predetermined Low
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false)); // Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false)); // Predetermined High
+		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false)); // Predetermined High
+		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0, false)); // Manual Up
 
 		// ArmTelop Keybinds
 
@@ -76,14 +76,12 @@ public class RobotContainer {
 	}
 
 	private void configureBindings() {
-
 		// Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
 
 		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
 		// m_chooser.addOption("Auto Sequence 2", new
 		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
 		SmartDashboard.putData(m_chooser);
-
 	}
 
 	/**
