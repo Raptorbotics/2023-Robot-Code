@@ -125,9 +125,12 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 			case "Default":
-				if(getArmLength() > 0) {
-					reduceArmLength(armExtensionSpeed);
-				} else if (getShoulderAngle() > 0) {
+				if (getShoulderAngle() > 0) {
+					if(getArmLength() > 0) {
+						reduceArmLength(armExtensionSpeed);
+						System.out.println("Arm Extension: " + getArmLength());
+						return;
+					} 
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
 					m_shoulder.setMotorSpeed(0);
