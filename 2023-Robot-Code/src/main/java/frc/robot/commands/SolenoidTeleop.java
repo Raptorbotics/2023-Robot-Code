@@ -5,18 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.solenoid;
 
 public class SolenoidTeleop extends CommandBase {
- boolean solenoidState;
- solenoid solenoidSystem;
- boolean commandDone;
   /** Creates a new SolenoidTeleop. */
+  solenoid solenoidSystem;
   public SolenoidTeleop(solenoid solenoidSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.solenoidObject);
 
     solenoidSystem = solenoidSubsystem;
-    solenoidState = solenoidSystem.getSolenoidState();
   }
 
   // Called when the command is initially scheduled.
@@ -26,16 +25,15 @@ public class SolenoidTeleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    commandDone = false;
-    if(solenoidState == false) {
+    if(solenoidSystem.getSolenoidState() == false) {
       solenoidSystem.setSolenoidStateTrue();
-      commandDone = true;
-    } else if (solenoidState == true) {
+      return;
+    } else if (solenoidSystem.getSolenoidState() == true) {
       solenoidSystem.setSolenoidStateFalse();
-      commandDone = true;
+      return;
     } else {
       System.out.println("There was a problem with the solenoidState");
-      commandDone = true;
+      return;
     }
   }
 
@@ -46,9 +44,6 @@ public class SolenoidTeleop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(commandDone == true) {
-      return true;
-    }
-    return false;
+    return true;
   }
 }

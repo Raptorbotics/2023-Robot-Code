@@ -14,7 +14,6 @@ import frc.robot.subsystems.arm;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.shoulder;
 import frc.robot.subsystems.solenoid;
-import java.sql.DriverPropertyInfo;
 
 /**
  * The VM is configured to automatically run this class, and to call the

@@ -20,9 +20,13 @@ public class solenoid extends SubsystemBase {
 
   public void setSolenoidStateTrue() {
     solenoidObject.set(true);
+    solenoidState = solenoidObject.get();
+    System.out.println("The solenoidState has been set to " + solenoidState);
   }
   public void setSolenoidStateFalse() {
     solenoidObject.set(false);
+    solenoidState = solenoidObject.get();
+    System.out.println("The solenoidState has been set to " + solenoidState);
   }
 
 
