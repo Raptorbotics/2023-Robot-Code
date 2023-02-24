@@ -46,6 +46,7 @@ public class ShoulderTeleop extends CommandBase {
 
 	public void reduceArmLength(double amount) {
 		m_arm.reduceArmLength(amount);
+		m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 	}
 
 	/** Creates a new ShoulderTeleop. */
@@ -130,7 +131,9 @@ public class ShoulderTeleop extends CommandBase {
 						reduceArmLength(armExtensionSpeed);
 						System.out.println("Arm Extension: " + getArmLength());
 						return;
-					} 
+					} else {
+						m_arm.setMotorSpeed(0);
+					}
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
 					m_shoulder.setMotorSpeed(0);
