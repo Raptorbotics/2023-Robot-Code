@@ -22,24 +22,26 @@ public class ArmTeleop extends CommandBase {
 	boolean reset;
 	double autonomousExtension;
 
-	public double getArmAngle() {
-		return m_arm.getArmAngle();
+	public double getArmLength() {
+		return m_arm.getArmLength();
 	}
 
-	public void reduceArmAngle(double amount) {
-		m_arm.reduceArmAngle(amount);
+	public void reduceArmLength(double amount) {
+		m_arm.reduceArmLength(amount);
+		Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 	}
 
-	public void increaseArmAngle(double amount) {
-		m_arm.increaseArmAngle(amount);
+	public void increaseArmLength(double amount) {
+		m_arm.increaseArmLength(amount);
+		Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 	}
 
-	public ArmTeleop(String Option, arm subsystem, double autonomousArmExtension, double m_time, boolean m_reset) {
+	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time, boolean m_reset) {
 		addRequirements(Robot.m_arm);
 
 		option = Option;
 		autonomousExtension = autonomousArmExtension;
-		m_arm = subsystem;
+		m_arm = armSubsystem;
 
 		time = m_time;
 
@@ -57,131 +59,117 @@ public class ArmTeleop extends CommandBase {
 	public void execute() {
 		switch (option) {
 			case "Manual Retract":
-				if (getArmAngle() <= 0) {
+				if (getArmLength() <= 0) {
 					System.out.println("Arm Extension: MINIMUM");
 
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					return;
 				}
-				reduceArmAngle(armExtensionSpeed);
-				Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+				reduceArmLength(armExtensionSpeed);
 				break;
 			case "Manual Extend":
-				if (getArmAngle() >= 270) {
+				if (getArmLength() >= 270) {
 					System.out.println("Arm Extension: MAXIMUM");
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					return;
 				}
-				increaseArmAngle(armExtensionSpeed);
-				Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
+				increaseArmLength(armExtensionSpeed);
 				break;
 			// Low Preset
 			case "Low":
-				if (getArmAngle() < Constants.Predetermined.Arm.Extension.low) {
-					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					increaseArmAngle(armExtensionSpeed);
-				} else if (getArmAngle() > Constants.Predetermined.Arm.Extension.low) {
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
+				if (getArmLength() < Constants.Predetermined.Arm.Extension.low) {
+					increaseArmLength(armExtensionSpeed);
+				} else if (getArmLength() > Constants.Predetermined.Arm.Extension.low) {
+					reduceArmLength(armExtensionSpeed);
 				} else {
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: LOW PRESET");
 				}
 				break;
 			// Medium Preset
 			case "Medium":
-				if (getArmAngle() < Constants.Predetermined.Arm.Extension.medium) {
-					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					increaseArmAngle(armExtensionSpeed);
-				} else if (getArmAngle() > Constants.Predetermined.Arm.Extension.medium) {
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
+				if (getArmLength() < Constants.Predetermined.Arm.Extension.medium) {
+					increaseArmLength(armExtensionSpeed);
+				} else if (getArmLength() > Constants.Predetermined.Arm.Extension.medium) {
+					reduceArmLength(armExtensionSpeed);
 				} else {
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: MEDIUM PRESET");
 				}
 				break;
 			// High Preset
 			case "High":
-				if (getArmAngle() < Constants.Predetermined.Arm.Extension.high) {
-					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					increaseArmAngle(armExtensionSpeed);
-				} else if (getArmAngle() > Constants.Predetermined.Arm.Extension.high) {
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
+				if (getArmLength() < Constants.Predetermined.Arm.Extension.high) {
+					increaseArmLength(armExtensionSpeed);
+				} else if (getArmLength() > Constants.Predetermined.Arm.Extension.high) {
+					reduceArmLength(armExtensionSpeed);
 				} else {
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: HIGH PRESET");
 				}
 				break;
 			case "Default":
-				if (getArmAngle() > 0) {
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
+				if (getArmLength() > 0) {
+					reduceArmLength(armExtensionSpeed);
 				} else {
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Exension: Reset");
 				}
 			/* case "Autonomous":
 
-				if (getArmAngle() < autonomousExtension) {
-					Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
-					increaseArmAngle(armExtensionSpeed);
-				} else if (getArmAngle() > autonomousExtension) {
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
+				if (getArmLength() < autonomousExtension) {
+					increaseArmLength(armExtensionSpeed);
+				} else if (getArmLength() > autonomousExtension) {
+					reduceArmLength(armExtensionSpeed);
 				} else {
-					Robot.m_arm.setMotorSpeed(0);
+					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Extension: Autonomous");
 				}
 
-				if (reset && timer.hasElapsed(time) && getArmAngle() > 0) {
+				if (reset && timer.hasElapsed(time) && getArmLength() > 0) {
+					reduceArmLength(armExtensionSpeed);
+					System.out.println("Arm Extension: " + getArmLength());
 
-					Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-					reduceArmAngle(armExtensionSpeed);
-					System.out.println("Arm Extension: " + getArmAngle());
-
-				} else if (getArmAngle() == 0 || reset == false && timer.hasElapsed(time)) {
-					Robot.m_arm.setMotorSpeed(0);
+				} else if (getArmLength() == 0 || reset == false && timer.hasElapsed(time)) {
+					m_arm.setMotorSpeed(0);
 
 				}
 				break;
  */
 
 			default:
-				Robot.m_arm.setMotorSpeed(0);
+				m_arm.setMotorSpeed(0);
 				break;
 		}
 
-		System.out.println("Arm Extension: " + getArmAngle());
+		System.out.println("Arm Extension: " + getArmLength());
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		Robot.m_arm.setMotorSpeed(0);
+		m_arm.setMotorSpeed(0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
 		if (
-			(option == "Low" && getArmAngle() == Constants.Predetermined.Arm.Extension.low) ||
-			(option == "Medium" && getArmAngle() == Constants.Predetermined.Arm.Extension.medium) ||
-			(option == "High" && getArmAngle() == Constants.Predetermined.Arm.Extension.high) ||
-			(option == "Default" && getArmAngle() == 0) // ||
-			// (option == "Autonomous" && getArmAngle() == autonomousExtension)
+			(option == "Low" && getArmLength() == Constants.Predetermined.Arm.Extension.low) ||
+			(option == "Medium" && getArmLength() == Constants.Predetermined.Arm.Extension.medium) ||
+			(option == "High" && getArmLength() == Constants.Predetermined.Arm.Extension.high) ||
+			(option == "Default" && getArmLength() == 0) // ||
+			// (option == "Autonomous" && getArmLength() == autonomousExtension)
 		) {
 			return true;
 		}
-		/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmAngle() > 0) {
+		/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
 
-			Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
-			reduceArmAngle(armExtensionSpeed);
-			System.out.println("Arm Extension: " + getArmAngle());
+			reduceArmLength(armExtensionSpeed);
+			System.out.println("Arm Extension: " + getArmLength());
 
-		} else if (getArmAngle() == 0 || reset == false && timer.hasElapsed(time)) {
-			Robot.m_arm.setMotorSpeed(0);
+		} else if (getArmLength() == 0 || reset == false && timer.hasElapsed(time)) {
+			m_arm.setMotorSpeed(0);
 			return true;
 		} */
 

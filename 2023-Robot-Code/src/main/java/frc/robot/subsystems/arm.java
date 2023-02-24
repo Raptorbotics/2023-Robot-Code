@@ -10,22 +10,22 @@ import frc.robot.Constants;
 
 public class arm extends SubsystemBase {
 
-	private double ArmAngle = 0;
+	private double ArmLength = 0;
 
-	public void setArmAngle(double value) {
-		ArmAngle = value;
+	public void setArmLength(double value) {
+		ArmLength = value;
 	}
 
-	public double getArmAngle() {
-		return ArmAngle;
+	public double getArmLength() {
+		return ArmLength;
 	}
 
-	public void reduceArmAngle(double amount) {
-		ArmAngle = ArmAngle - amount;
+	public void reduceArmLength(double amount) {
+		ArmLength = ArmLength - amount;
 	}
 
-	public void increaseArmAngle(double amount) {
-		ArmAngle = ArmAngle + amount;
+	public void increaseArmLength(double amount) {
+		ArmLength = ArmLength + amount;
 	}
 
 	PWMVictorSPX armMotor = new PWMVictorSPX(Constants.Motors.arm.armMotor);

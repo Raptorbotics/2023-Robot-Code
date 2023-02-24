@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.shoulder;
+import frc.robot.subsystems.arm;
 
 public class ShoulderTeleop extends CommandBase {
 
 	static double shoulderHeightSpeed = Constants.Predetermined.Shoulder.speed;
+	static double armExtensionSpeed = Constants.Predetermined.Arm.speed;
 	String option;
 	private shoulder m_shoulder;
+	private arm m_arm;
 
 	double time;
 	Timer timer = new Timer();
@@ -37,14 +40,23 @@ public class ShoulderTeleop extends CommandBase {
 		m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
 	}
 
+	public double getArmLength() {
+		return m_arm.getArmLength();
+	}
+
+	public void reduceArmLength(double amount) {
+		m_arm.reduceArmLength(amount);
+	}
+
 	/** Creates a new ShoulderTeleop. */
-	public ShoulderTeleop(String Option, shoulder subsystem, double autonomousShoulderExtension, double m_time, boolean m_reset) {
+	public ShoulderTeleop(String Option, shoulder shoulderSubsystem, double autonomousShoulderExtension, double m_time, boolean m_reset, arm armSubsystem) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_shoulder);
 		option = Option;
 
 		autonomousExtension = autonomousShoulderExtension;
-		m_shoulder = subsystem;
+		m_shoulder = shoulderSubsystem;
+		m_arm = armSubsystem;
 
 		time = m_time;
 		reset = m_reset;
@@ -113,7 +125,9 @@ public class ShoulderTeleop extends CommandBase {
 				}
 				break;
 			case "Default":
-				if (getShoulderAngle() > 0) {
+				if(getArmLength() > 0) {
+					reduceArmLength(armExtensionSpeed);
+				} else if (getShoulderAngle() > 0) {
 					reduceShoulderAngle(shoulderHeightSpeed);
 				} else {
 					m_shoulder.setMotorSpeed(0);
