@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmTeleop;
 import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
+import frc.robot.commands.SolenoidTeleop;
 
 /**
  * S

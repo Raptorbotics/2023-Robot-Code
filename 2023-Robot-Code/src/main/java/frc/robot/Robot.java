@@ -13,6 +13,7 @@ import frc.robot.commands.DriveTeleop;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.shoulder;
+import frc.robot.subsystems.solenoid;
 import java.sql.DriverPropertyInfo;
 
 /**
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 	public static MecanumDrive drive;
 	public static arm m_arm = new arm();
 	public static shoulder m_shoulder = new shoulder();
+	public static solenoid solenoidObject = new solenoid();
 
 	// MUST BE LAST THING INSTANTIATED
 	public static RobotContainer m_robotContainer = new RobotContainer();
