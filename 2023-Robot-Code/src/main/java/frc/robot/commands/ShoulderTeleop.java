@@ -21,6 +21,7 @@ public class ShoulderTeleop extends CommandBase {
 
 	double time;
 	Timer timer = new Timer();
+	boolean resetBool;
 
 	double autonomousExtension;
 
@@ -48,7 +49,7 @@ public class ShoulderTeleop extends CommandBase {
 	}
 
 	/** Creates a new ShoulderTeleop. */
-	public ShoulderTeleop(String Option, shoulder shoulderSubsystem, double autonomousShoulderExtension, double m_time, arm armSubsystem) {
+	public ShoulderTeleop(String Option, shoulder shoulderSubsystem, double autonomousShoulderExtension, double m_time, boolean reset, arm armSubsystem) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_shoulder);
 		option = Option;
@@ -58,6 +59,7 @@ public class ShoulderTeleop extends CommandBase {
 		m_arm = armSubsystem;
 
 		time = m_time;
+		resetBool = reset;
 	}
 
 	// Called when the command is initially scheduled.1
@@ -184,7 +186,11 @@ public class ShoulderTeleop extends CommandBase {
 			return true;
 		}
 		 if (option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+			if(resetBool == true) {
 			reduceShoulderAngle(shoulderHeightSpeed);
+			} else if (resetBool == false) {
+				return true;
+			}
 
 		} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 			m_shoulder.setMotorSpeed(0);
