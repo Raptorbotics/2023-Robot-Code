@@ -19,7 +19,6 @@ public class ArmTeleop extends CommandBase {
 	double time;
 	Timer timer = new Timer();
 
-	boolean reset;
 	double autonomousExtension;
 
 	public double getArmLength() {
@@ -36,7 +35,7 @@ public class ArmTeleop extends CommandBase {
 		Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 	}
 
-	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time, boolean m_reset) {
+	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time) {
 		addRequirements(Robot.m_arm);
 
 		option = Option;
@@ -45,7 +44,6 @@ public class ArmTeleop extends CommandBase {
 
 		time = m_time;
 
-		reset = m_reset;
 	}
 
 	// Called when the command is initially scheduled.
@@ -115,7 +113,7 @@ public class ArmTeleop extends CommandBase {
 					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Exension: Reset");
 				}
-			/* case "Autonomous":
+			 case "Autonomous":
 
 				if (getArmLength() < autonomousExtension) {
 					increaseArmLength(armExtensionSpeed);
@@ -126,16 +124,14 @@ public class ArmTeleop extends CommandBase {
 					System.out.println("Arm Extension: Autonomous");
 				}
 
-				if (reset && timer.hasElapsed(time) && getArmLength() > 0) {
+				if (timer.hasElapsed(time) && getArmLength() > 0) {
 					reduceArmLength(armExtensionSpeed);
-					System.out.println("Arm Extension: " + getArmLength());
 
-				} else if (getArmLength() == 0 || reset == false && timer.hasElapsed(time)) {
+				} else if (getArmLength() == 0 || timer.hasElapsed(time)) {
 					m_arm.setMotorSpeed(0);
 
 				}
 				break;
- */
 
 			default:
 				m_arm.setMotorSpeed(0);
@@ -158,17 +154,16 @@ public class ArmTeleop extends CommandBase {
 			(option == "Low" && getArmLength() == Constants.Predetermined.Arm.Extension.low) ||
 			(option == "Medium" && getArmLength() == Constants.Predetermined.Arm.Extension.medium) ||
 			(option == "High" && getArmLength() == Constants.Predetermined.Arm.Extension.high) ||
-			(option == "Default" && getArmLength() == 0) // ||
-			// (option == "Autonomous" && getArmLength() == autonomousExtension)
+			(option == "Default" && getArmLength() == 0)  ||
+			 (option == "Autonomous" && getArmLength() == autonomousExtension)
 		) {
 			return true;
 		}
-		if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
+		 	if (option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
 
 			reduceArmLength(armExtensionSpeed);
-			System.out.println("Arm Extension: " + getArmLength());
 
-		} else if (getArmLength() == 0 || reset == false && timer.hasElapsed(time)) {
+		} else if (getArmLength() == 0 || timer.hasElapsed(time)) {
 			m_arm.setMotorSpeed(0);
 			return true;
 		} 

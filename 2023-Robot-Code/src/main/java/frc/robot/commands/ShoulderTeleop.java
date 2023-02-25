@@ -21,8 +21,7 @@ public class ShoulderTeleop extends CommandBase {
 
 	double time;
 	Timer timer = new Timer();
-
-	boolean reset;
+	boolean resetBool;
 
 	double autonomousExtension;
 
@@ -50,7 +49,7 @@ public class ShoulderTeleop extends CommandBase {
 	}
 
 	/** Creates a new ShoulderTeleop. */
-	public ShoulderTeleop(String Option, shoulder shoulderSubsystem, double autonomousShoulderExtension, double m_time, boolean m_reset, arm armSubsystem) {
+	public ShoulderTeleop(String Option, shoulder shoulderSubsystem, double autonomousShoulderExtension, double m_time, boolean reset, arm armSubsystem) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(Robot.m_shoulder);
 		option = Option;
@@ -60,7 +59,7 @@ public class ShoulderTeleop extends CommandBase {
 		m_arm = armSubsystem;
 
 		time = m_time;
-		reset = m_reset;
+		resetBool = reset;
 	}
 
 	// Called when the command is initially scheduled.1
@@ -140,7 +139,7 @@ public class ShoulderTeleop extends CommandBase {
 					System.out.println("Shoulder Height: Reset");
 				}
 				break;
-			/* case "Autonomous":
+			 case "Autonomous":
 
 				if (getShoulderAngle() < autonomousExtension) {
 					increaseShoulderAngle(shoulderHeightSpeed);
@@ -151,16 +150,15 @@ public class ShoulderTeleop extends CommandBase {
 					System.out.println("Shoulder Height: Autonomous");
 				}
 
-				if (reset && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+				if (timer.hasElapsed(time) && getShoulderAngle() > 0) {
 					reduceShoulderAngle(shoulderHeightSpeed);
-					System.out.println("Shoulder Height: " + getShoulderAngle());
 
-				} else if (getShoulderAngle() == 0 || reset == false && timer.hasElapsed(time)) {
+				} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 					m_shoulder.setMotorSpeed(0);
 
 				}
 
-				break; */
+				break; 
 
 			default:
 				m_shoulder.setMotorSpeed(0);
@@ -187,15 +185,18 @@ public class ShoulderTeleop extends CommandBase {
 		) {
 			return true;
 		}
-		/* if (reset && option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+		 if (option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
+			if(resetBool == true) {
 			reduceShoulderAngle(shoulderHeightSpeed);
-			System.out.println("Shoulder Height: " + getShoulderAngle());
+			} else if (resetBool == false) {
+				return true;
+			}
 
-		} else if (getShoulderAngle() == 0 || reset == false && timer.hasElapsed(time)) {
+		} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 			m_shoulder.setMotorSpeed(0);
 			return true;
 		}
- */
+ 
 		return false;
 	}
 }
