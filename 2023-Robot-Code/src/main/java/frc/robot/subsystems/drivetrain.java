@@ -32,8 +32,8 @@ public class drivetrain extends SubsystemBase {
 	MotorControllerGroup m_backRight = new MotorControllerGroup(backRightMotorOne, backRightMotorTwo);
 
 	public drivetrain() {
-		//*rontLeftMotor.setInverted(true);
-		//backRightMotor.setInverted(true);
+		// *rontLeftMotor.setInverted(true);
+		// backRightMotor.setInverted(true);
 
 		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
 	}
@@ -41,7 +41,7 @@ public class drivetrain extends SubsystemBase {
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis, double d) {
 		Robot.drive.driveCartesian(xAxis, yAxis, zAxis);
 	}
-	
+
 	public boolean exampleCondition() {
 		// Query some boolean state, such as a digital sensor.
 		return false;
@@ -56,6 +56,4 @@ public class drivetrain extends SubsystemBase {
 	public void simulationPeriodic() {
 		// This method will be called once per scheduler run during simulation
 	}
-
-
 }

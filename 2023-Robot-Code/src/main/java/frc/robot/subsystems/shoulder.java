@@ -27,7 +27,7 @@ public class shoulder extends SubsystemBase {
 	public void increaseShoulderAngle(double amount) {
 		shoulderAngle = shoulderAngle + amount;
 	}
-	
+
 	PWMVictorSPX shoulderMotor = new PWMVictorSPX(Constants.Motors.shoulder.shoulderMotor);
 
 	public void setMotorSpeed(double axis) {
@@ -36,12 +36,11 @@ public class shoulder extends SubsystemBase {
 
 	/** Creates a new shoulder. */
 	public shoulder() {}
-//CHANGE TO FALCON SPEED CONTROLLER TYPE (LOOOK AT ARM CODE FOR 2022 ROBOT)
-	
+
+	// CHANGE TO FALCON SPEED CONTROLLER TYPE (LOOOK AT ARM CODE FOR 2022 ROBOT)
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
 	}
-
 }

@@ -9,22 +9,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class arm extends SubsystemBase {
-	private double ArmAngle = 0;
 
-	public void setArmAngle(double value) {
-		ArmAngle = value;
+	private double ArmLength = 0;
+
+	public void setArmLength(double value) {
+		ArmLength = value;
 	}
 
-	public double getArmAngle() {
-		return ArmAngle;
+	public double getArmLength() {
+		return ArmLength;
 	}
 
-	public void reduceArmAngle(double amount) {
-		ArmAngle = ArmAngle - amount;
+	public void reduceArmLength(double amount) {
+		ArmLength = ArmLength - amount;
 	}
 
-	public void increaseArmAngle(double amount) {
-		ArmAngle = ArmAngle + amount;
+	public void increaseArmLength(double amount) {
+		ArmLength = ArmLength + amount;
 	}
 
 	PWMVictorSPX armMotor = new PWMVictorSPX(Constants.Motors.arm.armMotor);
@@ -39,6 +40,4 @@ public class arm extends SubsystemBase {
 	public void periodic() {
 		// This method will be called once per scheduler run
 	}
-
-	
 }
