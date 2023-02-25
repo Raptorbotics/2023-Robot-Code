@@ -126,7 +126,6 @@ public class ArmTeleop extends CommandBase {
 
 				if (timer.hasElapsed(time) && getArmLength() > 0) {
 					reduceArmLength(armExtensionSpeed);
-					System.out.println("Arm Extension: " + getArmLength());
 
 				} else if (getArmLength() == 0 || timer.hasElapsed(time)) {
 					m_arm.setMotorSpeed(0);
@@ -163,7 +162,6 @@ public class ArmTeleop extends CommandBase {
 		 	if (option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
 
 			reduceArmLength(armExtensionSpeed);
-			System.out.println("Arm Extension: " + getArmLength());
 
 		} else if (getArmLength() == 0 || timer.hasElapsed(time)) {
 			m_arm.setMotorSpeed(0);

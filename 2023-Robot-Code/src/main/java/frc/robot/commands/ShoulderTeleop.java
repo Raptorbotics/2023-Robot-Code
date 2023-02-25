@@ -150,7 +150,6 @@ public class ShoulderTeleop extends CommandBase {
 
 				if (timer.hasElapsed(time) && getShoulderAngle() > 0) {
 					reduceShoulderAngle(shoulderHeightSpeed);
-					System.out.println("Shoulder Height: " + getShoulderAngle());
 
 				} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 					m_shoulder.setMotorSpeed(0);
@@ -186,7 +185,6 @@ public class ShoulderTeleop extends CommandBase {
 		}
 		 if (option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
 			reduceShoulderAngle(shoulderHeightSpeed);
-			System.out.println("Shoulder Height: " + getShoulderAngle());
 
 		} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 			m_shoulder.setMotorSpeed(0);
