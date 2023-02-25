@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveTeleop;
+import frc.robot.commands.compressorCommand;
 import frc.robot.subsystems.arm;
+import frc.robot.subsystems.compressor;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.shoulder;
 import frc.robot.subsystems.solenoid;
@@ -33,6 +35,7 @@ public class Robot extends TimedRobot {
 	public static arm m_arm = new arm();
 	public static shoulder m_shoulder = new shoulder();
 	public static solenoid solenoidObject = new solenoid();
+	public static compressor m_Compressor = new compressor();
 
 	// MUST BE LAST THING INSTANTIATED
 	public static RobotContainer m_robotContainer = new RobotContainer();
@@ -48,6 +51,8 @@ public class Robot extends TimedRobot {
 		// and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
+		Robot.m_Compressor.setDefaultCommand(new compressorCommand(7));
+
 		CameraServer.startAutomaticCapture();
 	}
 
