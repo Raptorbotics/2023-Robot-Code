@@ -115,7 +115,7 @@ public class ArmTeleop extends CommandBase {
 					m_arm.setMotorSpeed(0);
 					System.out.println("Arm Exension: Reset");
 				}
-			/* case "Autonomous":
+			 case "Autonomous":
 
 				if (getArmLength() < autonomousExtension) {
 					increaseArmLength(armExtensionSpeed);
@@ -135,7 +135,6 @@ public class ArmTeleop extends CommandBase {
 
 				}
 				break;
- */
 
 			default:
 				m_arm.setMotorSpeed(0);
@@ -158,12 +157,12 @@ public class ArmTeleop extends CommandBase {
 			(option == "Low" && getArmLength() == Constants.Predetermined.Arm.Extension.low) ||
 			(option == "Medium" && getArmLength() == Constants.Predetermined.Arm.Extension.medium) ||
 			(option == "High" && getArmLength() == Constants.Predetermined.Arm.Extension.high) ||
-			(option == "Default" && getArmLength() == 0) // ||
-			// (option == "Autonomous" && getArmLength() == autonomousExtension)
+			(option == "Default" && getArmLength() == 0)  ||
+			 (option == "Autonomous" && getArmLength() == autonomousExtension)
 		) {
 			return true;
 		}
-		/* 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
+		 	if (reset && option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
 
 			reduceArmLength(armExtensionSpeed);
 			System.out.println("Arm Extension: " + getArmLength());
@@ -171,7 +170,7 @@ public class ArmTeleop extends CommandBase {
 		} else if (getArmLength() == 0 || reset == false && timer.hasElapsed(time)) {
 			m_arm.setMotorSpeed(0);
 			return true;
-		} */
+		} 
 
 		return false;
 	}
