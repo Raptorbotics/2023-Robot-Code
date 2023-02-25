@@ -28,8 +28,8 @@ public class AutonomousSequenceOne extends SequentialCommandGroup {
 				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
 				1
 			),
-			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270, 3, false, Robot.m_arm),
-			new ArmTeleop("Autonomous", Robot.m_arm, 270, 4, true),
+			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270, 3, Robot.m_arm),
+			new ArmTeleop("Autonomous", Robot.m_arm, 270, 4),
 			new DriveTeleop(
 				Constants.Predetermined.Drive.autonomous,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,

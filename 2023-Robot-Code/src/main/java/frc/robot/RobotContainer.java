@@ -58,21 +58,21 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		// ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Down1
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Low
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Medium
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
-		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
-		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Up
+		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, Robot.m_arm)); // Manual Down1
+		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, Robot.m_arm)); // Predetermined Low
+		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, Robot.m_arm)); // Predetermined Medium
+		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, Robot.m_arm)); // Predetermined High
+		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, Robot.m_arm)); // Predetermined High
+		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0,  Robot.m_arm)); // Manual Up
 
 		// ArmTelop Keybinds
 
-		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0, false));
-		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0, false));
-		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0, false));
-		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0, false));
-		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0, 0, false));
-		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0, false));
+		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0));
+		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
+		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0));
+		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0));
+		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0, 0));
+		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0));
 
 		//Solenoid keybind
 		aButton.and(rBumper.negate()).onTrue(new SolenoidTeleop(Robot.solenoidObject));
