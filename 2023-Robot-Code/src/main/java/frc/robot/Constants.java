@@ -18,7 +18,7 @@ package frc.robot;
  */
 public final class Constants {
 
-	public static final int m_limiter = 1;
+	public static final double m_limiter = .5;
 
 	public final class Predetermined {
 
@@ -100,7 +100,7 @@ public final class Constants {
 		public final class Speeds {
 
 			public static final double arm = .5;
-			public static final double shoulder = .5;
+			public static final double shoulder = .3;
 		}
 	}
 

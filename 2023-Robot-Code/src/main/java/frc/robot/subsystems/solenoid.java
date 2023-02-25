@@ -10,22 +10,25 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class solenoid extends SubsystemBase {
   /** Creates a new solenoid. */
-  Solenoid solenoidObject = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+  Solenoid solenoidObjectYellow = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+  Solenoid solenoidObjectBlue = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
-  private boolean solenoidState = solenoidObject.get();
+  private boolean solenoidState = false;
 
   public boolean getSolenoidState() {
     return solenoidState;
   }
 
   public void setSolenoidStateTrue() {
-    solenoidObject.set(true);
-    solenoidState = solenoidObject.get();
+    solenoidObjectBlue.set(false);
+    solenoidObjectYellow.set(true);
+    solenoidState = true;
     System.out.println("The solenoidState has been set to " + solenoidState);
   }
   public void setSolenoidStateFalse() {
-    solenoidObject.set(false);
-    solenoidState = solenoidObject.get();
+    solenoidObjectBlue.set(true);
+    solenoidObjectYellow.set(false);
+    solenoidState = false;
     System.out.println("The solenoidState has been set to " + solenoidState);
   }
 
