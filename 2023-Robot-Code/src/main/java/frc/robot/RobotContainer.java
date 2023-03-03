@@ -65,7 +65,7 @@ public class RobotContainer {
 		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
 		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0,  false, Robot.m_arm)); // Manual Up
 
-		// ArmTelop Keybinds
+		// // ArmTelop Keybinds
 
 		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0));
 		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
@@ -76,7 +76,7 @@ public class RobotContainer {
 
 		//Solenoid keybind
 		aButton.and(rBumper.negate()).onTrue(new SolenoidTeleop(Robot.solenoidObject));
-		configureBindings();
+		 configureBindings();
 	}
 
 	private void configureBindings() {
