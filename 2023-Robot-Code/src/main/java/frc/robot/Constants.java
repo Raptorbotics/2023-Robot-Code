@@ -24,7 +24,7 @@ public final class Constants {
 
 		public final class Drive {
 
-			//public static final String teleop = "Teleop";
+			public static final String teleop = "Teleop";
 			public static final String autonomous = "Autonomous";
 		}
 

@@ -16,6 +16,7 @@ public class DriveTeleop extends CommandBase {
 	double yInput;
 	double zInput;
 	double time;
+	double tempLimiter = 0;
 
 	Timer m_timer = new Timer();
 
@@ -48,6 +49,10 @@ public class DriveTeleop extends CommandBase {
 
 		switch (option) {
 			case "Teleop":
+				if(tempLimiter < 1) {
+					tempLimiter += .5;
+				}
+				//Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter, leftStickY * tempLimiter, rightStickX * tempLimiter, 0);
 				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":
@@ -63,7 +68,9 @@ public class DriveTeleop extends CommandBase {
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) {}
+	public void end(boolean interrupted) {
+		tempLimiter = 0;
+	}
 
 	// Returns true when the command should end.
 	@Override
