@@ -52,8 +52,8 @@ public class DriveTeleop extends CommandBase {
 				if(tempLimiter < 1) {
 					tempLimiter += .5;
 				}
-				//Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter, leftStickY * tempLimiter, rightStickX * tempLimiter, 0);
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter, leftStickY * tempLimiter, rightStickX * tempLimiter, 0);
+				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":
 				if (m_timer.get() < time) {
