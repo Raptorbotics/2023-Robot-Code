@@ -18,7 +18,7 @@ package frc.robot;
  */
 public final class Constants {
 
-	public static final double m_limiter = .5;
+	public static final double m_limiter = .2;
 
 	public final class Predetermined {
 

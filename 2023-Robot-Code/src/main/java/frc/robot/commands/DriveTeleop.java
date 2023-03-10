@@ -49,10 +49,8 @@ public class DriveTeleop extends CommandBase {
 
 		switch (option) {
 			case "Teleop":
-				if(tempLimiter < 1) {
-					tempLimiter += .1;
-				}
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter, leftStickY * tempLimiter, rightStickX * tempLimiter, 0);
+				
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
 				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":
