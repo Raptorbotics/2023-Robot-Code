@@ -27,12 +27,12 @@ public class ArmTeleop extends CommandBase {
 
 	public void reduceArmLength(double amount) {
 		m_arm.reduceArmLength(amount);
-		Robot.m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
+		m_arm.setMotorSpeed(-Constants.Motors.Speeds.arm);
 	}
 
 	public void increaseArmLength(double amount) {
 		m_arm.increaseArmLength(amount);
-		Robot.m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
+		m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 	}
 
 	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time) {

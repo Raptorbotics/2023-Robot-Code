@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 		// and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-		Robot.m_Compressor.setDefaultCommand(new compressorCommand(7));
+		
 
 		CameraServer.startAutomaticCapture();
 	}
@@ -109,6 +109,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		Robot.m_Compressor.setDefaultCommand(new compressorCommand(7));
 
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();

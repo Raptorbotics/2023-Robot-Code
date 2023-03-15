@@ -15,7 +15,7 @@ public class compressor extends SubsystemBase {
   Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   public void compressorOn() {
-	pcmCompressor.enableAnalog(0, 120);
+	pcmCompressor.enableAnalog(5, 20);
 }
 
 public void compressorOff(){
