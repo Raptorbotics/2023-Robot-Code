@@ -75,7 +75,7 @@ public class RobotContainer {
 		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0));
 
 		//Solenoid keybind
-		aButton.and(rBumper.negate()).onTrue(new SolenoidTeleop(Robot.solenoidObject));
+		aButton.and(rBumper.negate().and(lBumper.negate())).onTrue(new SolenoidTeleop(Robot.solenoidObject));
 		configureBindings();
 	}
 

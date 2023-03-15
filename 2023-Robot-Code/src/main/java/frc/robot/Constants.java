@@ -74,27 +74,27 @@ public final class Constants {
 
 		public final class Drivetrain {
 
-			public static final int frontLeftMotorOne = 0;
-			public static final int frontLeftMotorTwo = 1;
+			public static final int frontLeftMotorOne = 9;
+			public static final int frontLeftMotorTwo = 8;
 
 			public static final int frontRightMotorOne = 2;
 			public static final int frontRightMotorTwo = 3;
 
-			public static final int backLeftMotorOne = 4;
-			public static final int backLeftMotorTwo = 5;
+			public static final int backLeftMotorOne = 6;
+			public static final int backLeftMotorTwo = 7;
 
-			public static final int backRightMotorOne = 6;
-			public static final int backRightMotorTwo = 7;
+			public static final int backRightMotorOne = 4;
+			public static final int backRightMotorTwo = 5;
 		}
 
 		public final class arm {
 
-			public static final int armMotor = 8;
+			public static final int armMotor = 1;
 		}
 
 		public final class shoulder {
 
-			public static final int shoulderMotor = 9;
+			public static final int shoulderMotor = 0;
 		}
 
 		public final class Speeds {

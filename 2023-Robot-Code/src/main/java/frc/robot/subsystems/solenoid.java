@@ -7,14 +7,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Compressor;
 
 public class solenoid extends SubsystemBase {
   /** Creates a new solenoid. */
   Solenoid solenoidObjectYellow = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
   Solenoid solenoidObjectBlue = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
-  Compressor pcmCompressor0 = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  Compressor pcmCompressor1 = new Compressor(1, PneumaticsModuleType.CTREPCM);
 
   private boolean solenoidState = false;
 

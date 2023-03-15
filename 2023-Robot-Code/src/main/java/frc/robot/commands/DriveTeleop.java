@@ -49,10 +49,23 @@ public class DriveTeleop extends CommandBase {
 
 		switch (option) {
 			case "Teleop":
-				if(tempLimiter < 1) {
-					tempLimiter += .1;
+			while(leftStickX == 1 || leftStickY == 1 || rightStickX == 1) {
+				for  (int i=0;i<=10;i++){
+					Robot.m_Drivetrain.setMotorSpeed(.25, .25, .25, 0);
+					System.out.print(i);
 				}
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter, leftStickY * tempLimiter, rightStickX * tempLimiter, 0);
+				for  (int i=0;i<=10;i++){
+					Robot.m_Drivetrain.setMotorSpeed(.5, .5, .5, 0);
+					System.out.print(i);
+				}
+				for  (int i=0;i<=10;i++){
+					System.out.print(i);
+					Robot.m_Drivetrain.setMotorSpeed(.75, .75, .75, 0);
+
+				}
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
+			}
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
 				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":
