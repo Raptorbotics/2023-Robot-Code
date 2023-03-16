@@ -13,13 +13,20 @@ public class compressor extends SubsystemBase {
   public compressor() {
   }
   Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  boolean compressorState = false;
 
   public void compressorOn() {
 	pcmCompressor.enableAnalog(5, 20);
+  compressorState = true;
 }
 
 public void compressorOff(){
   pcmCompressor.disable();
+  compressorState = false;
+}
+
+public boolean state() {
+  return compressorState;
 }
 
   @Override

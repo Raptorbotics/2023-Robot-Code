@@ -21,7 +21,7 @@ public class DriveTeleop extends CommandBase {
 	Timer m_timer = new Timer();
 
 	/** Creates a new Drive. */
-	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) {
+	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) { // Call all inputs needed to run the file
 		// Use addRequirements() here to declare subsystem dependencies.
 
 		option = Option;
@@ -31,17 +31,15 @@ public class DriveTeleop extends CommandBase {
 
 		time = m_time;
 
-		addRequirements(Robot.m_Drivetrain);
+		addRequirements(Robot.m_Drivetrain); // Set the drivetrain subsystem as a requirement to run this file
 	}
 
-	// Called when the command is initially scheduled.
 	@Override
-	public void initialize() {
+	public void initialize() { // When the command is first called, this function runs
 		m_timer.start();
 	}
 
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
+	@Override // When the command is called, this function runs
 	public void execute() {
 		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) * (Constants.m_limiter);
 		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
