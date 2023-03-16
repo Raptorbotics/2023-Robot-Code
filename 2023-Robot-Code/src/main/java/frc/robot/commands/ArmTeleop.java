@@ -163,10 +163,12 @@ public class ArmTeleop extends CommandBase {
 
 			reduceArmLength(armExtensionSpeed);
 
-		} else if (getArmLength() == 0 || timer.hasElapsed(time)) {
+		} else if (option == "Autonomous" && timer.hasElapsed(time) && getArmLength() == 0) {
+
 			m_arm.setMotorSpeed(0);
 			return true;
-		} 
+
+		}
 
 		return false;
 	}

@@ -192,7 +192,7 @@ public class ShoulderTeleop extends CommandBase {
 				return true;
 			}
 
-		} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
+		} else if (option == "Autonomous" && getShoulderAngle() == 0 && timer.hasElapsed(time)) {
 			m_shoulder.setMotorSpeed(0);
 			return true;
 		}
