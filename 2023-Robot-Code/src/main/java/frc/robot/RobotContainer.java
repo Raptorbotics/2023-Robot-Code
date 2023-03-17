@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmTeleop;
-import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
 import frc.robot.commands.SolenoidTeleop;
+import frc.robot.commands.compressorCommand;
 
 /**
  * S
@@ -76,6 +76,7 @@ public class RobotContainer {
 
 		//Solenoid keybind
 		aButton.and(rBumper.negate()).and(lBumper.negate()).onTrue(new SolenoidTeleop(Robot.solenoidObject));
+		yButton.and(rBumper.negate()).and(lBumper.negate()).onTrue(new compressorCommand(Robot.m_Compressor, 0));
 		configureBindings();
 	}
 
