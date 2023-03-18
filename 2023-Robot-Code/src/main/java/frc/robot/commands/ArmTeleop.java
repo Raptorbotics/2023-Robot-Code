@@ -147,8 +147,9 @@ public class ArmTeleop extends CommandBase {
 	@Override
 	public void end(boolean interrupted) { // When the keybind is let go, the motor will be turned off
 		m_arm.setMotorSpeed(0);
+		m_arm.stopMotor();
 	}
-
+s
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() { // If a preset or autonomous preset is finished, it will turn off the motor

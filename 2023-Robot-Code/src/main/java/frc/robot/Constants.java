@@ -99,7 +99,7 @@ public final class Constants {
 
 		public final class Speeds {
 
-			public static final double arm = .2;
+			public static final double arm = .5;
 			public static final double shoulder = .3;
 		}
 	}

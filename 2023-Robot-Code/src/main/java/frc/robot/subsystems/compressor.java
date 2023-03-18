@@ -16,7 +16,7 @@ public class compressor extends SubsystemBase {
   boolean compressorState = false;
 
   public void compressorOn() {
-	pcmCompressor.enableAnalog(5, 20);
+	//pcmCompressor.enableAnalog();
   compressorState = true;
 }
 
