@@ -20,6 +20,12 @@ public class DriveTeleop extends CommandBase {
 
 	Timer m_timer = new Timer();
 
+	static double exponentialIncrease = .7;
+
+	
+	  
+	
+
 	/** Creates a new Drive. */
 	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) {
 		// Use addRequirements() here to declare subsystem dependencies.
@@ -43,14 +49,20 @@ public class DriveTeleop extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) * (Constants.m_limiter);
-		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
-		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) * (Constants.m_limiter);
-
+		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) ;
+		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) ;
+		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) ;
+		//leftStickX = exponentialChange(leftStickX);
 		switch (option) {
 			case "Teleop":
-				
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
+
+
+				if (tempLimiter < 1 && (leftStickX > 0.1 || leftStickY > 0.1 || rightStickX > 0.1)){
+					tempLimiter += .05;
+				}
+			
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter , leftStickY *tempLimiter, rightStickX *tempLimiter, 0);
+				System.out.println(tempLimiter);
 				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":

@@ -24,6 +24,8 @@
       "/LiveWindow/Ungrouped/MecanumDrive[1]": "MecanumDrive",
       "/LiveWindow/Ungrouped/PWMVictorSPX[5]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[6]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[8]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[9]": "Motor Controller",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/SendableChooser[1]": "String Chooser"
     },
