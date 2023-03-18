@@ -57,8 +57,10 @@ public class DriveTeleop extends CommandBase {
 			case "Teleop":
 
 
-				if (tempLimiter < 1 && (leftStickX > 0.1 || leftStickY > 0.1 || rightStickX > 0.1)){
-					tempLimiter += .05;
+				if (tempLimiter < 1){
+					if(leftStickX > 0.1 || leftStickY > 0.1 || rightStickX > 0.1) {
+						tempLimiter += .05;
+					}
 				}
 			
 				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter , leftStickY *tempLimiter, rightStickX *tempLimiter, 0);
