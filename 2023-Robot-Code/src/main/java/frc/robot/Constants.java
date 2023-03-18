@@ -34,9 +34,9 @@ public final class Constants {
 
 			public final class Extension {
 
-				public static final double low = 90;
-				public static final double medium = 120;
-				public static final double high = 250;
+				public static final double low = 100;
+				public static final double medium = 50;
+				public static final double high = 10;
 			}
 		}
 
@@ -99,7 +99,9 @@ public final class Constants {
 
 		public final class Speeds {
 
-			public static final double arm = .5;
+			public static final double arm = .4;
+			public static final double armStop = .19;
+			public static final double armRelease = .1;
 			public static final double shoulder = .3;
 		}
 	}

@@ -71,6 +71,10 @@ public class ShoulderTeleop extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		if(getArmLength() < 100) {
+			m_shoulder.setMotorSpeed(0);
+			return;
+		}
 		switch (option) {
 			// MANUAL DOWN
 			case "Manual Down":

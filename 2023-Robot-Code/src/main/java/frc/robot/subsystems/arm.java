@@ -34,10 +34,6 @@ public class arm extends SubsystemBase {
 		armMotor.set(axis);
 	}
 
-	public void stopMotor() {
-		armMotor.stopMotor();
-	}
-
 	public arm() {}
 
 	@Override
