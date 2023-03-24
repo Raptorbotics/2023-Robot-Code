@@ -18,7 +18,7 @@ package frc.robot;
  */
 public final class Constants {
 
-	public static final double m_limiter = .2;
+	public static final double m_limiter = .4;
 
 	public final class Predetermined {
 
@@ -26,6 +26,7 @@ public final class Constants {
 
 			public static final String teleop = "Teleop";
 			public static final String autonomous = "Autonomous";
+			public static final double exponentialIncrease = 0.06;
 		}
 
 		public final class Arm {
@@ -34,9 +35,9 @@ public final class Constants {
 
 			public final class Extension {
 
-				public static final double low = 90;
-				public static final double medium = 120;
-				public static final double high = 250;
+				public static final double low = 100;
+				public static final double medium = 50;
+				public static final double high = 10;
 			}
 		}
 
@@ -74,33 +75,36 @@ public final class Constants {
 
 		public final class Drivetrain {
 
-			public static final int frontLeftMotorOne = 0;
-			public static final int frontLeftMotorTwo = 1;
+			public static final int frontLeftMotorOne = 9;
+			public static final int frontLeftMotorTwo = 8;
 
 			public static final int frontRightMotorOne = 2;
 			public static final int frontRightMotorTwo = 3;
 
-			public static final int backLeftMotorOne = 4;
-			public static final int backLeftMotorTwo = 5;
+			public static final int backLeftMotorOne = 6;
+			public static final int backLeftMotorTwo = 7;
 
-			public static final int backRightMotorOne = 6;
-			public static final int backRightMotorTwo = 7;
+			public static final int backRightMotorOne = 4;
+			public static final int backRightMotorTwo = 5;
 		}
 
 		public final class arm {
 
-			public static final int armMotor = 8;
+			public static final int armMotor = 1;
 		}
 
 		public final class shoulder {
 
-			public static final int shoulderMotor = 9;
+			public static final int shoulderMotor = 0;
 		}
 
 		public final class Speeds {
 
-			public static final double arm = .5;
-			public static final double shoulder = .3;
+			public static final double arm = .75;
+			public static final double armStop = .1;
+			public static final double armRelease = .1;
+			public static final double shoulder = .25;
+			public static final double shoulderStop = .1;
 		}
 	}
 
@@ -113,6 +117,9 @@ public final class Constants {
 			public static final int m_leftStickY = 1;
 			public static final int m_leftStickX = 0;
 			public static final int m_rightStickX = 4;
+			// public static final int m_rightTrigger = 3;
+
+
 
 			public static final int m_leftTrigger = 2;
 			public static final int m_rightTrigger = 3;

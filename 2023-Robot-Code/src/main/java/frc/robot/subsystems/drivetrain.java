@@ -32,8 +32,12 @@ public class drivetrain extends SubsystemBase {
 	MotorControllerGroup m_backRight = new MotorControllerGroup(backRightMotorOne, backRightMotorTwo);
 
 	public drivetrain() {
-		// *rontLeftMotor.setInverted(true);
-		// backRightMotor.setInverted(true);
+		backLeftMotorOne.setInverted(true);
+		backLeftMotorTwo.setInverted(true);
+		backRightMotorOne.setInverted(true);
+		backRightMotorTwo.setInverted(true);
+		frontLeftMotorTwo.setInverted(true);
+
 
 		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
 	}

@@ -119,6 +119,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop(Constants.Predetermined.Drive.teleop, 0, 0, 0, 0));
+		Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop("Teleop", Robot.m_shoulder,0,0,0,0 ));
+	
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import frc.robot.Robot;
 import frc.robot.commands.ArmTeleop;
 import frc.robot.commands.DriveTeleop;
 import frc.robot.commands.ShoulderTeleop;
+import frc.robot.commands.SolenoidTeleop;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -21,23 +22,34 @@ public class AutonomousSequenceOne extends SequentialCommandGroup {
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(
+			
 			new DriveTeleop(
 				Constants.Predetermined.Drive.autonomous,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
-				2
+				0 //time robot will move in said direction
 			),
-			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270, 6, false, Robot.m_arm),
-			new ArmTeleop("Autonomous", Robot.m_arm, 270, 4),
-			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 0, 6, true, Robot.m_arm),
+			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270,
+			 10, false, Robot.m_arm),
+			new ArmTeleop("Autonomous", Robot.m_arm, 270, 0),
+			
+			new SolenoidTeleop(Robot.solenoidObject),
+
+			new SolenoidTeleop(Robot.solenoidObject),
+
+			new ArmTeleop("Autonomous", Robot.m_arm, 270, 0),
+			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 0,
+			 0, true, Robot.m_arm),
+			
 			new DriveTeleop(
 				Constants.Predetermined.Drive.autonomous,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
 				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
-				4
-			)
+				0
+			 ) 
+			 
 		);
 	}
 }

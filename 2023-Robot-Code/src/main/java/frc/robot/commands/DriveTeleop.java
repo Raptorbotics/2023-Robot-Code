@@ -20,9 +20,9 @@ public class DriveTeleop extends CommandBase {
 
 	Timer m_timer = new Timer();
 
-	static double exponentialIncrease = .7;
+	//static double exponentialIncrease = .7;
 
-	
+	Timer m_teleopTimer = new Timer();
 	  
 	
 
@@ -57,14 +57,17 @@ public class DriveTeleop extends CommandBase {
 			case "Teleop":
 
 
-				if (tempLimiter < 1){
-					if(leftStickX > 0.1 || leftStickY > 0.1 || rightStickX > 0.1) {
-						tempLimiter += .05;
+				if ((Math.abs(leftStickX) > 0.1) || (Math.abs(leftStickY) > 0.1) || (Math.abs(rightStickX) > 0.1)){
+					if(tempLimiter < 1) {
+						tempLimiter += Constants.Predetermined.Drive.exponentialIncrease;
 					}
+					Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter * Constants.m_limiter, leftStickY *tempLimiter* Constants.m_limiter, rightStickX *tempLimiter* Constants.m_limiter, 0);
+				} else {
+					tempLimiter = 0;
+					Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
 				}
 			
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX * tempLimiter , leftStickY *tempLimiter, rightStickX *tempLimiter, 0);
-				System.out.println(tempLimiter);
+				//System.out.println(tempLimiter);
 				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":
