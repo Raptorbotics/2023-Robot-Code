@@ -60,11 +60,14 @@ public class RobotContainer {
 
 		// ShoulderTeleop Keybinds
 		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Down1
+		DOWN.and(rBumper).whileTrue(new ShoulderTeleop("Manual Down Slow", null, 0, 0, false, Robot.m_arm));
 		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Low
 		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Medium
 		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
 		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
 		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0,  false, Robot.m_arm)); // Manual Up
+		UP.and(rBumper).whileTrue(new ShoulderTeleop("Manual Up Slow", Robot.m_shoulder, 0, 0,  false, Robot.m_arm));
+
 
 		// ArmTelop Keybinds
 

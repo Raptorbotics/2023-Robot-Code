@@ -22,6 +22,8 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/MecanumDrive[1]": "MecanumDrive",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[1]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[5]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[6]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[8]": "Motor Controller",

@@ -18,7 +18,7 @@ package frc.robot;
  */
 public final class Constants {
 
-	public static final double m_limiter = .4;
+	public static final double m_limiter = .8;
 
 	public final class Predetermined {
 
@@ -75,17 +75,17 @@ public final class Constants {
 
 		public final class Drivetrain {
 
-			public static final int frontLeftMotorOne = 9;
-			public static final int frontLeftMotorTwo = 8;
+			public static final int frontLeftMotorOne = 9;//blue
+			public static final int frontLeftMotorTwo = 8;//orange
 
-			public static final int frontRightMotorOne = 2;
+			public static final int frontRightMotorOne = 2;//Green2
 			public static final int frontRightMotorTwo = 3;
 
 			public static final int backLeftMotorOne = 6;
-			public static final int backLeftMotorTwo = 7;
+			public static final int backLeftMotorTwo = 7; //yellow
 
-			public static final int backRightMotorOne = 4;
-			public static final int backRightMotorTwo = 5;
+			public static final int backRightMotorOne = 4;//Green
+			public static final int backRightMotorTwo = 5;//BlackGreen
 		}
 
 		public final class arm {
@@ -100,11 +100,10 @@ public final class Constants {
 
 		public final class Speeds {
 
-			public static final double arm = .75;
+			public static final double arm = .9;
 			public static final double armStop = .1;
 			public static final double armRelease = .1;
-			public static final double shoulder = .25;
-			public static final double shoulderStop = .1;
+			public static final double shoulder = .18;
 		}
 	}
 

@@ -23,21 +23,28 @@ public class ShoulderTeleop extends CommandBase {
 	Timer timer = new Timer();
 	boolean resetBool;
 
-	double tempLimiter = 0;
 	double autonomousExtension;
 
 	public double getShoulderAngle() {
 		return m_shoulder.getShoulderAngle();
 	}
 
-	public void reduceShoulderAngle(double amount) {
+	public void reduceShoulderAngle(double amount, String speed) {
 		m_shoulder.reduceShoulderAngle(amount);
-		m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder);
+		if(speed == "Full") {
+			m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder * .2);
+		} else if(speed == "Slow") {
+			m_shoulder.setMotorSpeed(-Constants.Motors.Speeds.shoulder * .7);
+		}
 	}
 
-	public void increaseShoulderAngle(double amount) {
+	public void increaseShoulderAngle(double amount, String speed) {
 		m_shoulder.increaseShoulderAngle(amount);
-		m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
+		if(speed == "Full") {
+			m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder);
+		} else if(speed == "Slow") {
+			m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulder * .7);
+		}
 	}
 
 	public double getArmLength() {
@@ -61,7 +68,6 @@ public class ShoulderTeleop extends CommandBase {
 
 		time = m_time;
 		resetBool = reset;
-
 	}
 
 	// Called when the command is initially scheduled.1
@@ -73,21 +79,22 @@ public class ShoulderTeleop extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-
-		double rightTrigger = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightTrigger)) ;
 		switch (option) {
-
-			case "Teleop":
-			if ((Math.abs(rightTrigger) > 0.1)){
-				if(tempLimiter < 1) {
-					tempLimiter += Constants.Predetermined.Drive.exponentialIncrease;
-				}
-				Robot.m_shoulder.setMotorSpeed(rightTrigger);
-			} else {
-				tempLimiter = 0;
-				Robot.m_shoulder.setMotorSpeed(0);
-			}
+			// MANUAL DOWN
+			case "Manual Down":
+				reduceShoulderAngle(shoulderHeightSpeed, "Full");
 				break;
+			case "Manual Down Slow":
+				reduceShoulderAngle(shoulderHeightSpeed, "Slow");
+				break;
+			// MANUAL UP
+			case "Manual Up":
+				increaseShoulderAngle(shoulderHeightSpeed, "Full");
+				break;
+			case "Manual Up Slow":
+				increaseShoulderAngle(shoulderHeightSpeed, "Slow");
+				break;
+
 			case "Default":
 				if (getShoulderAngle() > 0) {
 					if(getArmLength() > 0) {
@@ -97,7 +104,7 @@ public class ShoulderTeleop extends CommandBase {
 					} else {
 						m_arm.setMotorSpeed(0);
 					}
-					reduceShoulderAngle(shoulderHeightSpeed);
+					reduceShoulderAngle(shoulderHeightSpeed, "Full");
 				} else {
 					m_shoulder.setMotorSpeed(0);
 					System.out.println("Shoulder Height: Reset");
@@ -106,16 +113,16 @@ public class ShoulderTeleop extends CommandBase {
 			 case "Autonomous":
 
 				if (getShoulderAngle() < autonomousExtension) {
-					increaseShoulderAngle(shoulderHeightSpeed);
+					increaseShoulderAngle(shoulderHeightSpeed, "Full");
 				} else if (getShoulderAngle() > autonomousExtension) {
-					reduceShoulderAngle(shoulderHeightSpeed);
+					reduceShoulderAngle(shoulderHeightSpeed, "Full");
 				} else {
 					m_shoulder.setMotorSpeed(0);
 					System.out.println("Shoulder Height: Autonomous");
 				}
 
 				if (timer.hasElapsed(time) && getShoulderAngle() > 0) {
-					reduceShoulderAngle(shoulderHeightSpeed);
+					reduceShoulderAngle(shoulderHeightSpeed, "Full");
 
 				} else if (getShoulderAngle() == 0 || timer.hasElapsed(time)) {
 					m_shoulder.setMotorSpeed(0);
@@ -134,8 +141,8 @@ public class ShoulderTeleop extends CommandBase {
 
 	// Called once the command ends or is interrupted.
 	@Override
-	public void end(boolean interrupted) { // When the keybind is let go, the motor will be turned off
-		Robot.m_shoulder.setMotorSpeed(Constants.Motors.Speeds.shoulderStop);
+	public void end(boolean interrupted) {
+		m_shoulder.setMotorSpeed(0.08);
 	}
 
 	// Returns true when the command should end.
@@ -151,7 +158,7 @@ public class ShoulderTeleop extends CommandBase {
 		}
 		 if (option == "Autonomous" && timer.hasElapsed(time) && getShoulderAngle() > 0) {
 			if(resetBool == true) {
-			reduceShoulderAngle(shoulderHeightSpeed);
+			reduceShoulderAngle(shoulderHeightSpeed, "Full");
 			} else if (resetBool == false) {
 				return true;
 			}

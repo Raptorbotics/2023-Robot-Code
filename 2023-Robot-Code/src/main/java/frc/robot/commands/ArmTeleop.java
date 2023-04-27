@@ -29,7 +29,7 @@ public class ArmTeleop extends CommandBase {
 
 	public void reduceArmLength(double amount) { // Retracts the arm by an amount which is the negative of armExtensionSpeed
 		m_arm.reduceArmLength(amount);
-		m_arm.setMotorSpeed(-0.2);
+		m_arm.setMotorSpeed(-0.08);
 	}
 
 	public void increaseArmLength(double amount) { // Extends the arm by an amount which is the positive of armExtensionSpeed

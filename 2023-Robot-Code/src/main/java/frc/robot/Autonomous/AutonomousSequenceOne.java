@@ -22,33 +22,21 @@ public class AutonomousSequenceOne extends SequentialCommandGroup {
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
 		addCommands(
-			
+			new SolenoidTeleop(Robot.solenoidObject),
+
 			new DriveTeleop(
 				Constants.Predetermined.Drive.autonomous,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
+				0,
+				-1,
+				0,
 				0 //time robot will move in said direction
-			),
-			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 270,
-			 10, false, Robot.m_arm),
-			new ArmTeleop("Autonomous", Robot.m_arm, 270, 0),
+			)
+		
 			
-			new SolenoidTeleop(Robot.solenoidObject),
-
-			new SolenoidTeleop(Robot.solenoidObject),
-
-			new ArmTeleop("Autonomous", Robot.m_arm, 270, 0),
-			new ShoulderTeleop("Autonomous", Robot.m_shoulder, 0,
-			 0, true, Robot.m_arm),
+		
 			
-			new DriveTeleop(
-				Constants.Predetermined.Drive.autonomous,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.xInput,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.yInput,
-				Constants.AutonomousSpeeds.Drive.SequenceOne.zInput,
-				0
-			 ) 
+
+			
 			 
 		);
 	}
