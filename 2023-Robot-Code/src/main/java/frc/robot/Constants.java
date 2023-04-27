@@ -18,7 +18,7 @@ package frc.robot;
  */
 public final class Constants {
 
-	public static final double m_limiter = .5;
+	public static final double m_limiter = .8;
 
 	public final class Predetermined {
 
@@ -26,6 +26,7 @@ public final class Constants {
 
 			public static final String teleop = "Teleop";
 			public static final String autonomous = "Autonomous";
+			public static final double exponentialIncrease = 0.06;
 		}
 
 		public final class Arm {
@@ -74,17 +75,20 @@ public final class Constants {
 
 		public final class Drivetrain {
 
-			public static final int frontLeftMotorOne = 9;
-			public static final int frontLeftMotorTwo = 8;
 
-			public static final int frontRightMotorOne = 2;
+			public static final int frontLeftMotorOne = 9;//blue
+			public static final int frontLeftMotorTwo = 8;//orange
+
+			public static final int frontRightMotorOne = 2;//Green2
 			public static final int frontRightMotorTwo = 3;
 
 			public static final int backLeftMotorOne = 6;
-			public static final int backLeftMotorTwo = 7;
 
-			public static final int backRightMotorOne = 4;
-			public static final int backRightMotorTwo = 5;
+			public static final int backLeftMotorTwo = 7; //yellow
+
+			public static final int backRightMotorOne = 4;//Green
+			public static final int backRightMotorTwo = 5;//BlackGreen
+
 		}
 
 		public final class arm {
@@ -99,10 +103,12 @@ public final class Constants {
 
 		public final class Speeds {
 
-			public static final double arm = .4;
-			public static final double armStop = .19;
+
+			public static final double arm = .9;
+			public static final double armStop = .1;
 			public static final double armRelease = .1;
-			public static final double shoulder = .3;
+			public static final double shoulder = .18;
+
 		}
 	}
 
@@ -115,6 +121,9 @@ public final class Constants {
 			public static final int m_leftStickY = 1;
 			public static final int m_leftStickX = 0;
 			public static final int m_rightStickX = 4;
+			// public static final int m_rightTrigger = 3;
+
+
 
 			public static final int m_leftTrigger = 2;
 			public static final int m_rightTrigger = 3;

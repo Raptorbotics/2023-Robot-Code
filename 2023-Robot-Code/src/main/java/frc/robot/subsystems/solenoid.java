@@ -10,26 +10,36 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class solenoid extends SubsystemBase {
   /** Creates a new solenoid. */
-  Solenoid solenoidObjectYellow = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
-  Solenoid solenoidObjectBlue = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+  Solenoid solenoidObjectSix = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
+  Solenoid solenoidObjectOne = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+  Solenoid solenoidObjectSeven = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+  Solenoid solenoidObjectZero = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
-  private boolean solenoidState = false;
+  Compressor pcmCompressor0 = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  Compressor pcmCompressor1 = new Compressor(1, PneumaticsModuleType.CTREPCM);
 
-  public boolean getSolenoidState() {
-    return solenoidState;
+  private boolean clawState = true;
+
+  public boolean getClawState() {
+    return clawState;
   }
 
-  public void setSolenoidStateTrue() {
-    solenoidObjectBlue.set(false);
-    solenoidObjectYellow.set(true);
-    solenoidState = true;
-    System.out.println("The solenoidState has been set to " + solenoidState);
+  public void openClaw() {
+    solenoidObjectSeven.set(false);
+    solenoidObjectZero.set(false);
+    solenoidObjectSix.set(true);
+    solenoidObjectOne.set(true);
+
+    clawState = true;
+    System.out.println("The claw has been set to " + clawState);
   }
-  public void setSolenoidStateFalse() {
-    solenoidObjectBlue.set(true);
-    solenoidObjectYellow.set(false);
-    solenoidState = false;
-    System.out.println("The solenoidState has been set to " + solenoidState);
+  public void closeClaw() {
+    solenoidObjectSix.set(false);
+    solenoidObjectOne.set(false);
+    solenoidObjectSeven.set(true);
+    solenoidObjectZero.set(true);
+    clawState = false;
+    System.out.println("The claw has been set to " + clawState);
   }
 
 

@@ -20,6 +20,12 @@ public class DriveTeleop extends CommandBase {
 
 	Timer m_timer = new Timer();
 
+	//static double exponentialIncrease = .7;
+
+	Timer m_teleopTimer = new Timer();
+	  
+	
+
 	/** Creates a new Drive. */
 	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) { // Call all inputs needed to run the file
 		// Use addRequirements() here to declare subsystem dependencies.
@@ -41,29 +47,24 @@ public class DriveTeleop extends CommandBase {
 
 	@Override // When the command is called, this function runs
 	public void execute() {
-		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) * (Constants.m_limiter);
-		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) * (Constants.m_limiter);
-		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) * (Constants.m_limiter);
-
+		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) ;
+		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) ;
+		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) ;
+		//leftStickX = exponentialChange(leftStickX);
 		switch (option) {
 			case "Teleop":
-			while(leftStickX == 1 || leftStickY == 1 || rightStickX == 1) {
-				for  (int i=0;i<=10;i++){
-					Robot.m_Drivetrain.setMotorSpeed(.25, .25, .25, 0);
-					System.out.print(i);
-				}
-				for  (int i=0;i<=10;i++){
-					Robot.m_Drivetrain.setMotorSpeed(.5, .5, .5, 0);
-					System.out.print(i);
-				}
-				for  (int i=0;i<=10;i++){
-					System.out.print(i);
-					Robot.m_Drivetrain.setMotorSpeed(.75, .75, .75, 0);
 
+				if (leftStickX == -1){
+					
 				}
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
-			}
-				Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
+				
+					Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
+					if(leftStickX >.1 || leftStickY > .1 || rightStickX > .1){
+					Robot.m_Drivetrain.MotorTest();
+					}
+				
+				//System.out.println(tempLimiter);
+
 				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
 				break;
 			case "Autonomous":

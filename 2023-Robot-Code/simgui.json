@@ -1,5 +1,17 @@
 {
   "HALProvider": {
+    "Other Devices": {
+      "Compressor[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Compressor[1]": {
+        "header": {
+          "open": true
+        }
+      }
+    },
     "PWM Outputs": {
       "window": {
         "visible": true
@@ -10,8 +22,12 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/MecanumDrive[1]": "MecanumDrive",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[1]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[5]": "Motor Controller",
       "/LiveWindow/Ungrouped/PWMVictorSPX[6]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[8]": "Motor Controller",
+      "/LiveWindow/Ungrouped/PWMVictorSPX[9]": "Motor Controller",
       "/SmartDashboard/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/SendableChooser[1]": "String Chooser"
     },

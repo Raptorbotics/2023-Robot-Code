@@ -34,7 +34,10 @@ public class drivetrain extends SubsystemBase {
 	public drivetrain() {
 		backLeftMotorOne.setInverted(true);
 		backLeftMotorTwo.setInverted(true);
+		backRightMotorOne.setInverted(true);
+		backRightMotorTwo.setInverted(true);
 		frontLeftMotorTwo.setInverted(true);
+
 		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
 	}
 
@@ -55,5 +58,23 @@ public class drivetrain extends SubsystemBase {
 	@Override
 	public void simulationPeriodic() {
 		// This method will be called once per scheduler run during simulation
+	}
+	public void MotorTest(){
+
+		System.out.print("FRONT LEFT MOTOR ONE " + frontLeftMotorOne.get()+ " ");
+		System.out.print("FRONT LEFT MOTOR TWO " + frontLeftMotorTwo.get()+ " ");
+
+
+		System.out.print(" FRONT RIGHT MOTOR ONE " + frontRightMotorOne.get()+ " ");
+		System.out.print(" FRONT RIGHT MOTOR TWO " + frontRightMotorTwo.get()+ " ");
+
+	
+		System.out.print(" BACK LEFT MOTOR ONE " + backLeftMotorOne.get()+ " ");
+		System.out.print(" BACK LEFT MOTOR TWO " + backLeftMotorTwo.get()+ " ");
+
+	
+		System.out.print(" BACK RIGHT MOTOR ONE " + backRightMotorOne.get()+ " ");
+		System.out.print(" BACK RIGHT MOTOR TWO " + backRightMotorTwo.get()+ " ");
+
 	}
 }

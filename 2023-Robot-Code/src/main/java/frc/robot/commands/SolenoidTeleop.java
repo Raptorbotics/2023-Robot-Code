@@ -25,14 +25,14 @@ public class SolenoidTeleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(solenoidSystem.getSolenoidState() == false) {
-      solenoidSystem.setSolenoidStateTrue();
+    if(solenoidSystem.getClawState() == false) {
+      solenoidSystem.openClaw();
       return;
-    } else if (solenoidSystem.getSolenoidState() == true) {
-      solenoidSystem.setSolenoidStateFalse();
+    } else if (solenoidSystem.getClawState() == true) {
+      solenoidSystem.closeClaw();
       return;
     } else {
-      System.out.println("There was a problem with the solenoidState");
+      System.out.println("There was a problem with the claw");
       return;
     }
   }
