@@ -75,6 +75,7 @@ public final class Constants {
 
 		public final class Drivetrain {
 
+
 			public static final int frontLeftMotorOne = 9;//blue
 			public static final int frontLeftMotorTwo = 8;//orange
 
@@ -82,10 +83,12 @@ public final class Constants {
 			public static final int frontRightMotorTwo = 3;
 
 			public static final int backLeftMotorOne = 6;
+
 			public static final int backLeftMotorTwo = 7; //yellow
 
 			public static final int backRightMotorOne = 4;//Green
 			public static final int backRightMotorTwo = 5;//BlackGreen
+
 		}
 
 		public final class arm {
@@ -100,10 +103,12 @@ public final class Constants {
 
 		public final class Speeds {
 
+
 			public static final double arm = .9;
 			public static final double armStop = .1;
 			public static final double armRelease = .1;
 			public static final double shoulder = .18;
+
 		}
 	}
 

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveTeleop;
-import frc.robot.commands.compressorCommand;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.compressor;
 import frc.robot.subsystems.drivetrain;
@@ -51,7 +50,7 @@ public class Robot extends TimedRobot {
 		// and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-		Robot.m_Compressor.setDefaultCommand(new compressorCommand(7));
+		
 
 		CameraServer.startAutomaticCapture();
 	}
@@ -109,6 +108,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		//Robot.m_Compressor.setDefaultCommand(new compressorCommand(m_Compressor, 7));
 
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
