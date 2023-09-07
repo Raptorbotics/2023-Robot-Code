@@ -5,7 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -17,6 +19,7 @@ public class DriveTeleop extends CommandBase {
 	double zInput;
 	double time;
 	double tempLimiter = 0;
+	
 
 	Timer m_timer = new Timer();
 
@@ -50,15 +53,16 @@ public class DriveTeleop extends CommandBase {
 		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) ;
 		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) ;
 		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) ;
+
+
+		//System.out.println(bonk.getTotalCurrent());
 		//leftStickX = exponentialChange(leftStickX);
 		switch (option) {
 			case "Teleop":
-
-				if (leftStickX == -1){
-					
-				}
+					System.out.println(Robot.m_Drivetrain.getTalonPosition());
 				
 					Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
+					Robot.m_Drivetrain.setTalonSpeed(leftStickY);
 					if(leftStickX >.1 || leftStickY > .1 || rightStickX > .1){
 					Robot.m_Drivetrain.MotorTest();
 					}
@@ -75,6 +79,7 @@ public class DriveTeleop extends CommandBase {
 				break;
 			default:
 				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
+				Robot.m_Drivetrain.setTalonSpeed(0);
 		}
 	}
 
