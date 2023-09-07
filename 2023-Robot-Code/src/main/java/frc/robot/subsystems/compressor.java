@@ -12,14 +12,21 @@ public class compressor extends SubsystemBase {
   /** Creates a new compressor. */
   public compressor() {
   }
-  //Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  boolean compressorState = false;
 
   public void compressorOn() {
-	//	pcmCompressor.isEnabled();
+	//pcmCompressor.enableAnalog();
+  compressorState = true;
 }
 
 public void compressorOff(){
-  //pcmCompressor.disable();
+  pcmCompressor.disable();
+  compressorState = false;
+}
+
+public boolean state() {
+  return compressorState;
 }
 
   @Override

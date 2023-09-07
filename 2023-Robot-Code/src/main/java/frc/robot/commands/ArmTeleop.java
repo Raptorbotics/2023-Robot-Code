@@ -29,13 +29,16 @@ public class ArmTeleop extends CommandBase {
 
 	public void reduceArmLength(double amount) { // Retracts the arm by an amount which is the negative of armExtensionSpeed
 		m_arm.reduceArmLength(amount);
+
 		m_arm.setMotorSpeed(-0.08);
+
 	}
 
 	public void increaseArmLength(double amount) { // Extends the arm by an amount which is the positive of armExtensionSpeed
 		m_arm.increaseArmLength(amount);
 		m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 	}
+
 	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time) { // When the command is called, passes in all of these values which is used to run the code in this file
 		addRequirements(Robot.m_arm); // Adds the Robot.m_arm subsystem as a requirement to use this command
 
@@ -58,10 +61,12 @@ public class ArmTeleop extends CommandBase {
 	public void execute() { 
 		switch (option) {
 			case "Manual Retract":
+
 				reduceArmLength(armExtensionSpeed); // If the condition above returns false (greater than 0) then the reduceArmLength function will run
 				break;
 			case "Manual Extend": 
 				increaseArmLength(armExtensionSpeed); // If the condition above returns false (lesser than 270) then the increaseArmLength function will run
+
 				break;
 			// This case is for emergency purposes in the case that the arm motor value needs to be reset to 0 or the default position
 			case "Default":
