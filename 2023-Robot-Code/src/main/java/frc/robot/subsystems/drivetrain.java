@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -26,6 +27,8 @@ public class drivetrain extends SubsystemBase {
 	private PWMSparkMax backRightMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorOne);
 	private PWMSparkMax backRightMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo);
 
+	private WPI_TalonFX motor = new WPI_TalonFX(1);
+
 	MotorControllerGroup m_frontLeft = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo);
 	MotorControllerGroup m_frontRight = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo);
 	MotorControllerGroup m_backleft = new MotorControllerGroup(backLeftMotorOne, backLeftMotorTwo);
@@ -37,15 +40,19 @@ public class drivetrain extends SubsystemBase {
 		backRightMotorOne.setInverted(true);
 		backRightMotorTwo.setInverted(true);
 		frontLeftMotorTwo.setInverted(true);
-
-
-
-
 		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis, double d) {
 		Robot.drive.driveCartesian(xAxis, yAxis, zAxis);
+	}
+
+	public double getTalonPosition() {
+		return motor.getSelectedSensorPosition();
+	}
+
+	public void setTalonSpeed(double xAxis) {
+		motor.set(xAxis);
 	}
 
 	public boolean exampleCondition() {
@@ -64,20 +71,6 @@ public class drivetrain extends SubsystemBase {
 	}
 	public void MotorTest(){
 
-		System.out.print("FRONT LEFT MOTOR ONE " + frontLeftMotorOne.get()+ " ");
-		System.out.print("FRONT LEFT MOTOR TWO " + frontLeftMotorTwo.get()+ " ");
-
-
-		System.out.print(" FRONT RIGHT MOTOR ONE " + frontRightMotorOne.get()+ " ");
-		System.out.print(" FRONT RIGHT MOTOR TWO " + frontRightMotorTwo.get()+ " ");
-
-	
-		System.out.print(" BACK LEFT MOTOR ONE " + backLeftMotorOne.get()+ " ");
-		System.out.print(" BACK LEFT MOTOR TWO " + backLeftMotorTwo.get()+ " ");
-
-	
-		System.out.print(" BACK RIGHT MOTOR ONE " + backRightMotorOne.get()+ " ");
-		System.out.print(" BACK RIGHT MOTOR TWO " + backRightMotorTwo.get()+ " ");
-
+		
 	}
 }
