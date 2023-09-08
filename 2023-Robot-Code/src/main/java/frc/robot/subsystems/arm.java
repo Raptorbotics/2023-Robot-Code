@@ -34,7 +34,8 @@ public class arm extends SubsystemBase {
 		armMotor.set(axis);
 	}
 
-	public arm() {}
+	public arm() {
+	}
 
 	@Override
 	public void periodic() {

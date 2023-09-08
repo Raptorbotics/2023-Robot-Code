@@ -12,11 +12,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmTeleop;
-import frc.robot.commands.ShoulderTeleop;
-import frc.robot.commands.SolenoidTeleop;
-
-import frc.robot.Constants;
-
 
 /**
  * S
@@ -60,15 +55,18 @@ public class RobotContainer {
 		// Configure the trigger bindings
 
 		// ShoulderTeleop Keybinds
-		DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Down1
-		DOWN.and(rBumper).whileTrue(new ShoulderTeleop("Manual Down Slow", null, 0, 0, false, Robot.m_arm));
-		rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Low
-		rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined Medium
-		rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
-		rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined High
-		UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0,  false, Robot.m_arm)); // Manual Up
-		UP.and(rBumper).whileTrue(new ShoulderTeleop("Manual Up Slow", Robot.m_shoulder, 0, 0,  false, Robot.m_arm));
-
+		//DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Down1
+		//DOWN.and(rBumper).whileTrue(new ShoulderTeleop("Manual Down Slow", null, 0, 0, false, Robot.m_arm));
+		//rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
+																																																				// Low
+		//rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
+																																																						// Medium
+		//rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
+																																																					// High
+		//rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
+																																																						// High
+		//UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Up
+		//UP.and(rBumper).whileTrue(new ShoulderTeleop("Manual Up Slow", Robot.m_shoulder, 0, 0, false, Robot.m_arm));
 
 		// ArmTelop Keybinds
 
@@ -79,9 +77,6 @@ public class RobotContainer {
 		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0, 0));
 		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0));
 
-		//Solenoid keybind
-		aButton.and(rBumper.negate()).and(lBumper.negate()).onTrue(new SolenoidTeleop(Robot.solenoidObject));
-		yButton.and(rBumper.negate()).and(lBumper.negate()).onTrue(new compressorCommand(Robot.m_Compressor, 0));
 		configureBindings();
 	}
 

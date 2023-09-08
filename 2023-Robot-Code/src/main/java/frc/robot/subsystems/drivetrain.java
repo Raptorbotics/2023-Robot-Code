@@ -4,56 +4,53 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class drivetrain extends SubsystemBase {
 
 	/** Creates a new ExampleSubsystem. */
-	private PWMSparkMax frontLeftMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.frontLeftMotorOne);
-	private PWMSparkMax frontLeftMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.frontLeftMotorTwo);
-	
-	private PWMSparkMax frontRightMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.frontRightMotorOne);
-	private PWMSparkMax frontRightMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.frontRightMotorTwo);
+	private CANSparkMax frontLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorOne, MotorType.kBrushless);
+	private CANSparkMax frontLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorTwo, MotorType.kBrushless);
 
-	private PWMSparkMax backLeftMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.backLeftMotorOne);
-	private PWMSparkMax backLeftMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.backLeftMotorTwo);
+	private CANSparkMax frontRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorOne, MotorType.kBrushless);
+	private CANSparkMax frontRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorTwo, MotorType.kBrushless);
 
-	private PWMSparkMax backRightMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorOne);
-	private PWMSparkMax backRightMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo);
+	private CANSparkMax backLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorOne, MotorType.kBrushless);
+	private CANSparkMax backLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorTwo, MotorType.kBrushless);
 
-	private WPI_TalonFX motor = new WPI_TalonFX(1);
+	private CANSparkMax backRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorOne, MotorType.kBrushless);
+	private CANSparkMax backRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo, MotorType.kBrushless);
 
-	MotorControllerGroup m_frontLeft = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo);
-	MotorControllerGroup m_frontRight = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo);
-	MotorControllerGroup m_backleft = new MotorControllerGroup(backLeftMotorOne, backLeftMotorTwo);
-	MotorControllerGroup m_backRight = new MotorControllerGroup(backRightMotorOne, backRightMotorTwo);
+	MotorControllerGroup m_Left = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo, backLeftMotorOne, backLeftMotorTwo);
+	MotorControllerGroup m_Right = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo, backRightMotorOne, backRightMotorTwo);
+
+	private RelativeEncoder FLM1Encoder = frontLeftMotorOne.getEncoder();
+	private RelativeEncoder FLM2Encoder = frontLeftMotorTwo.getEncoder();
+	private RelativeEncoder BLM1Encoder = backLeftMotorOne.getEncoder();
+	private RelativeEncoder BLM2Encoder = backLeftMotorOne.getEncoder();
+	private RelativeEncoder FRM1Encoder = frontRightMotorOne.getEncoder();
+	private RelativeEncoder FRM2Encoder = frontRightMotorOne.getEncoder();
+	private RelativeEncoder BRM1Encoder = backRightMotorOne.getEncoder();
+	private RelativeEncoder BRM2Encoder = backRightMotorOne.getEncoder();
+
+	public double getMotorPosition() {
+		return FLM1Encoder.getPosition();
+	}
 
 	public drivetrain() {
-		backLeftMotorOne.setInverted(true);
-		backLeftMotorTwo.setInverted(true);
-		backRightMotorOne.setInverted(true);
-		backRightMotorTwo.setInverted(true);
-		frontLeftMotorTwo.setInverted(true);
 
-		Robot.drive = new MecanumDrive(m_frontLeft, m_backleft, m_frontRight, m_backRight);
+		Robot.drive = new DifferentialDrive(m_Left, m_Right);
 	}
 
-	public void setMotorSpeed(double xAxis, double yAxis, double zAxis, double d) {
-		Robot.drive.driveCartesian(xAxis, yAxis, zAxis);
-	}
-
-	public double getTalonPosition() {
-		return motor.getSelectedSensorPosition();
-	}
-
-	public void setTalonSpeed(double xAxis) {
-		motor.set(xAxis);
+	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
+		Robot.drive.arcadeDrive(yAxis, zAxis);
 	}
 
 	public boolean exampleCondition() {
@@ -70,8 +67,8 @@ public class drivetrain extends SubsystemBase {
 	public void simulationPeriodic() {
 		// This method will be called once per scheduler run during simulation
 	}
-	public void MotorTest(){
 
-		
+	public void MotorTest() {
+
 	}
 }

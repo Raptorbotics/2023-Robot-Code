@@ -5,9 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.PowerDistribution;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -19,18 +17,18 @@ public class DriveTeleop extends CommandBase {
 	double zInput;
 	double time;
 	double tempLimiter = 0;
-	
 
 	Timer m_timer = new Timer();
 
-	//static double exponentialIncrease = .7;
+	// static double exponentialIncrease = .7;
 
 	Timer m_teleopTimer = new Timer();
-	  
-	
 
 	/** Creates a new Drive. */
-	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) { // Call all inputs needed to run the file
+	public DriveTeleop(String Option, double m_xInput, double m_yInput, double m_zInput, double m_time) { // Call all
+																																																				// inputs needed
+																																																				// to run the
+																																																				// file
 		// Use addRequirements() here to declare subsystem dependencies.
 
 		option = Option;
@@ -50,36 +48,32 @@ public class DriveTeleop extends CommandBase {
 
 	@Override // When the command is called, this function runs
 	public void execute() {
-		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX)) ;
-		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY)) ;
-		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX)) ;
+		double leftStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickX));
+		double leftStickY = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_leftStickY));
+		double rightStickX = (Robot.m_robotContainer.GetDriverRawAxis(Constants.Controller.Joystick.m_rightStickX));
 
-
-		//System.out.println(bonk.getTotalCurrent());
-		//leftStickX = exponentialChange(leftStickX);
+		// System.out.println(bonk.getTotalCurrent());
+		// leftStickX = exponentialChange(leftStickX);
 		switch (option) {
 			case "Teleop":
-					System.out.println(Robot.m_Drivetrain.getTalonPosition());
-				
-					Robot.m_Drivetrain.setMotorSpeed(leftStickX , leftStickY , rightStickX , 0);
-					Robot.m_Drivetrain.setTalonSpeed(leftStickY);
-					if(leftStickX >.1 || leftStickY > .1 || rightStickX > .1){
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX);
+				if (leftStickX > .1 || leftStickY > .1 || rightStickX > .1) {
 					Robot.m_Drivetrain.MotorTest();
-					}
-				
-				//System.out.println(tempLimiter);
+				}
 
-				//Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX, 0);
+				// System.out.println(tempLimiter);
+
+				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX);
+				System.out.println(Robot.m_Drivetrain.getMotorPosition());
 				break;
 			case "Autonomous":
 				if (m_timer.get() < time) {
-					Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput, 0);
+					Robot.m_Drivetrain.setMotorSpeed(xInput, yInput, zInput);
 				}
 
 				break;
 			default:
-				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
-				Robot.m_Drivetrain.setTalonSpeed(0);
+				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0);
 		}
 	}
 
@@ -94,7 +88,7 @@ public class DriveTeleop extends CommandBase {
 	public boolean isFinished() {
 		if (option == "Autonomous") {
 			if (m_timer.hasElapsed(time)) {
-				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0, 0);
+				Robot.m_Drivetrain.setMotorSpeed(0, 0, 0);
 				return true;
 			} else {
 				return false;

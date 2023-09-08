@@ -66,28 +66,29 @@ public final class Constants {
 			}
 		}
 
-		public final class Arm {}
+		public final class Arm {
+		}
 
-		public final class Shoulder {}
+		public final class Shoulder {
+		}
 	}
 
 	public final class Motors {
 
 		public final class Drivetrain {
 
+			public static final int frontLeftMotorOne = 9;// blue
+			public static final int frontLeftMotorTwo = 8;// orange
 
-			public static final int frontLeftMotorOne = 9;//blue
-			public static final int frontLeftMotorTwo = 8;//orange
-
-			public static final int frontRightMotorOne = 2;//Green2
+			public static final int frontRightMotorOne = 2;// Green2
 			public static final int frontRightMotorTwo = 3;
 
 			public static final int backLeftMotorOne = 6;
 
-			public static final int backLeftMotorTwo = 7; //yellow
+			public static final int backLeftMotorTwo = 7; // yellow
 
-			public static final int backRightMotorOne = 4;//Green
-			public static final int backRightMotorTwo = 5;//BlackGreen
+			public static final int backRightMotorOne = 4;// Green
+			public static final int backRightMotorTwo = 5;// BlackGreen
 
 		}
 
@@ -102,7 +103,6 @@ public final class Constants {
 		}
 
 		public final class Speeds {
-
 
 			public static final double arm = .9;
 			public static final double armStop = .1;
@@ -122,8 +122,6 @@ public final class Constants {
 			public static final int m_leftStickX = 0;
 			public static final int m_rightStickX = 4;
 			// public static final int m_rightTrigger = 3;
-
-
 
 			public static final int m_leftTrigger = 2;
 			public static final int m_rightTrigger = 3;
