@@ -9,26 +9,42 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class drivetrain extends SubsystemBase {
 
 	/** Creates a new ExampleSubsystem. */
-	private CANSparkMax frontLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorOne, MotorType.kBrushless);
-	private CANSparkMax frontLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorTwo, MotorType.kBrushless);
+	/* 
+	private PWMSparkMax frontLeftMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.frontLeftMotorOne);
+	private PWMSparkMax frontLeftMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.frontLeftMotorTwo);
 
-	private CANSparkMax frontRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorOne, MotorType.kBrushless);
-	private CANSparkMax frontRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorTwo, MotorType.kBrushless);
+	private PWMSparkMax frontRightMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.frontRightMotorOne);
+	private PWMSparkMax frontRightMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.frontRightMotorTwo);
 
-	private CANSparkMax backLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorOne, MotorType.kBrushless);
-	private CANSparkMax backLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorTwo, MotorType.kBrushless);
+	private PWMSparkMax backLeftMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.backLeftMotorOne);
+	private PWMSparkMax backLeftMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.backLeftMotorTwo);
 
-	private CANSparkMax backRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorOne, MotorType.kBrushless);
-	private CANSparkMax backRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo, MotorType.kBrushless);
+	private PWMSparkMax backRightMotorOne = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorOne);
+	private PWMSparkMax backRightMotorTwo = new PWMSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo);
+	*/
+	
+	public CANSparkMax frontLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorOne, MotorType.kBrushless);
+	public CANSparkMax frontLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontLeftMotorTwo, MotorType.kBrushless);
+
+	public CANSparkMax frontRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorOne, MotorType.kBrushless);
+	public CANSparkMax frontRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.frontRightMotorTwo, MotorType.kBrushless);
+
+	public CANSparkMax backLeftMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorOne, MotorType.kBrushless);
+	public CANSparkMax backLeftMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backLeftMotorTwo, MotorType.kBrushless);
+
+	public CANSparkMax backRightMotorOne = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorOne, MotorType.kBrushless);
+	public CANSparkMax backRightMotorTwo = new CANSparkMax(Constants.Motors.Drivetrain.backRightMotorTwo, MotorType.kBrushless);
 
 	MotorControllerGroup m_Left = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo, backLeftMotorOne, backLeftMotorTwo);
 	MotorControllerGroup m_Right = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo, backRightMotorOne, backRightMotorTwo);
+	
 
 	public drivetrain() {
 

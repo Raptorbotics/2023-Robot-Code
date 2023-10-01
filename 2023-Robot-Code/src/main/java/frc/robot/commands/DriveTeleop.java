@@ -64,7 +64,7 @@ public class DriveTeleop extends CommandBase {
 				// System.out.println(tempLimiter);
 
 				Robot.m_Drivetrain.setMotorSpeed(leftStickX, leftStickY, rightStickX);
-				System.out.println(rightStickX);
+				// System.out.println(rightStickX);
 				break;
 			case "Autonomous":
 				if (m_timer.get() < time) {
