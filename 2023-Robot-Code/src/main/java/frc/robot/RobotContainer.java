@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmTeleop;
+import frc.robot.commands.DriveTeleop;
+import frc.robot.subsystems.arm;
+import frc.robot.subsystems.drivetrain;
 
 /**
  * S
@@ -29,22 +32,21 @@ public class RobotContainer {
 
 	XboxController controller = new XboxController(Constants.Controller.m_controller);
 
-	public Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
-	public Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
-	public Trigger bButton = new JoystickButton(controller, Constants.Controller.Buttons.m_bButton);
-	public Trigger aButton = new JoystickButton(controller, Constants.Controller.Buttons.m_aButton);
+	private Trigger xButton = new JoystickButton(controller, Constants.Controller.Buttons.m_xButton);
+	private Trigger yButton = new JoystickButton(controller, Constants.Controller.Buttons.m_yButton);
+	private Trigger bButton = new JoystickButton(controller, Constants.Controller.Buttons.m_bButton);
+	private Trigger aButton = new JoystickButton(controller, Constants.Controller.Buttons.m_aButton);
 
-	public Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
-	public Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
+	private Trigger rBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_rBumper);
+	private Trigger lBumper = new JoystickButton(controller, Constants.Controller.Bumpers.m_lBumper);
 
-	public POVButton UP = new POVButton(controller, 0);
-	public POVButton DOWN = new POVButton(controller, 180);
-	public POVButton LEFT = new POVButton(controller, 270);
-	public POVButton RIGHT = new POVButton(controller, 90);
+	private POVButton UP = new POVButton(controller, 0);
+	private POVButton DOWN = new POVButton(controller, 180);
+	private POVButton LEFT = new POVButton(controller, 270);
+	private POVButton RIGHT = new POVButton(controller, 90);
 
-	public double GetDriverRawAxis(int axis) {
-		return controller.getRawAxis(axis);
-	}
+	private final drivetrain m_Drivetrain = new drivetrain();
+	private final arm m_arm = new arm();
 
 	final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -52,6 +54,16 @@ public class RobotContainer {
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
+		m_Drivetrain.setDefaultCommand(new DriveTeleop(() -> controller.getLeftX(), () -> controller.getLeftY(), () -> controller.getRightX(), m_Drivetrain));
+
+		SmartDashboard.putData(m_chooser);
+		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
+
+		configureBindings();
+	}
+
+	private void configureBindings() {
+
 		// Configure the trigger bindings
 
 		// ShoulderTeleop Keybinds
@@ -70,23 +82,17 @@ public class RobotContainer {
 
 		// ArmTelop Keybinds
 
+		/*
 		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0));
 		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
 		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0));
 		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0));
 		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0, 0));
 		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0));
-
-		configureBindings();
-	}
-
-	private void configureBindings() {
-		// Robot.m_shoulder.setDefaultCommand(new ShoulderTeleop());
-
-		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
+		*/
 		// m_chooser.addOption("Auto Sequence 2", new
 		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
-		SmartDashboard.putData(m_chooser);
+
 	}
 
 	/**
@@ -98,5 +104,9 @@ public class RobotContainer {
 		// An example command will be run in autonomous
 		return m_chooser.getSelected();
 		// }
+	}
+
+	public drivetrain getDriveTrain() {
+		return m_Drivetrain;
 	}
 }

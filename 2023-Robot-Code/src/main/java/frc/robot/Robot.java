@@ -4,14 +4,9 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVPhysicsSim;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveTeleop;
@@ -30,25 +25,9 @@ import frc.robot.subsystems.drivetrain;
 public class Robot extends TimedRobot {
 
 	private Command m_autonomousCommand;
-	public static drivetrain m_Drivetrain = new drivetrain();
-
-	public static DifferentialDrive drive;
-	public static arm m_arm = new arm();
-
-	private CANSparkMax frontLeftMotorOne = m_Drivetrain.frontLeftMotorOne;
-	private CANSparkMax frontLeftMotorTwo = m_Drivetrain.frontLeftMotorTwo;
-
-	private CANSparkMax frontRightMotorOne = m_Drivetrain.frontRightMotorOne;
-	private CANSparkMax frontRightMotorTwo = m_Drivetrain.frontRightMotorTwo;
-
-	private CANSparkMax backLeftMotorOne = m_Drivetrain.backLeftMotorOne;
-	private CANSparkMax backLeftMotorTwo = m_Drivetrain.backLeftMotorTwo;
-
-	private CANSparkMax backRightMotorOne = m_Drivetrain.backRightMotorOne;
-	private CANSparkMax backRightMotorTwo = m_Drivetrain.backRightMotorTwo;
 
 	// MUST BE LAST THING INSTANTIATED
-	public static RobotContainer m_robotContainer = new RobotContainer();
+	private static RobotContainer m_robotContainer;
 	
 
 	/**
@@ -132,7 +111,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop(Constants.Predetermined.Drive.teleop, 0, 0, 0, 0));
+		//Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop("Teleop", 0, 0, 0, 0));
 	}
 
 	@Override
@@ -149,14 +128,7 @@ public class Robot extends TimedRobot {
 	/** This function is called once when the robot is first started up. */
 	@Override
 	public void simulationInit() {
-		REVPhysicsSim.getInstance().addSparkMax(frontLeftMotorOne, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(frontLeftMotorTwo, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(frontRightMotorOne, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(frontRightMotorTwo, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(backLeftMotorOne, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(backLeftMotorTwo, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(backRightMotorOne, DCMotor.getNEO(1));
-		REVPhysicsSim.getInstance().addSparkMax(backRightMotorTwo, DCMotor.getNEO(1));
+		m_robotContainer.getDriveTrain().simulationInit();
 	}
 
 	/** This function is called periodically whilst in simulation. */

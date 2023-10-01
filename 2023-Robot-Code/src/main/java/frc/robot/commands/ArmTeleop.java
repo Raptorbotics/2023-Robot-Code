@@ -12,9 +12,8 @@ import frc.robot.subsystems.arm;
 
 public class ArmTeleop extends CommandBase {
 
-	static double armExtensionSpeed = Constants.Predetermined.Arm.speed;
-	static double armStop = Constants.Motors.Speeds.armStop;
-	static double armRelease = Constants.Motors.Speeds.armRelease;
+	//static double armStop = Constants.Motors.Speeds.armStop;
+	//static double armRelease = Constants.Motors.Speeds.armRelease;
 	String option;
 	private arm m_arm;
 
@@ -35,19 +34,13 @@ public class ArmTeleop extends CommandBase {
 
 	}
 
-	public void increaseArmLength(double amount) { // Extends the arm by an amount which is the positive of
-																									// armExtensionSpeed
+	public void increaseArmLength(double amount) { // Extends the arm by an amount which is the positive of armExtensionSpeed
 		m_arm.increaseArmLength(amount);
-		m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
+		//m_arm.setMotorSpeed(Constants.Motors.Speeds.arm);
 	}
 
-	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time) { // When the command
-																																																		// is called, passes
-																																																		// in all of these
-																																																		// values which is
-																																																		// used to run the
-																																																		// code in this file
-		addRequirements(Robot.m_arm); // Adds the Robot.m_arm subsystem as a requirement to use this command
+	public ArmTeleop(String Option, arm armSubsystem, double autonomousArmExtension, double m_time) { // When the command																																										// code in this file
+		addRequirements(m_arm); // Adds the Robot.m_arm subsystem as a requirement to use this command
 
 		option = Option;
 		autonomousExtension = autonomousArmExtension;
@@ -69,21 +62,19 @@ public class ArmTeleop extends CommandBase {
 		switch (option) {
 			case "Manual Retract":
 
-				reduceArmLength(armExtensionSpeed); // If the condition above returns false (greater than 0) then the
-																						// reduceArmLength function will run
+				//reduceArmLength(armExtensionSpeed); // If the condition above returns false (greater than 0) then the reduceArmLength function will run
 				break;
 			case "Manual Extend":
-				increaseArmLength(armExtensionSpeed); // If the condition above returns false (lesser than 270) then the
-																							// increaseArmLength function will run
+				//increaseArmLength(armExtensionSpeed); // If the condition above returns false (lesser than 270) then the increaseArmLength function will run
 
 				break;
 			// This case is for emergency purposes in the case that the arm motor value
 			// needs to be reset to 0 or the default position
 			case "Default":
 				if (getArmLength() > 0) {
-					reduceArmLength(armExtensionSpeed);
+					//reduceArmLength(armExtensionSpeed);
 				} else {
-					m_arm.setMotorSpeed(armStop);
+					//m_arm.setMotorSpeed(armStop);
 					System.out.println("Arm Exension: Reset");
 				}
 				// This is the autonomous case, where the robot will run automatically
@@ -91,30 +82,30 @@ public class ArmTeleop extends CommandBase {
 
 				if (getArmLength() < autonomousExtension) { // If the arm length is less than the autonomous preset, it will
 																										// increase the arm length until it reaches the autonomous preset
-					increaseArmLength(armExtensionSpeed);
+					//increaseArmLength(armExtensionSpeed);
 				} else if (getArmLength() > autonomousExtension) {// If the arm length is greater than the autonomous preset, it
 																													// will decrease the arm length until it reaches the
 																													// autonomous preset
-					reduceArmLength(armExtensionSpeed);
+					//reduceArmLength(armExtensionSpeed);
 				} else { // If the arm length is already at the autonomous preset, it will refuse to run
 									// the motor anymore
-					m_arm.setMotorSpeed(armStop);
+					//m_arm.setMotorSpeed(armStop);
 					System.out.println("Arm Extension: Autonomous");
 				}
 
 				if (timer.hasElapsed(time) && getArmLength() > 0) { // If the autonomous timer has been passed and the armLength
 																														// is greater than 0, it will retract the arm back to 0
-					reduceArmLength(armExtensionSpeed);
+					//reduceArmLength(armExtensionSpeed);
 
 				} else if (getArmLength() == 0 || timer.hasElapsed(time)) { // If the autonomous timer or the arm length is
 																																		// already 0, the motor speed will be set to 0
-					m_arm.setMotorSpeed(armStop);
+					//m_arm.setMotorSpeed(armStop);
 
 				}
 				break;
 
 			default:
-				m_arm.setMotorSpeed(armStop); // In the case that something goes wrong, the motor will be turned off
+				//m_arm.setMotorSpeed(armStop); // In the case that something goes wrong, the motor will be turned off
 				break;
 		}
 
@@ -124,12 +115,13 @@ public class ArmTeleop extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) { // When the keybind is let go, the motor will be turned off
-		m_arm.setMotorSpeed(armStop);
+		//m_arm.setMotorSpeed(armStop);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() { // If a preset or autonomous preset is finished, it will turn off the motor
+		/* 
 		if ((option == "Low" && getArmLength() == Constants.Predetermined.Arm.Extension.low) ||
 				(option == "Medium" && getArmLength() == Constants.Predetermined.Arm.Extension.medium) ||
 				(option == "High" && getArmLength() == Constants.Predetermined.Arm.Extension.high) ||
@@ -137,13 +129,14 @@ public class ArmTeleop extends CommandBase {
 				(option == "Autonomous" && getArmLength() == autonomousExtension)) {
 			return true;
 		}
+		*/
 		if (option == "Autonomous" && timer.hasElapsed(time) && getArmLength() > 0) {
 
-			reduceArmLength(armExtensionSpeed);
+			//reduceArmLength(armExtensionSpeed);
 
 		} else if (option == "Autonomous" && timer.hasElapsed(time) && getArmLength() == 0) {
 
-			m_arm.setMotorSpeed(armStop);
+			//m_arm.setMotorSpeed(armStop);
 			return true;
 
 		}

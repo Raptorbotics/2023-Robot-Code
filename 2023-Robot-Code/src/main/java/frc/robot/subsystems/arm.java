@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.armConstants;
 
 public class arm extends SubsystemBase {
 
@@ -28,7 +28,7 @@ public class arm extends SubsystemBase {
 		ArmLength = ArmLength + amount;
 	}
 
-	PWMVictorSPX armMotor = new PWMVictorSPX(Constants.Motors.arm.armMotor);
+	PWMVictorSPX armMotor = new PWMVictorSPX(armConstants.armMotor);
 
 	public void setMotorSpeed(double axis) {
 		armMotor.set(axis);
