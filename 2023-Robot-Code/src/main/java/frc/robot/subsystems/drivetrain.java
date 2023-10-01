@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class drivetrain extends SubsystemBase {
@@ -31,26 +30,13 @@ public class drivetrain extends SubsystemBase {
 	MotorControllerGroup m_Left = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo, backLeftMotorOne, backLeftMotorTwo);
 	MotorControllerGroup m_Right = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo, backRightMotorOne, backRightMotorTwo);
 
-	private RelativeEncoder FLM1Encoder = frontLeftMotorOne.getEncoder();
-	private RelativeEncoder FLM2Encoder = frontLeftMotorTwo.getEncoder();
-	private RelativeEncoder BLM1Encoder = backLeftMotorOne.getEncoder();
-	private RelativeEncoder BLM2Encoder = backLeftMotorOne.getEncoder();
-	private RelativeEncoder FRM1Encoder = frontRightMotorOne.getEncoder();
-	private RelativeEncoder FRM2Encoder = frontRightMotorOne.getEncoder();
-	private RelativeEncoder BRM1Encoder = backRightMotorOne.getEncoder();
-	private RelativeEncoder BRM2Encoder = backRightMotorOne.getEncoder();
-
-	public double getMotorPosition() {
-		return FLM1Encoder.getPosition();
-	}
-
 	public drivetrain() {
 
 		Robot.drive = new DifferentialDrive(m_Left, m_Right);
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
-		Robot.drive.arcadeDrive(yAxis, zAxis);
+		Robot.drive.arcadeDrive(yAxis, -zAxis);
 	}
 
 	public boolean exampleCondition() {
