@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import com.revrobotics.CANSparkMax;
@@ -51,11 +52,26 @@ public class drivetrain extends SubsystemBase {
 	private  final DifferentialDrive drive = new DifferentialDrive(m_Left, m_Right);
 
 	public drivetrain() {
-
+		CANSparkMax[] listSparkMaxs = new CANSparkMax[8];
+		listSparkMaxs[0] = frontLeftMotorOne;
+		listSparkMaxs[1] = frontLeftMotorTwo;
+		listSparkMaxs[2] = frontRightMotorOne;
+		listSparkMaxs[3] = frontRightMotorTwo;
+		listSparkMaxs[4] = backLeftMotorOne;
+		listSparkMaxs[5] = backLeftMotorTwo;
+		listSparkMaxs[6] = backRightMotorOne;
+		listSparkMaxs[7] = backRightMotorTwo;
+		for(int i = 0; i < listSparkMaxs.length; i++) {
+			if(listSparkMaxs[i].getEncoder() != null) {
+				System.out.println("Sparkmax ID " + listSparkMaxs[i].getDeviceId() + ": Encoder detected! -> " + listSparkMaxs[i].getEncoder());
+			} else {
+				System.out.println("Sparkmax ID " + listSparkMaxs[i].getDeviceId() + ": NO ENCODER DETECTED! -> " + listSparkMaxs[i].getEncoder());
+			}
+		}
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
-		drive.arcadeDrive(yAxis, -zAxis);
+		drive.arcadeDrive(yAxis * Constants.m_limiter, -zAxis * Constants.m_limiter);
 	}
 
 	@Override

@@ -7,13 +7,15 @@
   "keyboardJoysticks": [
     {
       "axisConfig": [
-        {},
+        {
+          "decKey": 81,
+          "incKey": 69
+        },
         {
           "decKey": 83,
           "incKey": 87
         },
         {
-          "decKey": 69,
           "decayRate": 0.0,
           "keyRate": 0.009999999776482582
         },
@@ -24,13 +26,13 @@
         }
       ],
       "axisCount": 5,
-      "buttonCount": 5,
+      "buttonCount": 6,
       "buttonKeys": [
         -1,
         -1,
+        88,
         -1,
-        -1,
-        -1,
+        82,
         -1
       ],
       "povConfig": [

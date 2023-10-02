@@ -4,41 +4,45 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.armConstants;
 
 public class arm extends SubsystemBase {
 
-	private double ArmLength = 0;
+	WPI_TalonFX armMotor = new WPI_TalonFX(armConstants.armMotor);
 
-	public void setArmLength(double value) {
-		ArmLength = value;
+	TalonFXSimCollection armMotorSim = new TalonFXSimCollection(armMotor);
+
+	public void setArmLength(double position) {
+		armMotor.set(ControlMode.Position, position);
+	}
+
+	public void changeArmLength(double amount) {
+		armMotor.set(ControlMode.Position, armMotor.getSelectedSensorPosition() + amount);
 	}
 
 	public double getArmLength() {
-		return ArmLength;
-	}
-
-	public void reduceArmLength(double amount) {
-		ArmLength = ArmLength - amount;
-	}
-
-	public void increaseArmLength(double amount) {
-		ArmLength = ArmLength + amount;
-	}
-
-	PWMVictorSPX armMotor = new PWMVictorSPX(armConstants.armMotor);
-
-	public void setMotorSpeed(double axis) {
-		armMotor.set(axis);
+		return armMotor.getSelectedSensorPosition();
 	}
 
 	public arm() {
+		final ErrorCode resetStatus = armMotor.setSelectedSensorPosition(0);
+		if(resetStatus != ErrorCode.valueOf(0)) {
+			System.out.println("Something went wrong with resetting armMotor back to position: " + resetStatus);
+		} else {
+			System.out.println("ArmMotor Reset Status: " + resetStatus);
+		}
 	}
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+	}
+
+	public void simulationPeriodic() {
 	}
 }

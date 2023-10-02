@@ -56,9 +56,6 @@ public class RobotContainer {
 	public RobotContainer() {
 		m_Drivetrain.setDefaultCommand(new DriveTeleop(() -> controller.getLeftX(), () -> controller.getLeftY(), () -> controller.getRightX(), m_Drivetrain));
 
-		SmartDashboard.putData(m_chooser);
-		m_chooser.setDefaultOption("Auto Sequence 1", new frc.robot.Autonomous.AutonomousSequenceOne());
-
 		configureBindings();
 	}
 
@@ -82,14 +79,16 @@ public class RobotContainer {
 
 		// ArmTelop Keybinds
 
+		
+		LEFT.whileTrue(new ArmTeleop(m_arm, "decrease"));
 		/*
-		LEFT.whileTrue(new ArmTeleop("Manual Extend", Robot.m_arm, 0, 0));
 		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
 		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0));
 		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0));
-		lBumper.and(xButton).onTrue(new ArmTeleop("Default", Robot.m_arm, 0, 0));
-		RIGHT.whileTrue(new ArmTeleop("Manual Retract", Robot.m_arm, 0, 0));
 		*/
+		lBumper.and(xButton).onTrue(new ArmTeleop(m_arm, "set"));
+		RIGHT.whileTrue(new ArmTeleop(m_arm, "increase"));
+		
 		// m_chooser.addOption("Auto Sequence 2", new
 		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
 
