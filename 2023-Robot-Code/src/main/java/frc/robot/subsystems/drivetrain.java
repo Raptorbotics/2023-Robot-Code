@@ -21,17 +21,17 @@ public class drivetrain extends SubsystemBase {
 
 	/** Creates a new ExampleSubsystem. */
 /*
-	private PWMSparkMax frontLeftMotorOne = new PWMSparkMax(DriveConstants.frontLeftMotorOne);
-	private PWMSparkMax frontLeftMotorTwo = new PWMSparkMax(DriveConstants.frontLeftMotorTwo);
+	private PWMSparkMax frontRightMotorOne = new PWMSparkMax(DriveConstants.frontRightMotorOne); //2
+	private PWMSparkMax frontRightMotorTwo = new PWMSparkMax(DriveConstants.frontRightMotorTwo); //3
 
-	private PWMSparkMax frontRightMotorOne = new PWMSparkMax(DriveConstants.frontRightMotorOne);
-	private PWMSparkMax frontRightMotorTwo = new PWMSparkMax(DriveConstants.frontRightMotorTwo);
+	private PWMSparkMax backRightMotorOne = new PWMSparkMax(DriveConstants.backRightMotorOne); //4
+	private PWMSparkMax backRightMotorTwo = new PWMSparkMax(DriveConstants.backRightMotorTwo); //5
 
-	private PWMSparkMax backLeftMotorOne = new PWMSparkMax(DriveConstants.backLeftMotorOne);
-	private PWMSparkMax backLeftMotorTwo = new PWMSparkMax(DriveConstants.backLeftMotorTwo);
+	private PWMSparkMax backLeftMotorOne = new PWMSparkMax(DriveConstants.backLeftMotorOne); //6
+	private PWMSparkMax backLeftMotorTwo = new PWMSparkMax(DriveConstants.backLeftMotorTwo); //7
 
-	private PWMSparkMax backRightMotorOne = new PWMSparkMax(DriveConstants.backRightMotorOne);
-	private PWMSparkMax backRightMotorTwo = new PWMSparkMax(DriveConstants.backRightMotorTwo);
+	private PWMSparkMax frontLeftMotorOne = new PWMSparkMax(DriveConstants.frontLeftMotorOne); //8
+	private PWMSparkMax frontLeftMotorTwo = new PWMSparkMax(DriveConstants.frontLeftMotorTwo); //9
 */
 
 	private final CANSparkMax frontLeftMotorOne = new CANSparkMax(DriveConstants.frontLeftMotorOne, MotorType.kBrushless);
@@ -49,7 +49,7 @@ public class drivetrain extends SubsystemBase {
 	private final MotorControllerGroup m_Left = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo, backLeftMotorOne, backLeftMotorTwo);
 	private final MotorControllerGroup m_Right = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo, backRightMotorOne, backRightMotorTwo);
 	
-	private  final DifferentialDrive drive = new DifferentialDrive(m_Left, m_Right);
+	private  final DifferentialDrive drive;
 
 	public drivetrain() {
 		CANSparkMax[] listSparkMaxs = new CANSparkMax[8];
@@ -68,10 +68,11 @@ public class drivetrain extends SubsystemBase {
 				System.out.println("Sparkmax ID " + listSparkMaxs[i].getDeviceId() + ": NO ENCODER DETECTED! -> " + listSparkMaxs[i].getEncoder());
 			}
 		}
+		drive = new DifferentialDrive(m_Left, m_Right);
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
-		drive.arcadeDrive(yAxis * Constants.m_limiter, -zAxis * Constants.m_limiter);
+		drive.arcadeDrive(yAxis * Constants.m_limiter, zAxis * Constants.m_limiter);
 	}
 
 	@Override
@@ -80,7 +81,6 @@ public class drivetrain extends SubsystemBase {
 	}
 
 	public void simulationInit() {
-		
 		REVPhysicsSim.getInstance().addSparkMax(frontLeftMotorOne, DCMotor.getNEO(1));
 		REVPhysicsSim.getInstance().addSparkMax(frontLeftMotorTwo, DCMotor.getNEO(1));
 		REVPhysicsSim.getInstance().addSparkMax(frontRightMotorOne, DCMotor.getNEO(1));
@@ -89,6 +89,7 @@ public class drivetrain extends SubsystemBase {
 		REVPhysicsSim.getInstance().addSparkMax(backLeftMotorTwo, DCMotor.getNEO(1));
 		REVPhysicsSim.getInstance().addSparkMax(backRightMotorOne, DCMotor.getNEO(1));
 		REVPhysicsSim.getInstance().addSparkMax(backRightMotorTwo, DCMotor.getNEO(1));
+
 		System.out.println("REVPhysicsSim added all sparkmaxes");
 	}
 
