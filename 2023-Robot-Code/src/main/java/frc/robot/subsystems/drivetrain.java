@@ -49,7 +49,7 @@ public class drivetrain extends SubsystemBase {
 	private final MotorControllerGroup m_Left = new MotorControllerGroup(frontLeftMotorOne, frontLeftMotorTwo, backLeftMotorOne, backLeftMotorTwo);
 	private final MotorControllerGroup m_Right = new MotorControllerGroup(frontRightMotorOne, frontRightMotorTwo, backRightMotorOne, backRightMotorTwo);
 	
-	private  final DifferentialDrive drive = new DifferentialDrive(m_Left, m_Right);
+	private  final DifferentialDrive drive;
 
 	public drivetrain() {
 		CANSparkMax[] listSparkMaxs = new CANSparkMax[8];
@@ -68,10 +68,15 @@ public class drivetrain extends SubsystemBase {
 				System.out.println("Sparkmax ID " + listSparkMaxs[i].getDeviceId() + ": NO ENCODER DETECTED! -> " + listSparkMaxs[i].getEncoder());
 			}
 		}
+
+		m_Right.setInverted(true);
+		m_Left.setInverted(false);
+	
+		drive = new DifferentialDrive(m_Left, m_Right);
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
-		drive.arcadeDrive(yAxis * Constants.m_limiter, -zAxis * Constants.m_limiter);
+		drive.arcadeDrive(yAxis * 0.5, zAxis * 0.5);
 	}
 
 	@Override

@@ -35,7 +35,17 @@ public final class Constants {
 		public static final int armMotor = 1;
 	}
 
-	public static final double m_limiter = .8;
+	public static final class intakeConstants {
+		public static final int intakeMotor1 = 10;
+		public static final int intakeMotor2 = 11;
+		public static final double spinPercent = 0.25;
+	}
+
+	public static final class extenderConstants {
+		public static final int extenderMotor = 12;
+	}
+
+	public static final double m_limiter = .4;
 
 	public final class AutonomousSpeeds {
 

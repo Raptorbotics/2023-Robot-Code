@@ -36,10 +36,10 @@ public class ArmTeleop extends CommandBase {
 	public void execute() {
 		switch (option) {
 			case "increase":
-			m_arm.changeArmLength(64);
+			m_arm.changeArmLength(1);
 				break;
 			case "decrease":
-			m_arm.changeArmLength(-64);
+			m_arm.changeArmLength(-1);
 				break;
 			case "set":
 			m_arm.setArmLength(0);
@@ -54,6 +54,7 @@ public class ArmTeleop extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) { // When the keybind is let go, the motor will be turned off
+		m_arm.changeArmLength(0);
 	}
 
 	// Returns true when the command should end.

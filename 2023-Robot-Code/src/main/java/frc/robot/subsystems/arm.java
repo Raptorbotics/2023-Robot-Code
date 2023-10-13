@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,10 +21,18 @@ public class arm extends SubsystemBase {
 	public void setArmLength(double position) {
 		armMotor.set(ControlMode.Position, position);
 	}
-
+	/* 
 	public void changeArmLength(double amount) {
 		armMotor.set(ControlMode.Position, armMotor.getSelectedSensorPosition() + amount);
 	}
+	*/
+
+	public void changeArmLength(double amount) {
+		armMotor.set(ControlMode.PercentOutput, amount * .4);
+	}
+
+
+
 
 	public double getArmLength() {
 		return armMotor.getSelectedSensorPosition();
@@ -36,6 +45,7 @@ public class arm extends SubsystemBase {
 		} else {
 			System.out.println("ArmMotor Reset Status: " + resetStatus);
 		}
+		armMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
 	}
 
 	@Override

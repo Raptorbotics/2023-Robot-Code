@@ -13,8 +13,12 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmTeleop;
 import frc.robot.commands.DriveTeleop;
+import frc.robot.commands.intakeTeleop;
+import frc.robot.commands.extenderTeleop;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.intake;
+import frc.robot.subsystems.extender;
 
 /**
  * S
@@ -47,6 +51,9 @@ public class RobotContainer {
 
 	private final drivetrain m_Drivetrain = new drivetrain();
 	private final arm m_arm = new arm();
+	private final intake m_intake = new intake();
+	private final extender m_extender = new extender();
+
 
 	final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -55,7 +62,6 @@ public class RobotContainer {
 	 */
 	public RobotContainer() {
 		m_Drivetrain.setDefaultCommand(new DriveTeleop(() -> controller.getLeftX(), () -> controller.getLeftY(), () -> controller.getRightX(), m_Drivetrain));
-
 		configureBindings();
 	}
 
@@ -63,31 +69,16 @@ public class RobotContainer {
 
 		// Configure the trigger bindings
 
-		// ShoulderTeleop Keybinds
-		//DOWN.whileTrue(new ShoulderTeleop("Manual Down", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Down1
-		//DOWN.and(rBumper).whileTrue(new ShoulderTeleop("Manual Down Slow", null, 0, 0, false, Robot.m_arm));
-		//rBumper.and(aButton).onTrue(new ShoulderTeleop("Low", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
-																																																				// Low
-		//rBumper.and(bButton).onTrue(new ShoulderTeleop("Medium", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
-																																																						// Medium
-		//rBumper.and(yButton).onTrue(new ShoulderTeleop("High", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
-																																																					// High
-		//rBumper.and(xButton).onTrue(new ShoulderTeleop("Default", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Predetermined
-																																																						// High
-		//UP.whileTrue(new ShoulderTeleop("Manual Up", Robot.m_shoulder, 0, 0, false, Robot.m_arm)); // Manual Up
-		//UP.and(rBumper).whileTrue(new ShoulderTeleop("Manual Up Slow", Robot.m_shoulder, 0, 0, false, Robot.m_arm));
 
+		LEFT.whileTrue(new extenderTeleop(m_extender, "retract"));
+		RIGHT.whileTrue(new extenderTeleop(m_extender, "extend"));
 		// ArmTelop Keybinds
+		aButton.onTrue(new intakeTeleop(m_intake, "toggle"));
 
 		
-		LEFT.whileTrue(new ArmTeleop(m_arm, "decrease"));
-		/*
-		lBumper.and(aButton).onTrue(new ArmTeleop("Low", Robot.m_arm, 0, 0));
-		lBumper.and(bButton).onTrue(new ArmTeleop("Medium", Robot.m_arm, 0, 0));
-		lBumper.and(yButton).onTrue(new ArmTeleop("High", Robot.m_arm, 0, 0));
-		*/
-		lBumper.and(xButton).onTrue(new ArmTeleop(m_arm, "set"));
-		RIGHT.whileTrue(new ArmTeleop(m_arm, "increase"));
+		lBumper.whileTrue(new ArmTeleop(m_arm, "decrease"));
+		xButton.onTrue(new ArmTeleop(m_arm, "set"));
+		rBumper.whileTrue(new ArmTeleop(m_arm, "increase"));
 		
 		// m_chooser.addOption("Auto Sequence 2", new
 		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());
