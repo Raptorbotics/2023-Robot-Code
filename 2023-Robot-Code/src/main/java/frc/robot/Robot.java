@@ -4,17 +4,14 @@
 
 package frc.robot;
 
+import com.revrobotics.REVPhysicsSim;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveTeleop;
 import frc.robot.subsystems.arm;
-import frc.robot.subsystems.compressor;
 import frc.robot.subsystems.drivetrain;
-import frc.robot.subsystems.shoulder;
-import frc.robot.subsystems.solenoid;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,16 +25,10 @@ import frc.robot.subsystems.solenoid;
 public class Robot extends TimedRobot {
 
 	private Command m_autonomousCommand;
-	public static drivetrain m_Drivetrain = new drivetrain();
-
-	public static MecanumDrive drive;
-	public static arm m_arm = new arm();
-	public static shoulder m_shoulder = new shoulder();
-	public static solenoid solenoidObject = new solenoid();
-	public static compressor m_Compressor = new compressor();
 
 	// MUST BE LAST THING INSTANTIATED
-	public static RobotContainer m_robotContainer = new RobotContainer();
+	private static RobotContainer m_robotContainer;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -50,9 +41,8 @@ public class Robot extends TimedRobot {
 		// and put our
 		// autonomous chooser on the dashboard.
 		m_robotContainer = new RobotContainer();
-		
 
-		CameraServer.startAutomaticCapture();
+		//CameraServer.startAutomaticCapture();
 	}
 
 	/**
@@ -79,10 +69,12 @@ public class Robot extends TimedRobot {
 
 	/** This function is called once each time the robot enters Disabled mode. */
 	@Override
-	public void disabledInit() {}
+	public void disabledInit() {
+	}
 
 	@Override
-	public void disabledPeriodic() {}
+	public void disabledPeriodic() {
+	}
 
 	/**
 	 * This autonomous runs the autonomous command selected by your
@@ -100,7 +92,8 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during autonomous. */
 	@Override
-	public void autonomousPeriodic() {}
+	public void autonomousPeriodic() {
+	}
 
 	@Override
 	public void teleopInit() {
@@ -108,7 +101,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		//Robot.m_Compressor.setDefaultCommand(new compressorCommand(m_Compressor, 7));
+		// Robot.m_Compressor.setDefaultCommand(new compressorCommand(m_Compressor, 7));
 
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
@@ -118,7 +111,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop(Constants.Predetermined.Drive.teleop, 0, 0, 0, 0));
+		//Robot.m_Drivetrain.setDefaultCommand(new DriveTeleop("Teleop", 0, 0, 0, 0));
 	}
 
 	@Override
@@ -129,13 +122,18 @@ public class Robot extends TimedRobot {
 
 	/** This function is called periodically during test mode. */
 	@Override
-	public void testPeriodic() {}
+	public void testPeriodic() {
+	}
 
 	/** This function is called once when the robot is first started up. */
 	@Override
-	public void simulationInit() {}
+	public void simulationInit() {
+		m_robotContainer.getDriveTrain().simulationInit();
+	}
 
 	/** This function is called periodically whilst in simulation. */
 	@Override
-	public void simulationPeriodic() {}
+	public void simulationPeriodic() {
+		REVPhysicsSim.getInstance().run();
+	}
 }

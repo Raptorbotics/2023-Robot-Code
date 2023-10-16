@@ -5,17 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.solenoid;
+import frc.robot.subsystems.extender;
 
-public class SolenoidTeleop extends CommandBase {
-  /** Creates a new SolenoidTeleop. */
-  solenoid solenoidSystem;
-  public SolenoidTeleop(solenoid solenoidSubsystem) {
+public class extenderTeleop extends CommandBase {
+  private extender motor;
+  private String option;
+  /** Creates a new extenderTeleop. */
+  public extenderTeleop(extender subsystem, String Option) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.solenoidObject);
-
-    solenoidSystem = solenoidSubsystem;
+    motor = subsystem;
+    option = Option;
+    addRequirements(motor);
   }
 
   // Called when the command is initially scheduled.
@@ -25,25 +25,24 @@ public class SolenoidTeleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(solenoidSystem.getClawState() == false) {
-      solenoidSystem.openClaw();
-      return;
-    } else if (solenoidSystem.getClawState() == true) {
-      solenoidSystem.closeClaw();
-      return;
+    if(option == "extend") {
+      motor.extend();
+    } else if(option == "retract") {
+      motor.retract();
     } else {
-      System.out.println("There was a problem with the claw");
-      return;
+      motor.stop();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    motor.stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
