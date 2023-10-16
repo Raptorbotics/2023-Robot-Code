@@ -74,11 +74,12 @@ public class RobotContainer {
 		RIGHT.whileTrue(new extenderTeleop(m_extender, "extend"));
 		// ArmTelop Keybinds
 		aButton.onTrue(new intakeTeleop(m_intake, "toggle"));
+		bButton.onTrue(new intakeTeleop(m_intake, "stop"));
 
 		
-		lBumper.whileTrue(new ArmTeleop(m_arm, "decrease"));
-		xButton.onTrue(new ArmTeleop(m_arm, "set"));
-		rBumper.whileTrue(new ArmTeleop(m_arm, "increase"));
+		lBumper.onTrue(new ArmTeleop(m_arm, "decrease"));
+		xButton.onTrue(new ArmTeleop(m_arm, "reset"));
+		rBumper.onTrue(new ArmTeleop(m_arm, "increase"));
 		
 		// m_chooser.addOption("Auto Sequence 2", new
 		// frc.robot..Autonomous.AutonomousSequences.AutonomousSequenceTwo());

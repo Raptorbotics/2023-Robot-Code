@@ -76,7 +76,7 @@ public class drivetrain extends SubsystemBase {
 	}
 
 	public void setMotorSpeed(double xAxis, double yAxis, double zAxis) {
-		drive.arcadeDrive(yAxis * 0.5, zAxis * 0.5);
+		drive.arcadeDrive(yAxis * 0.5, zAxis * 0.5); //yAxis * 0.5, zAxis * 0.5)
 	}
 
 	@Override

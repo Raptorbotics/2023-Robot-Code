@@ -31,6 +31,8 @@ public class intakeTeleop extends CommandBase {
     intakeSystem.start();
     if(option == "toggle") {
       intakeSystem.changeToggle();
+    } else if(option == "stop") {
+      intakeSystem.stop();
     }
   }
 

@@ -36,33 +36,33 @@ public class ArmTeleop extends CommandBase {
 	public void execute() {
 		switch (option) {
 			case "increase":
-			m_arm.changeArmLength(1);
+			m_arm.increaseArmLength();
 				break;
 			case "decrease":
-			m_arm.changeArmLength(-1);
+			m_arm.decreaseArmLength();
 				break;
 			case "set":
 			m_arm.setArmLength(0);
 				break;
+			case "reset":
+			m_arm.resetPosition();
+			break;
 		
 			default:
 				break;
 		}
-		System.out.println("Arm Rotations: " + (m_arm.getArmLength() / 2048));
+		System.out.println("Arm Rotations: " + (m_arm.getArmLength()));
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) { // When the keybind is let go, the motor will be turned off
-		m_arm.changeArmLength(0);
+		//m_arm.setArmLength(0);
 	}
 
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() { // If a preset or autonomous preset is finished, it will turn off the motor
-		if(option == "set") {
-			return true;
-		}
-		return false;
+		return true;
 	}
 }

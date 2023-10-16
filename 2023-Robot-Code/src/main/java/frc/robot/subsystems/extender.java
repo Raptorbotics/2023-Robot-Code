@@ -19,7 +19,7 @@ public class extender extends SubsystemBase {
     extensionMotor.set(VictorSPXControlMode.PercentOutput, .15);
   }
   public void retract() {
-    extensionMotor.set(VictorSPXControlMode.PercentOutput, -1);
+    extensionMotor.set(VictorSPXControlMode.PercentOutput, -.65);
   }
   public void stop() {
     extensionMotor.set(VictorSPXControlMode.PercentOutput, 0);

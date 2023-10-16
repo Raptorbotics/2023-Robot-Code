@@ -14,6 +14,7 @@ public class intake extends SubsystemBase {
   private VictorSPX motor1 = new VictorSPX(intakeConstants.intakeMotor1);
   private VictorSPX motor2 = new VictorSPX(intakeConstants.intakeMotor2);
   private boolean toggle = true;
+  private boolean on = true;
 
   /** Creates a new intake. */
   public intake() {}
@@ -24,8 +25,16 @@ public class intake extends SubsystemBase {
   }
 
   public void stop() {
-    motor1.set(VictorSPXControlMode.PercentOutput, 0);
-    motor2.set(VictorSPXControlMode.PercentOutput, 0);
+    if(on) {
+      motor1.set(VictorSPXControlMode.PercentOutput, 0);
+      motor2.set(VictorSPXControlMode.PercentOutput, 0);
+      on = false;
+    } else {
+      motor1.set(VictorSPXControlMode.PercentOutput, -intakeConstants.spinPercent);
+      motor2.set(VictorSPXControlMode.PercentOutput, intakeConstants.spinPercent);
+      on = true;
+    }
+
   }
 
   public void changeToggle() {
